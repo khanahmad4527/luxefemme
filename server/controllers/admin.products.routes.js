@@ -2,6 +2,9 @@ const ProductModel = require("../models/product.model.js");
 const express = require("express");
 const adminProductRouter = express.Router();
 const auth=require("../middlewares/auth.middleware.js");
+
+
+
 //get request
 adminProductRouter.get("/products",auth, async (req, res) => {
   let limit = 10;
@@ -15,6 +18,9 @@ adminProductRouter.get("/products",auth, async (req, res) => {
   }
 });
 
+
+
+
 //post request
 adminProductRouter.post("/add",auth, async (req, res) => {
   let payload = req.body;
@@ -27,6 +33,10 @@ adminProductRouter.post("/add",auth, async (req, res) => {
   }
 });
 
+
+
+
+
 //patch request
 adminProductRouter.patch("/product/:id",auth, async (req, res) => {
   let payload = req.body;
@@ -38,6 +48,9 @@ adminProductRouter.patch("/product/:id",auth, async (req, res) => {
     res.status(400).send({ error: er.message });
   }
 });
+
+
+
 
 
 

@@ -3,9 +3,13 @@ const jwt=require("jsonwebtoken");
 const auth=(req,res,next)=>{
 let token=req.headers.token;
 if(token){
-jwt.verify(token, process.env.privatekey, function(err, decoded) {
+jwt.verify(token, process.env.privatekey, (err, decoded)=>{
+    console.log(token,decoded.role)
      if(decoded.role=="admin" || decoded.role=="superadmin"){
         next()
+     }
+     else{
+        res.status(400).send({error:err})
      }
   });
 }
