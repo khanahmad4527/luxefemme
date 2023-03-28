@@ -21,7 +21,7 @@ adminProductRouter.get("/products",auth, async (req, res) => {
 
 
 
-//post request
+//post request from admin
 adminProductRouter.post("/add",auth, async (req, res) => {
   let payload = req.body;
   try {
