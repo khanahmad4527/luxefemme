@@ -58,6 +58,8 @@ adminUserRoutes.add("/add/admin", auth, superadminVerify, async (req, res) => {
   }
 });
 
+
+//delete admin by super admin
 adminUserRoutes.delete(
   "/delete/admin/:id",
   auth,
