@@ -48,10 +48,11 @@ adminUserRoutes.delete("/user/:id", auth, async (req, res) => {
 });
 
 //add admin by super admin
-adminUserRoutes.add("/add/admin", auth, superadminVerify, async (req, res) => {
+adminUserRoutes.post("/add/admin", auth, superadminVerify, async (req, res) => {
   try {
-    let admin = new AdminUserModel(req.body);
-    await admin.save();
+    // let admin = new AdminUserModel(req.body);
+    // await admin.save();
+    await AdminUserModel.insertMany()
     res.status(200).send("admin added");
   } catch (er) {
     res.status(400).send({ error: er.message });
