@@ -35,12 +35,6 @@ adminRouter.post("/registration", async (req, res) => {
   }
 });
 
-
-
-
-
-
-
 //login
 
 adminRouter.post("/login", async (req, res) => {
