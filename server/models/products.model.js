@@ -43,10 +43,12 @@ const productsSchema = mongoose.Schema(
       ],
     ],
     colours: [
-      {
-        type: String,
-        required: true,
-      },
+      [
+        {
+          type: String,
+          required: true,
+        },
+      ],
     ],
     sizes: [
       {
