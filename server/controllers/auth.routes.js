@@ -52,7 +52,7 @@ adminRouter.post("/login", async (req, res) => {
       if (decoded) {
         let token = jwt.sign(
           { userId: valid._id, role: valid.role },
-          process.env.privatekey
+          process.env.JWT_SECRET
         );
         res.status(200).send({ message: "Logged In", token });
       } else {
