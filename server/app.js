@@ -1,17 +1,30 @@
-const express=require("express");
+const express = require("express");
+const cors = require("cors");
 const connect = require("./config/database.js");
-const app=express();
-const adminRouter=require("./controllers/auth.routes.js");
-const adminUserRoutes=require("./controllers/admin.users.tables.routes.js");
-const adminProductRouter=require("./controllers/admin.products.routes.js");
-const cors=require("cors");
+const adminRouter = require("./controllers/auth.routes.js");
+const adminUserRoutes = require("./controllers/admin.users.tables.routes.js");
+const adminProductRouter = require("./controllers/admin.products.routes.js");
+const { userRoute } = require("./routes/user.route");
+const { userAuthRoute } = require("./routes/user.auth.route");
+const { validator } = require("./middlewares/validator");
 require("dotenv").config();
 
-app.use(express.json())
-app.use(cors())
+const app = express();
 
-app.use("/auth",adminRouter);
-app.use("/adminproduct",adminProductRouter);
-app.use("/adminuser",adminUserRoutes);
+app.use(cors());
 
-app.listen(process.env.port,connect);
+app.use(express.json());
+
+app.use("/auth", adminRouter);
+
+app.use("/adminproduct", adminProductRouter);
+
+app.use("/adminuser", adminUserRoutes);
+
+app.use("/user/auth", userAuthRoute);
+
+app.use(validator);
+
+app.use("/", userRoute);
+
+app.listen(process.env.port, connect);

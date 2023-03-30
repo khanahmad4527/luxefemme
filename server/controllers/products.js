@@ -1,4 +1,4 @@
-const { ProductsModel } = require("../models/products.model");
+const ProductModel = require("../models/product.model");
 
 const getProducts = async (req, res) => {
   const { q, _page, _limit, _sort, _order, category } = req.query;
@@ -47,21 +47,19 @@ const getProducts = async (req, res) => {
 
   try {
     if (_page && _sort) {
-      const products = await ProductsModel.find(filters)
+      const products = await ProductModel.find(filters)
         .sort(sort)
         .skip(skip)
         .limit(limit);
       return res.status(200).json(products);
     } else if (_page) {
-      const products = await ProductsModel.find(filters)
-        .skip(skip)
-        .limit(limit);
+      const products = await ProductModel.find(filters).skip(skip).limit(limit);
       return res.status(200).json(products);
     } else if (_sort) {
-      const products = await ProductsModel.find(filters).sort(sort);
+      const products = await ProductModel.find(filters).sort(sort);
       return res.status(200).json(products);
     } else {
-      const products = await ProductsModel.find(filters);
+      const products = await ProductModel.find(filters);
       return res.status(200).json(products);
     }
   } catch (err) {
@@ -73,7 +71,7 @@ const getSingleProduct = async (req, res) => {
   const { productId } = req.params;
 
   try {
-    const product = await ProductsModel.findById(productId);
+    const product = await ProductModel.findById(productId);
     return res.status(200).json(product);
   } catch (err) {
     return res.status(400).json({ message: err.message });
