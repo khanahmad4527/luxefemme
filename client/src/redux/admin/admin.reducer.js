@@ -25,7 +25,10 @@ import {
   PATCH_PRODUCT_SUCCESS,
   GET_ADMIN_LOADING,
   GET_ADMIN_ERROR,
-  GET_ADMIN_SUCCESS
+  GET_ADMIN_SUCCESS,
+  PATCH_ADMIN_LOADING,
+  PATCH_ADMIN_ERROR,
+  PATCH_ADMIN_SUCCESS
 } from "./admin.types";
 
 const initialState = {
@@ -239,6 +242,27 @@ export const adminReducer = (state = initialState, { type, payload }) => {
         loading:false,
       }
      }
+       
+     case PATCH_ADMIN_LOADING:{
+      return{
+        ...state,
+        loading:true
+      }
+     }
+     case PATCH_ADMIN_ERROR:{
+      return{
+        ...state,
+        loading:false,
+        error:true
+      }
+     }
+     case PATCH_ADMIN_SUCCESS:{
+      return{
+        ...state,
+        loading:false
+      }
+     }
+
     default: {
       return state;
     }
