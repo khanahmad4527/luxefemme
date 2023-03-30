@@ -11,14 +11,14 @@ const productSchema=mongoose.Schema({
     rating:{type:Number,required:true},
     reviews:{type:Number,required:true},
     image:{type:String,required:true},
-    images:{type:[[String]]},
-    colours:{type:[[String]]},
-    sizes:{type:[String]},
-    quantity:Number,
-    description:String,
-    brand:String,
-    addedAt:String,
-    updatedAt:String
+    images:{type:[[String]],required:true},
+    colours:{type:[[String]],required:true},
+    sizes:{type:[String],required:true},
+    quantity:{type:Number,required:true},
+    description:{type:String,required:true},
+    brand:{type:String,required:true},
+    addedAt:{type:String,required:true},
+    updatedAt:{type:String,required:true}
 
 })
 const ProductModel=mongoose.model("product",productSchema);
