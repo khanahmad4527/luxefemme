@@ -36,11 +36,12 @@ import { BiPencil } from "react-icons/bi";
 //AiFillDelete
 import { AiFillDelete } from "react-icons/ai";
 import AddAdmin from '../../components/Admin/AddAdmin';
+import Loading from '../../utils/Loading';
 const Admins = () => {
    const [admin,setAdmin]=useState(0);
    const { isOpen, onOpen, onClose } = useDisclosure()
    const dispatch=useDispatch();
-   const {admins}=useSelector(store=>store.admin);
+   const {admins,loading}=useSelector(store=>store.admin);
    console.log(admins,"hh")
    useEffect(()=>{
 dispatch(getAdminSuccess())
@@ -54,7 +55,7 @@ dispatch(getAdminSuccess())
     <AddAdmin/>
       <br/>
       <br/>
-        <TableContainer top="0px" w="100%">
+       { loading ?  <Loading/> :<TableContainer top="0px" w="100%">
   <Table variant='striped' colorScheme='teal'>
     {/* <TableCaption>Total User : {user}</TableCaption> */}
     <TableCaption><Button size="sm">Prev</Button><Button size="sm">1</Button><Button size="sm">Next</Button></TableCaption>
@@ -98,7 +99,7 @@ dispatch(getAdminSuccess())
       </Tr>
     </Tfoot>
   </Table>
-</TableContainer>
+</TableContainer>}
 <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

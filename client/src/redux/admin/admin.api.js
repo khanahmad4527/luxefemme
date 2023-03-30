@@ -83,7 +83,7 @@ export const addAdmin = async(payload) => {
             "token": localStorage.getItem("token")
         }
     })
-    return data?.data
+    return data
 }
 
 export const delAdmin = async(id) => {

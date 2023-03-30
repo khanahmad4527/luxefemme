@@ -21,7 +21,7 @@ const AddAdmin = () => {
         "lastname":"",
        "email":"",
         "hashedPassword":"",
-        "role":""
+        "role":"admin"
     }
     const [admin,setAdmin]=useState(initState);
     const handleChange=(e)=>{
@@ -55,7 +55,7 @@ const AddAdmin = () => {
           dispatch(addAdminSuccess(admin));
           dispatch(getAdminSuccess())
           onClose()
-
+          setAdmin(initState)
          }}>Update</Button>
           </ModalBody>
 

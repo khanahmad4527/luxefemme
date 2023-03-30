@@ -193,8 +193,7 @@ export const adminReducer = (state = initialState, { type, payload }) => {
      case ADD_ADMIN_SUCCESS:{
       return{
         ...state,
-        loading:false,
-        users:[...state.users,payload]
+        loading:false
       }
      }
  
