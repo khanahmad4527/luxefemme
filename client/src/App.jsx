@@ -4,7 +4,7 @@ import AllRoutes from "./pages/AllRoutes";
 
 const App = () => {
   return (
-    <Box>
+    <Box bgColor={"#FDFDF9"}>
       <AllRoutes />
     </Box>
   );
