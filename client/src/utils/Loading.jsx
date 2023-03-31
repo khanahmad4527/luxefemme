@@ -14,7 +14,7 @@ const Loading = () => {
         thickness="5px"
         speed="2s"
         emptyColor="white"
-        color="yellow.500"
+        color="teal.500"
         size="xl"
         boxSize="200px"
       />
