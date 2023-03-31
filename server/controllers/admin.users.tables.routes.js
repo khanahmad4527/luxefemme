@@ -20,7 +20,7 @@ adminUserRoutes.get("/users", auth, async (req, res) => {
 
 //get request admin
 adminUserRoutes.get("/admin", auth, async (req, res) => {
-  let page = req.query.page;
+  let page = req.query.page ;
   let limit = 5;
   let skip = (page - 1) * limit;
   try {
@@ -50,9 +50,9 @@ adminUserRoutes.delete("/user/:id", auth, async (req, res) => {
 //add admin by super admin
 adminUserRoutes.post("/add/admin", auth, superadminVerify, async (req, res) => {
   try {
-    // let admin = new UserModel(req.body);
-    // await admin.save();
-    await UserModel.insertMany()
+     let admin = new UserModel(req.body);
+     await admin.save();
+   
     res.status(200).send("admin added");
   } catch (er) {
     res.status(400).send({ error: er.message });
