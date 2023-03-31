@@ -16,6 +16,7 @@ import {
   Icon,
   Grid,
   Circle,
+  Link,
   Drawer,
   DrawerOverlay,
   DrawerContent,
@@ -31,34 +32,25 @@ import {
   MenuDivider,
   useToast,
   Text,
-  Spinner,
   Square,
-  Tabs,
-  TabList,
-  Tab,
-  TabIndicator,
-  TabPanels,
-  TabPanel,
+  Spinner,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import alphaLogo from "../../assets/LuxeFemme-alpha.png";
 import { SearchIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { BiUserCircle } from "react-icons/bi";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/auth/auth.action";
 import { getCartData } from "../../redux/cart/cart.actions";
+import { logout } from "../../redux/auth/auth.action";
 import { BsBag } from "react-icons/bs";
 
 const Navbar = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [category, setCategory] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const [query, setQuery] = useState(searchParams.get("q") || "");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const location = useLocation();
   const toast = useToast();
+  const dispatch = useDispatch();
 
   const categories = [
     { name: "dress", displayName: "New!" },
@@ -74,34 +66,6 @@ const Navbar = () => {
     { name: "dress", displayName: "Sale" },
   ];
 
-  const handleSearch = () => {
-    if (category !== "") {
-      if (searchParams.has("q")) {
-        setSearchParams((prevSearchParams) => {
-          const newSearchParams = new URLSearchParams(prevSearchParams);
-          newSearchParams.set("q", query);
-          newSearchParams.set("category", category);
-          newSearchParams.set("_page", 1);
-          return newSearchParams;
-        });
-      } else {
-        navigate(`/products?q=${query}&category=${category}`);
-      }
-    } else {
-      if (searchParams.has("q")) {
-        setSearchParams((prevSearchParams) => {
-          const newSearchParams = new URLSearchParams(prevSearchParams);
-          newSearchParams.set("q", query);
-          newSearchParams.delete("category");
-          newSearchParams.set("_page", 1);
-          return newSearchParams;
-        });
-      } else {
-        navigate(`/products?q=${query}`);
-      }
-    }
-  };
-
   const handleInputFocus = () => {
     setIsInputFocused(true);
   };
@@ -110,25 +74,12 @@ const Navbar = () => {
     setIsInputFocused(false);
   };
 
-  useEffect(() => {
-    setQuery(searchParams.get("q") || "");
-    let searchCategory = searchParams.getAll("category");
-    if (searchCategory.length === 1) {
-      setCategory(searchCategory[0]);
-    } else {
-      setCategory("");
-    }
-  }, [location]);
+  const { isAuth } = useSelector((store) => store.auth);
 
-  const { id, isAuth } = useSelector((store) => store.auth);
+  const { getIsLoading, cartData } = useSelector((store) => store.cart);
 
-  const { getIsLoading, getIsError, postIsLoading, postIsError, cartData } =
-    useSelector((store) => store.cart);
-
-  const dispatch = useDispatch();
-
-  const { first_name, last_name, email, address, orders } =
-    JSON.parse(localStorage.getItem("smUserData")) || {};
+  const { firstname, lastname } =
+    JSON.parse(localStorage.getItem("lfUserData")) || {};
 
   const handleLogout = () => {
     toast({
@@ -147,7 +98,7 @@ const Navbar = () => {
     window.scrollTo(0, 0);
 
     if (isAuth && cartData.length === 0) {
-      dispatch(getCartData(id));
+      dispatch(getCartData());
     }
   }, [isAuth]);
 
@@ -196,7 +147,7 @@ const Navbar = () => {
 
       {/*** 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 Mobile logo 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 ***/}
 
-      {isVisible && (
+      {isVisible && isAuth && (
         <Flex
           display={{ base: "none", lg: "flex" }}
           bgColor={"#F7F6F2"}
@@ -220,7 +171,7 @@ const Navbar = () => {
               </MenuButton>
               <MenuList position={"relative"} zIndex={10}>
                 <MenuGroup title="Profile">
-                  <MenuItem>Name: {`${first_name} ${last_name}`}</MenuItem>
+                  <MenuItem>Name: {`${firstname} ${lastname}`}</MenuItem>
                   <MenuItem onClick={() => navigate("/orders")}>
                     Orders
                   </MenuItem>
@@ -233,6 +184,21 @@ const Navbar = () => {
         </Flex>
       )}
 
+      {isVisible && !isAuth && (
+        <Flex
+          display={{ base: "none", lg: "flex" }}
+          bgColor={"#F7F6F2"}
+          color="lf.teal"
+          justifyContent="right"
+          alignItems={"center"}
+          p="15px 15px 15px 0px"
+        >
+          <Link color="teal" cursor="pointer" href="/login">
+            Sign In / Sign Up
+          </Link>
+        </Flex>
+      )}
+
       <Flex
         justifyContent={"space-between"}
         alignItems="center"
@@ -242,94 +208,97 @@ const Navbar = () => {
         {/*** 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 Mobile Logout Login My Account 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 ***/}
 
         <Box display={{ base: "block", lg: "none" }}>
-          <Icon
-            boxSize="8"
-            as={HamburgerIcon}
-            color={"sm.buff"}
-            onClick={onOpen}
-          />
+          <Icon boxSize="8" as={HamburgerIcon} onClick={onOpen} />
           <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
             <DrawerOverlay />
             <DrawerContent style={{ width: "200px" }}>
               <DrawerCloseButton />
-              <DrawerHeader borderBottomWidth="1px" color="sm.sparkle">
+              <DrawerHeader borderBottomWidth="1px" color="lf.black">
                 luxeFemme
               </DrawerHeader>
               <DrawerBody>
                 <Flex flexDirection="column" gap="10px">
-                  <Menu>
-                    <MenuButton
-                      as={Button}
-                      bg="sm.sparkle"
-                      color="yellow.500"
-                      _hover={{
-                        color: "sm.sparkle",
-                        bg: "yellow.500",
-                      }}
-                      leftIcon={<BiUserCircle size="30px" />}
-                      variant="unstyled"
-                      display="flex"
-                      alignItems="center"
-                      px="10px"
-                    >
-                      My Account
-                    </MenuButton>
-                    <MenuList position={"relative"} zIndex={10}>
-                      <MenuGroup title="Profile">
-                        <MenuItem>
-                          Name: {`${first_name} ${last_name}`}
-                        </MenuItem>
-                      </MenuGroup>
-                    </MenuList>
-                  </Menu>
+                  {isAuth && (
+                    <Menu>
+                      <MenuButton
+                        as={Button}
+                        bg="lf.button"
+                        color="white"
+                        _hover={{
+                          color: "lf.black",
+                          bg: "teal.500",
+                        }}
+                        leftIcon={<BiUserCircle size="30px" />}
+                        variant="unstyled"
+                        display="flex"
+                        alignItems="center"
+                        px="10px"
+                      >
+                        My Account
+                      </MenuButton>
+                      <MenuList position={"relative"} zIndex={10}>
+                        <MenuGroup title="Profile">
+                          <MenuItem>
+                            Name: {`${firstname} ${lastname}`}
+                          </MenuItem>
+                        </MenuGroup>
+                      </MenuList>
+                    </Menu>
+                  )}
 
-                  <Box>
-                    <Button
-                      bg="sm.sparkle"
-                      color="yellow.500"
-                      _hover={{
-                        color: "sm.sparkle",
-                        bg: "yellow.500",
-                      }}
-                      variant="unstyled"
-                      px="10px"
-                      onClick={() => navigate("/orders")}
-                    >
-                      Orders
-                    </Button>
-                  </Box>
+                  {isAuth && (
+                    <Box>
+                      <Button
+                        bg="lf.button"
+                        color="white"
+                        _hover={{
+                          color: "lf.black",
+                          bg: "teal.500",
+                        }}
+                        variant="unstyled"
+                        px="10px"
+                        onClick={() => navigate("/orders")}
+                      >
+                        Orders
+                      </Button>
+                    </Box>
+                  )}
 
-                  <Box>
-                    <Button
-                      bg="sm.sparkle"
-                      color="yellow.500"
-                      _hover={{
-                        color: "sm.sparkle",
-                        bg: "yellow.500",
-                      }}
-                      variant="unstyled"
-                      px="10px"
-                      onClick={() => navigate("/login")}
-                    >
-                      Login
-                    </Button>
-                  </Box>
+                  {!isAuth && (
+                    <Box>
+                      <Button
+                        bg="lf.button"
+                        color="white"
+                        _hover={{
+                          color: "lf.black",
+                          bg: "teal.500",
+                        }}
+                        variant="unstyled"
+                        px="10px"
+                        onClick={() => navigate("/login")}
+                      >
+                        Login
+                      </Button>
+                    </Box>
+                  )}
 
-                  <Box>
-                    <Button
-                      bg="sm.sparkle"
-                      color="yellow.500"
-                      _hover={{
-                        color: "sm.sparkle",
-                        bg: "yellow.500",
-                      }}
-                      variant="unstyled"
-                      px="10px"
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </Button>
-                  </Box>
+                  {isAuth && (
+                    <Box>
+                      <Button
+                        bg="lf.button"
+                        color="white"
+                        _hover={{
+                          color: "lf.black",
+                          bg: "teal.500",
+                        }}
+                        variant="unstyled"
+                        px="10px"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </Button>
+                    </Box>
+                  )}
                 </Flex>
               </DrawerBody>
             </DrawerContent>
@@ -361,8 +330,6 @@ const Navbar = () => {
             >
               <Input
                 placeholder="Search luxefemme"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
                 _focus={{ boxShadow: "none" }}
                 _placeholder={{ color: "lf.teal" }}
                 transition="0.2s ease-in-out"
@@ -375,9 +342,8 @@ const Navbar = () => {
               />
               <InputRightAddon
                 border="none"
-                borderRadius="none"
+                borderRightRadius={"5"}
                 cursor="pointer"
-                onClick={handleSearch}
                 color={isInputFocused ? "white" : "lf.teal"}
                 bgColor={isInputFocused ? "lf.teal" : "transparent"}
               >
@@ -394,17 +360,18 @@ const Navbar = () => {
             position="relative"
           >
             <Icon boxSize={8} as={BsBag} color="lf.teal" />
-            {getIsLoading ? (
+            {isAuth && getIsLoading && (
               <Spinner
                 position="absolute"
                 top={-2}
                 right={-2}
                 thickness="2px"
                 speed="0.65s"
-                color="yellow.500"
+                color="teal.500"
                 boxSize="25px"
               />
-            ) : (
+            )}
+            {isAuth && !getIsLoading && (
               <Circle
                 borderRadius="50%"
                 size="25px"
@@ -414,7 +381,7 @@ const Navbar = () => {
                 top={-2}
                 right={-2}
               >
-                1
+                {cartData && cartData.length}
               </Circle>
             )}
           </Square>

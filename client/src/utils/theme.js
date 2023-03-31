@@ -6,6 +6,7 @@ export const theme = extendTheme({
       teal: "#167A92",
       como: "#427555",
       black: "#26262C",
+      button: "#4B5666",
     },
   },
 });

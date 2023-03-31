@@ -9,13 +9,14 @@ const ProductCard = ({ _id, title, images, price }) => {
   return (
     <Card
       w={{
-        base: "150px",
+        base: "200px",
         sm: "210px",
         md: "260px",
         lg: "250px",
       }}
       border="1px solid"
       borderColor={"teal.500"}
+      bgColor={"#FDFDF9"}
       borderRadius={0}
       margin="auto"
       cursor="pointer"
@@ -34,7 +35,7 @@ const ProductCard = ({ _id, title, images, price }) => {
         />
         <Stack mt="6" spacing="3">
           <Text
-            color="sm.sparkle"
+            color="lf.black"
             fontSize="18px"
             fontWeight={400}
             overflow="hidden"
@@ -43,7 +44,7 @@ const ProductCard = ({ _id, title, images, price }) => {
           >
             {title}
           </Text>
-          <Text fontSize="20px" fontWeight={400} color="sm.sparkle">
+          <Text fontSize="20px" fontWeight={400} color="lf.black">
             <span>&#8377;</span> {price && formatMoney(price)}
           </Text>
         </Stack>

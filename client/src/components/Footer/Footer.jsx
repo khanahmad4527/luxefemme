@@ -6,12 +6,19 @@ import {
   Stack,
   Text,
   Flex,
+  Icon,
+  Divider,
+  Square,
 } from "@chakra-ui/react";
+import { BsInstagram, BsPinterest, BsTwitter } from "react-icons/bs";
+import { FaFacebookSquare } from "react-icons/fa";
+import { GoLocation } from "react-icons/go";
+import { TfiEmail } from "react-icons/tfi";
 
 export default function Footer() {
   return (
-    <Box>
-      <Container as={Stack} maxW={"6xl"} py={10}>
+    <Box fontSize={"13px"} fontWeight={400}>
+      <Container as={Stack} maxW={"6xl"} py={10} gap="40px">
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
           <Stack align={"flex-start"}>
             <ListHeader>Product</ListHeader>
@@ -37,40 +44,66 @@ export default function Footer() {
             <Link>Law Enforcement</Link>
             <Link>Status</Link>
           </Stack>
-          <Stack align={"flex-start"}>
-            <ListHeader>Follow Us</ListHeader>
-            <Link>Facebook</Link>
-            <Link>Twitter</Link>
-            <Link>Dribbble</Link>
-            <Link>Instagram</Link>
-            <Link>LinkedIn</Link>
+          <Stack>
+            <Link>
+              <Flex
+                color={"lf.teal"}
+                _hover={{ color: "lf.black" }}
+                alignItems="center"
+                gap="10px"
+              >
+                <Icon boxSize="5" as={GoLocation} color={"lf.teal"} />
+                Store Location
+              </Flex>
+            </Link>
+
+            <Link>
+              <Flex
+                color={"lf.teal"}
+                _hover={{ color: "lf.black" }}
+                alignItems="center"
+                gap="10px"
+              >
+                <Icon boxSize="5" as={TfiEmail} color={"lf.teal"} />
+                Get Email
+              </Flex>
+            </Link>
           </Stack>
         </SimpleGrid>
-      </Container>
-      <Box py={10}>
+
         <Flex
-          align={"center"}
-          _before={{
-            content: '""',
-            borderBottom: "1px solid",
-
-            flexGrow: 1,
-            mr: 8,
-          }}
-          _after={{
-            content: '""',
-            borderBottom: "1px solid",
-
-            flexGrow: 1,
-            ml: 8,
-          }}
+          align={"flex-start"}
+          direction="row"
+          justifyContent={"center"}
+          alignItems="center"
+          gap="20px"
         >
-          {/* <Logo /> */}
+          <Icon boxSize="5" as={BsPinterest} color={"lf.teal"} />
+          <Icon boxSize="5" as={BsInstagram} color={"lf.teal"} />
+          <Icon boxSize="5" as={FaFacebookSquare} color={"lf.teal"} />
+          <Icon boxSize="5" as={BsTwitter} color={"lf.teal"} />
         </Flex>
-        <Text pt={6} fontSize={"sm"} textAlign={"center"}>
-          © 2022 Chakra Templates. All rights reserved
-        </Text>
-      </Box>
+
+        <Flex
+          align={"flex-start"}
+          direction="row"
+          justifyContent={"center"}
+          alignItems="center"
+          gap="10px"
+        >
+          <Link>US</Link>
+          <Divider h="2" color={"#F7F6F2"} orientation="vertical" />
+          <Link>France</Link>
+          <Divider h="2" color={"#F7F6F2"} orientation="vertical" />
+          <Link>Germany</Link>
+          <Divider h="2" color={"#F7F6F2"} orientation="vertical" />
+          <Link>Italy</Link>
+          <Divider h="2" color={"#F7F6F2"} orientation="vertical" />
+          <Link>Spain</Link>
+          <Divider h="2" color={"#F7F6F2"} orientation="vertical" />
+          <Link>UK</Link>
+        </Flex>
+      </Container>
     </Box>
   );
 }

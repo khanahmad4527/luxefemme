@@ -1,4 +1,5 @@
-import axios from "axios";
+import instance from "../../utils/axiosInstance";
+
 import {
   GET_DRESS_LOADING,
   GET_DRESS_SUCCESS,
@@ -11,7 +12,7 @@ import {
 export const getDresses = () => async (dispatch) => {
   dispatch({ type: GET_DRESS_LOADING });
   try {
-    const responce = await axios.get(
+    const responce = await instance.get(
       `${process.env.REACT_APP_API_ENDPOINT}/products?category=dress`
     );
     dispatch({ type: GET_DRESS_SUCCESS, payload: responce.data });
@@ -23,7 +24,7 @@ export const getDresses = () => async (dispatch) => {
 export const getShoes = () => async (dispatch) => {
   dispatch({ type: GET_SHOES_LOADING });
   try {
-    const responce = await axios.get(
+    const responce = await instance.get(
       `${process.env.REACT_APP_API_ENDPOINT}/products?category=shoes`
     );
     dispatch({ type: GET_SHOES_SUCCESS, payload: responce.data });
