@@ -31,6 +31,10 @@ export const GET_ADMIN_ERROR="get/admin/error";
 export const GET_ADMIN_SUCCESS="get/admin/success";
 
 
+export const PATCH_ADMIN_LOADING="update/admin/loading";
+export const PATCH_ADMIN_ERROR="update/admin/error";
+export const PATCH_ADMIN_SUCCESS="update/admin/success";
+
 export const DELETE_ADMIN_LOADING="delete/admin/loading";
 export const DELETE_ADMIN_ERROR="delete/admin/error";
 export const DELETE_ADMIN_SUCCESS="delete/admin/success";

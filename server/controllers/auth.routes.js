@@ -5,10 +5,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-//registration
 
 adminRouter.post("/registration", async (req, res) => {
-  const { username, email, password, age, role, address } = req.body;
+  const { firstname,lastname,email,hashedPassword,role } = req.body;
   const valid = await AdminUserModel.findOne({ email });
   if (valid) {
     res
@@ -16,14 +15,9 @@ adminRouter.post("/registration", async (req, res) => {
       .send({ error: "user Already exists with this email id please" });
   }
   try {
-    bcrypt.hash(password, 12, (err, hash) => {
+    bcrypt.hash(hashedPassword, 12, (err, hash) => {
       const user = new AdminUserModel({
-        username,
-        email,
-        password: hash,
-        age,
-        role,
-        address,
+        firstname,lastname,email,hashedPassword:hash,role
       });
 
       user.save().then((ress) => {
@@ -46,9 +40,9 @@ adminRouter.post("/login", async (req, res) => {
       error: "user doesn't exist with this email id, please do registration",
     });
   }
-
+// console.log(valid.role)
   try {
-    bcrypt.compare(password, valid.password, (err, decoded) => {
+    bcrypt.compare(password, valid.hashedPassword, (err, decoded) => {
       if (decoded) {
         let token = jwt.sign(
           { userId: valid._id, role: valid.role },
