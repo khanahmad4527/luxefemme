@@ -17,6 +17,7 @@ import {
     Text,
     Heading,
     Flex,
+    Avatar,
   } from '@chakra-ui/react'
 import { useState } from 'react'
 import {
@@ -62,6 +63,7 @@ dispatch(getAdminSuccess())
     <Thead bg="blue" >
       <Tr >
         <Th textAlign={"center"} color="white">Sr. No.</Th>
+        <Th textAlign={"center"} color="white">Avatar</Th>
         <Th textAlign={"center"} color="white">Edit</Th>
         <Th textAlign={"center"}color="white">First Name</Th>
         <Th textAlign={"center"}color="white">Last Name</Th>
@@ -73,6 +75,10 @@ dispatch(getAdminSuccess())
      {
       admins?.map((el,i)=><Tr key={el._id}>
         <Td textAlign={"center"}>{i+1}</Td>
+        <Td textAlign={"center"}> <Avatar
+      size='md'
+      name={el.firstname[0]+el.lastname[0]}
+    /></Td>
         <Td textAlign={"center"} cursor="pointer"><Center onClick={()=>{
           setAdmin(el);
           onOpen()
@@ -90,6 +96,7 @@ dispatch(getAdminSuccess())
     </Tbody>
     <Tfoot bg="blue">
       <Tr>
+      <Td textAlign={"center"}>{""}</Td>
       <Td textAlign={"center"}>{""}</Td>
       <Td textAlign={"center"}>{""}</Td>
       <Td textAlign={"center"}>{""}</Td>

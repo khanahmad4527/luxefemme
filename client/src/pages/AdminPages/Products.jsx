@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Table,
     Thead,
@@ -10,47 +10,74 @@ import {
     TableCaption,
     TableContainer,
     Box,
+    Button,
+    Center,
+    useDisclosure,
+    Image,
   } from '@chakra-ui/react'
+  import { useEffect } from 'react';
+  import { useDispatch, useSelector } from "react-redux";
+  import { BiPencil } from "react-icons/bi";
+//AiFillDelete
+import { AiFillDelete } from "react-icons/ai";
+import Loading from '../../utils/Loading';
+import { deleteProductSucess, getProductSuccess } from '../../redux/admin/admin.action';
 const Products = () => {
-   
+  const {products,loading}=useSelector(store=>store.admin);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+ const dispatch=useDispatch();
+ const [prod,setProd]=useState([]);
+ useEffect(()=>{
+dispatch(getProductSuccess())
+ },[])
+ console.log(products)
   return (
     <Box w={{ base: 'full', md: "70%",lg:"80%" }} m="auto" border="solid" mr="0rem">
-        <TableContainer top="0px">
+        { loading ?  <Loading/> :<TableContainer top="0px" w="100%">
   <Table variant='striped' colorScheme='teal'>
-    <TableCaption>Imperial to metric conversion factors</TableCaption>
-    <Thead>
-      <Tr>
-        <Th>To convert</Th>
-        <Th>into</Th>
-        <Th isNumeric>multiply by</Th>
+    {/* <TableCaption>Total User : {user}</TableCaption> */}
+    <TableCaption><Button size="sm">Prev</Button><Button size="sm">1</Button><Button size="sm">Next</Button></TableCaption>
+    <Thead bg="blue" >
+      <Tr >
+        <Th textAlign={"center"} color="white">Sr. No.</Th>
+        <Th textAlign={"center"} color="white">Edit</Th>
+        <Th textAlign={"center"}color="white">Image</Th>
+        <Th textAlign={"left"}color="white">Category</Th>
+        <Th textAlign={"center"}color="white">Price</Th>
+        <Th textAlign={"center"}color="white">Delete</Th>
       </Tr>
     </Thead>
     <Tbody>
-      <Tr>
-        <Td>inches</Td>
-        <Td>millimetres (mm)</Td>
-        <Td isNumeric>25.4</Td>
-      </Tr>
-      <Tr>
-        <Td>feet</Td>
-        <Td>centimetres (cm)</Td>
-        <Td isNumeric>30.48</Td>
-      </Tr>
-      <Tr>
-        <Td>yards</Td>
-        <Td>metres (m)</Td>
-        <Td isNumeric>0.91444</Td>
-      </Tr>
+     {
+      products?.map((el,i)=><Tr key={el._id}>
+        <Td textAlign={"center"}>{i+1}</Td>
+        <Td textAlign={"center"} cursor="pointer"><Center onClick={()=>{
+          setProd(el);
+          onOpen()
+        }}><BiPencil  /></Center></Td>
+        <Td textAlign={"center"} w="10%"><Image w="100%" src={el.image}/></Td>
+        <Td>{el.category}</Td>
+        <Td textAlign={"center"}>₹{el.price}</Td>
+        <Td textAlign={"center"} cursor="pointer"><Center><AiFillDelete onClick={()=>{
+           dispatch(deleteProductSucess(el._id));
+           dispatch(getProductSuccess())
+          console.log(el._id)
+          }}/></Center></Td>
+      </Tr>)
+     }
     </Tbody>
-    <Tfoot>
+    <Tfoot bg="blue">
       <Tr>
-        <Th>To convert</Th>
-        <Th>into</Th>
-        <Th isNumeric>multiply by</Th>
+      <Td textAlign={"center"}>{""}</Td>
+      <Td textAlign={"center"}>{""}</Td>
+      <Td textAlign={"center"}>{""}</Td>
+      <Td textAlign={"center"}>{""}</Td>
+      <Td textAlign={"center"}>{""}</Td>
+      <Td textAlign={"center"}>{""}</Td>
       </Tr>
     </Tfoot>
   </Table>
-</TableContainer>
+</TableContainer>}
     </Box>
   )
 }

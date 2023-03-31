@@ -89,12 +89,12 @@ export const getProductError = () => ({
 })
 
 export const getProductSuccess = () => (dispatch) => {
-    dispatch({ type: GET_PRODUCTS_ERROR })
+    dispatch(getProductLoading())
     getProduct().then((res) => {
-        console.log(res)
+        
         dispatch({ type: GET_PRODUCTS_SUCCESS, payload: res })
     }).catch((er) => {
-        dispatch({ type: GET_PRODUCTS_ERROR })
+        dispatch(getProductError())
     })
 }
 
