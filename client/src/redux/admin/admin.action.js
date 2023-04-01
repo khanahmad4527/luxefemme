@@ -49,7 +49,7 @@ export const addProductsError = () => ({
 
 export const addProductsSucess = (payload) => (dispatch) => {
     dispatch(addProductsLoading())
-    postProduct(payload).then((res) => { dispatch({ type: ADD_PRODUCT_SUCCESS, payload: payload }) }).catch((er) => {
+    postProduct(payload).then((res) => { dispatch({ type: ADD_PRODUCT_SUCCESS}); dispatch(getProductSuccess()) }).catch((er) => {
 
         dispatch(addProductsError())
 
@@ -72,8 +72,9 @@ export const deleteProductSucess = (id) => (dispatch) => {
     dispatch(deleteProductLoading());
     delProduct(id).then((res) => {
         dispatch({ type: DELETE_PRODUCT_SUCCESS })
+        dispatch(getProductSuccess())
     }).catch((er) => {
-        dispatch({ type: DELETE_PRODUCT_ERROR })
+        dispatch(deleteProductError())
     })
 }
 
@@ -105,10 +106,11 @@ export const getProductSuccess = () => (dispatch) => {
 export const updateProductLoading = () => ({ type: PATCH_PRODUCT_LOADING });
 export const updateProductError = () => ({ tye: PATCH_PRODUCT_ERROR });
 
-export const updateProductSuccess = (payload) => (dispatch) => {
+export const updateProductSuccess = (id,payload) => (dispatch) => {
     dispatch(updateProductLoading())
-    updateProduct(payload.id, payload).then((res) => {
+    updateProduct(id, payload).then((res) => {
         dispatch({ type: PATCH_PRODUCT_SUCCESS });
+        dispatch(getProductSuccess())
     }).catch((er) => {
         dispatch(updateProductError())
     });

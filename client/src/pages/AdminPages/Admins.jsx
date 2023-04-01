@@ -65,8 +65,7 @@ dispatch(getAdminSuccess())
         <Th textAlign={"center"} color="white">Sr. No.</Th>
         <Th textAlign={"center"} color="white">Avatar</Th>
         <Th textAlign={"center"} color="white">Edit</Th>
-        <Th textAlign={"center"}color="white">First Name</Th>
-        <Th textAlign={"center"}color="white">Last Name</Th>
+        <Th textAlign={"center"}color="white">Name</Th>
         <Th textAlign={"center"}color="white">Email</Th>
         <Th textAlign={"center"}color="white">Delete</Th>
       </Tr>
@@ -83,8 +82,7 @@ dispatch(getAdminSuccess())
           setAdmin(el);
           onOpen()
         }}><BiPencil  /></Center></Td>
-        <Td textAlign={"center"}>{el.firstname}</Td>
-        <Td textAlign={"center"}>{el.lastname}</Td>
+        <Td textAlign={"center"}>{el.firstname+" "+el.lastname}</Td>
         <Td textAlign={"center"}>{el.email}</Td>
         <Td textAlign={"center"} cursor="pointer"><Center><AiFillDelete onClick={()=>{
            dispatch(delAdminSuccess(el._id));
@@ -96,7 +94,6 @@ dispatch(getAdminSuccess())
     </Tbody>
     <Tfoot bg="blue">
       <Tr>
-      <Td textAlign={"center"}>{""}</Td>
       <Td textAlign={"center"}>{""}</Td>
       <Td textAlign={"center"}>{""}</Td>
       <Td textAlign={"center"}>{""}</Td>

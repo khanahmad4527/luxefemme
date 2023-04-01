@@ -14,6 +14,7 @@ import Users from "./AdminPages/Users";
 import Admins from "./AdminPages/Admins";
 import Products from "./AdminPages/Products";
 import SimpleSidebar from "../components/Admin/AdminSidebar";
+import AdminPrivateRoute from "../hoc/AdminProtectedRoutes";
 
 const AllRoutes = () => {
   return (
@@ -54,10 +55,10 @@ const AllRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="*" element={<PageNotFound />} />
-      <Route path="/admin/" element={<> <SimpleSidebar/> <Home/></>}/>
-      <Route path="/admin/users" element={<> <SimpleSidebar/> <Users/></>}/>
-      <Route path="/admin/admins" element={<> <SimpleSidebar/> <Admins/></>}/>
-      <Route path="/admin/products" element={<> <SimpleSidebar/> <Products/></>}/>
+      <Route path="/admin/" element={<AdminPrivateRoute> <SimpleSidebar/> <Home/></AdminPrivateRoute>}/>
+      <Route path="/admin/users" element={<AdminPrivateRoute> <SimpleSidebar/> <Users/></AdminPrivateRoute>}/>
+      <Route path="/admin/admins" element={<AdminPrivateRoute> <SimpleSidebar/> <Admins/></AdminPrivateRoute>}/>
+      <Route path="/admin/products" element={<AdminPrivateRoute> <SimpleSidebar/> <Products/></AdminPrivateRoute>}/>
     </Routes>
   );
 };

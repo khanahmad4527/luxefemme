@@ -25,12 +25,13 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { GrUserAdmin } from "react-icons/gr";
 import { RiProductHuntLine } from "react-icons/ri";
-import {AiOutlineUser} from "react-icons/ai";
+import {AiOutlineUser,AiOutlineLogout} from "react-icons/ai";
 const LinkItems = [
-  { name: 'Home', icon: FiHome,to:"/admin/" },
+  { name: 'Dashboard', icon: FiHome,to:"/admin/" },
   { name: 'Admins', icon: GrUserAdmin,to:"/admin/admins" },
   { name: 'Users', icon: AiOutlineUser,to:"/admin/users" },
-  { name: 'Products', icon: RiProductHuntLine ,to:"/admin/products"}
+  { name: 'Products', icon: RiProductHuntLine ,to:"/admin/products"},
+  {name: 'SignOut', icon: AiOutlineLogout}
   
 ];
 
@@ -84,7 +85,10 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} onClick={()=>{navigate(link.to)}}>
+        <NavItem key={link.name} icon={link.icon} onClick={()=>{if(link.to){navigate(link.to)}else{
+          localStorage.clear();
+          navigate("/")
+        }}}>
           {link.name}
         </NavItem>
       ))}

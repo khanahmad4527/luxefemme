@@ -4,8 +4,8 @@ import axios from "axios";
 
 //products apis========================================
 
-export const getProduct = async() => {
-   let data=await axios.get("http://localhost:8080/adminproduct/products", { headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") } })
+export const getProduct = async(getProductsParam="") => {
+   let data=await axios.get("http://localhost:8080/adminproduct/products",getProductsParam, { headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") } })
  return data?.data;
 }
 
@@ -17,13 +17,13 @@ export const postProduct = async(payload) => {
 }
 
 export const delProduct = async(id) => {
-  let data= axios.delete(`http://localhost:8080/adminproduct/product/${id}`, {
+  let data=await axios.delete(`http://localhost:8080/adminproduct/product/${id}`, {
         headers: {
             "Content-Type": "application/json",
             "token": localStorage.getItem("token")
         }
     })
-    return data.data;
+    return data;
 }
 
 export const updateProduct = async(id, payload) => {
@@ -33,7 +33,7 @@ export const updateProduct = async(id, payload) => {
             "token": localStorage.getItem("token")
         }
     })
-    return data.data;
+    return data;
 }
 
 

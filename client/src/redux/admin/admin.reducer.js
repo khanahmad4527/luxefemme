@@ -51,7 +51,7 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        error: false,
+        error: true,
       };
     }
 
@@ -59,7 +59,6 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        products: [...state.products, payload],
       };
     }
 
@@ -107,13 +106,7 @@ export const adminReducer = (state = initialState, { type, payload }) => {
         products: payload,
       };
     }
-    case DELETE_PRODUCT_LOADING: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
-    
+   
     case GET_USERS_LOADING:{
       return{
         ...state,
@@ -137,6 +130,14 @@ export const adminReducer = (state = initialState, { type, payload }) => {
     }
    }
 
+   case DELETE_PRODUCT_LOADING: {
+    return {
+      ...state,
+      loading: true,
+    };
+  }
+  
+  
     case DELETE_PRODUCT_ERROR: {
       return {
         ...state,
