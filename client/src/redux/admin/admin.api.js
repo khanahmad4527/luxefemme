@@ -5,7 +5,7 @@ import axios from "axios";
 //products apis========================================
 
 export const getProduct = async() => {
-   let data= axios.get("http://localhost:8080/adminproduct/products", { headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") } })
+   let data=await axios.get("http://localhost:8080/adminproduct/products", { headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") } })
  return data?.data;
 }
 
@@ -52,7 +52,7 @@ export const getUsers = async() => {
 
 
 export const delUser = async(id) => {
-   let data= await axios.get(`http://localhost:8080/adminuser/user/${id}`, {
+   let data= await axios.delete(`http://localhost:8080/adminuser/user/${id}`, {
         headers: {
             "Content-Type": "application/json",
             "token": localStorage.getItem("token")
