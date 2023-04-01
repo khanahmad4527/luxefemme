@@ -56,7 +56,7 @@ dispatch(getAdminSuccess(page))
 
   const handleChange=(e)=>{
     setAdmin({...admin,[e.target.name]:e.target.value})
-  }
+  }//
   return (
     <Box w={{ base: 'full', md: "70%",lg:"80%" }} m="auto"  mr="0rem">
       
