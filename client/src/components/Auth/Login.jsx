@@ -16,11 +16,11 @@ import {
   Text,
   Divider,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { existingUser, login } from "../../redux/auth/auth.action";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,13 +30,13 @@ export default function Login() {
   const [isButton, setIsButton] = useState(false);
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsButton(true);
-    const status = await existingUser(email, password);
+    const { status, role } = await existingUser(email, password);
     if (status === 200) {
       dispatch(login(email, password));
       toast({
@@ -47,7 +47,11 @@ export default function Login() {
         isClosable: true,
         position: "top",
       });
-      navigate("/");
+      if (role === "admin" || role === "superadmin") {
+        navigate("/admin");
+      } else {
+        navigate(location.state?.data || "/", { replace: true });
+      }
       setIsButton(false);
     } else if (status === 404) {
       toast({

@@ -35,7 +35,14 @@ const login = async (req, res) => {
   try {
     const userExist = await UserModel.findOne({ email });
     if (userExist) {
-      const { _id: id, firstname, lastname, email, hashedPassword } = userExist;
+      const {
+        _id: id,
+        firstname,
+        lastname,
+        email,
+        role,
+        hashedPassword,
+      } = userExist;
       const isCorrect = await bcrypt.compare(password, hashedPassword);
       if (!isCorrect) {
         return res.status(401).json({ message: "Incorrect Password" });
@@ -53,7 +60,7 @@ const login = async (req, res) => {
             res.status(200).json({
               message: "Login Successfull",
               token,
-              userData: { id, firstname, lastname, email },
+              userData: { id, firstname, lastname, email, role },
             });
           }
         );

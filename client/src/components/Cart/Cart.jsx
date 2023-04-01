@@ -24,7 +24,7 @@ import EmptyCart from "./EmptyCart";
 const Cart = () => {
   const [subtotal, setSubtotal] = useState(0);
 
-  const { getIsLoading, getIsError, cartData } = useSelector(
+  const { cartGetIsLoading, cartGetIsError, cartData } = useSelector(
     (store) => store.cart
   );
 
@@ -50,13 +50,13 @@ const Cart = () => {
     setSubtotal(subtotal);
   }, [cartData]);
 
-  if (getIsLoading) {
+  if (cartGetIsLoading) {
     return (
       <Flex w="100%" h="100vh">
         <Loading />
       </Flex>
     );
-  } else if (getIsError) {
+  } else if (cartGetIsError) {
     return (
       <Flex w="100%" h="100vh">
         <Error />
@@ -76,7 +76,6 @@ const Cart = () => {
             gap="10px"
             w={{ base: "100%", lg: "70%" }}
             padding="20px"
-            bgColor="white"
           >
             <Text fontSize={30} fontWeight={500}>
               My Cart
@@ -97,7 +96,6 @@ const Cart = () => {
             w={{ base: "100%", lg: "30%" }}
             h="max-content"
             padding="20px"
-            bgColor="white"
           >
             <Text fontSize="30px">Total</Text>
 
@@ -134,6 +132,7 @@ const Cart = () => {
                 bg: "teal.500",
               }}
               onClick={() => navigate("/checkout")}
+              isDisabled={subtotal === 0 ? true : false}
             >
               Buy
             </Button>

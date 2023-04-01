@@ -66,13 +66,7 @@ const AddressModal = ({
         isClosable: true,
         position: "top",
       });
-
-      const newData = [
-        { id: userAddress.length + 1, ...formData },
-        ...userAddress,
-      ];
-
-      dispatch(addAddress(newData));
+      dispatch(addAddress(formData));
     } else if (addressOperation === "edit") {
       toast({
         title: "Successfully Updated",
@@ -82,10 +76,7 @@ const AddressModal = ({
         isClosable: true,
         position: "top",
       });
-      const newData = userAddress.map((item) =>
-        item.id === formData.id ? formData : item
-      );
-      dispatch(updateAddress(newData));
+      dispatch(updateAddress(formData._id, formData));
     }
 
     setFormData(initialFormData);
@@ -107,26 +98,49 @@ const AddressModal = ({
         <ModalBody color={"sm.sparkle"}>
           <form onSubmit={handleSubmit}>
             <VStack spacing="20px">
-              <FormControl id="full_name" isRequired>
-                <FormLabel>Full Name</FormLabel>
-                <Input
-                  border="2px solid"
-                  borderColor={"teal.500"}
-                  _focus={{
-                    boxShadow: "none",
-                    border: "2px solid",
-                    borderColor: "teal.500",
-                  }}
-                  _hover={{
-                    border: "2px solid",
-                    borderColor: "teal.500",
-                  }}
-                  type="text"
-                  name="full_name"
-                  value={formData.full_name}
-                  onChange={handleChange}
-                />
-              </FormControl>
+              <HStack spacing="20px">
+                <FormControl id="firstname" isRequired>
+                  <FormLabel>First Name</FormLabel>
+                  <Input
+                    border="2px solid"
+                    borderColor={"teal.500"}
+                    _focus={{
+                      boxShadow: "none",
+                      border: "2px solid",
+                      borderColor: "teal.500",
+                    }}
+                    _hover={{
+                      border: "2px solid",
+                      borderColor: "teal.500",
+                    }}
+                    type="text"
+                    name="firstname"
+                    value={formData.firstname}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+                <FormControl id="lastname" isRequired>
+                  <FormLabel>Last Name</FormLabel>
+                  <Input
+                    border="2px solid"
+                    borderColor={"teal.500"}
+                    _focus={{
+                      boxShadow: "none",
+                      border: "2px solid",
+                      borderColor: "teal.500",
+                    }}
+                    _hover={{
+                      border: "2px solid",
+                      borderColor: "teal.500",
+                    }}
+                    type="text"
+                    name="lastname"
+                    value={formData.lastname}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+              </HStack>
+
               <FormControl id="mobile" isRequired>
                 <FormLabel>Mobile Number</FormLabel>
                 <Input

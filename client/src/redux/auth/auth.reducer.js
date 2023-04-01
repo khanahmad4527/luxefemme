@@ -8,7 +8,9 @@ import {
   RESET_AUTH,
 } from "./auth.types";
 
-const token = localStorage.getItem("token");
+import Cookies from "js-cookie";
+
+const token = Cookies.get("token");
 
 const { firstname, lastname, email, id } =
   JSON.parse(localStorage.getItem("lfUserData")) || {};
@@ -37,13 +39,13 @@ export const authReducer = (state = initialState, { type, payload }) => {
 
     case GET_AUTH_SUCCESS: {
       if (payload.userData) {
-        localStorage.setItem("token", payload.token);
+        Cookies.set("token", payload.token, { expires: 3 });
         localStorage.setItem("lfUserData", JSON.stringify(payload.userData));
       }
 
       return {
         ...state,
-        id: payload.userData.id,
+        id: payload.userData._id,
         userDetails: {
           firstname: payload.userData.firstname,
           lastname: payload.userData.lastname,
@@ -86,7 +88,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
     }
 
     case RESET_AUTH: {
-      localStorage.removeItem("token");
+      Cookies.remove("token");
       localStorage.removeItem("lfUserData");
       return {
         ...initialState,

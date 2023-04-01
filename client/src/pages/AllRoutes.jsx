@@ -50,10 +50,9 @@ const AllRoutes = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="*" element={<PageNotFound />} />
       <Route
-        path="/admin/"
+        path="/admin"
         element={
           <>
-            {" "}
             <SimpleSidebar /> <Home />
           </>
         }
@@ -62,7 +61,6 @@ const AllRoutes = () => {
         path="/admin/users"
         element={
           <>
-            {" "}
             <SimpleSidebar /> <Users />
           </>
         }
@@ -71,7 +69,6 @@ const AllRoutes = () => {
         path="/admin/admins"
         element={
           <>
-            {" "}
             <SimpleSidebar /> <Admins />
           </>
         }
@@ -80,7 +77,6 @@ const AllRoutes = () => {
         path="/admin/products"
         element={
           <>
-            {" "}
             <SimpleSidebar /> <Products />
           </>
         }
