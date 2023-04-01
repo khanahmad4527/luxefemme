@@ -19,7 +19,8 @@ import {
     Flex,
     Avatar,
   } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState } from 'react';
+import { CHANGE_PAGE } from '../../redux/admin/admin.types';
 import {
   Modal,
   ModalOverlay,
@@ -42,11 +43,17 @@ const Admins = () => {
    const [admin,setAdmin]=useState(0);
    const { isOpen, onOpen, onClose } = useDisclosure()
    const dispatch=useDispatch();
-   const {admins,loading}=useSelector(store=>store.admin);
-   console.log(admins,"hh")
+   const {admins,loading,page}=useSelector(store=>store.admin);
+   
    useEffect(()=>{
-dispatch(getAdminSuccess())
+dispatch(getAdminSuccess(page))
    },[])
+   const handlePayload=(payload)=>{
+    let newPage=page+payload;
+    dispatch({type:CHANGE_PAGE,payload:newPage})
+    dispatch(getAdminSuccess(page))
+  }
+
   const handleChange=(e)=>{
     setAdmin({...admin,[e.target.name]:e.target.value})
   }
@@ -59,7 +66,7 @@ dispatch(getAdminSuccess())
        { loading ?  <Loading/> :<TableContainer top="0px" w="100%">
   <Table variant='striped' colorScheme='teal'>
     {/* <TableCaption>Total User : {user}</TableCaption> */}
-    <TableCaption><Button size="sm">Prev</Button><Button size="sm">1</Button><Button size="sm">Next</Button></TableCaption>
+    <TableCaption><Button size="sm" colorScheme={"blue"} mr="2px" onClick={()=>{handlePayload(-1)}} isDisabled={page==1}>Prev</Button><Button size="sm" >{page}</Button><Button size="sm" colorScheme={"blue"} onClick={()=>{handlePayload(+1)}} ml="2px">Next</Button></TableCaption>
     <Thead bg="blue" >
       <Tr >
         <Th textAlign={"center"} color="white">Sr. No.</Th>

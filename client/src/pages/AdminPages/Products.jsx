@@ -35,29 +35,43 @@ import { AiFillDelete } from "react-icons/ai";
 import Loading from '../../utils/Loading';
 import { deleteProductSucess, getProductSuccess, updateProductSuccess } from '../../redux/admin/admin.action';
 import AddProduct from '../../components/Admin/AddProduct';
+import { CHANGE_PAGE } from '../../redux/admin/admin.types';
 const Products = () => {
-  const {products,loading}=useSelector(store=>store.admin);
-  const [searchParams, setSearchParams] = useSearchParams();
-  
+  const {products,loading,page}=useSelector(store=>store.admin);
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const initialPage = searchParams.get('page')
+  //  const[page,setPage]=useState(initialPage||1);
+
   const { isOpen, onOpen, onClose } = useDisclosure()
  const dispatch=useDispatch();
  const [prod,setProd]=useState([]);
+const handlePayload=(payload)=>{
+  let newPage=page+payload;
+  dispatch({type:CHANGE_PAGE,payload:newPage})
+  dispatch(getProductSuccess(newPage))
+}
+
  useEffect(()=>{
-dispatch(getProductSuccess())
+  // const params={param:{
+  //   page:page
+  // }};
+//  setSearchParams(params.param)
+dispatch(getProductSuccess(page))
  },[dispatch])
  const handleChange=(e)=>{
 setProd({...prod,[e.target.name]:e.target.value})
  }
+
   return (
     <Box w={{ base: 'full', md: "70%",lg:"80%" }} m="auto"  mr="0rem">
       <AddProduct/>
         { loading ?  <Loading/> :<TableContainer top="0px" w="100%">
   <Table variant='striped' colorScheme='teal'>
     {/* <TableCaption>Total User : {user}</TableCaption> */}
-    <TableCaption><Button size="sm">Prev</Button><Button size="sm">1</Button><Button size="sm">Next</Button></TableCaption>
+    <TableCaption><Button size="sm" colorScheme={"blue"} mr="2px" onClick={()=>{handlePayload(-1)}} isDisabled={page==1}>Prev</Button><Button size="sm" >{page}</Button><Button size="sm" colorScheme={"blue"} onClick={()=>{handlePayload(+1)}} ml="2px">Next</Button></TableCaption>
     <Thead bg="blue" >
       <Tr >
-        <Th textAlign={"center"} color="white">Sr. No.</Th>
+        <Th textAlign={"center"} color="white">Product Id.</Th>
         <Th textAlign={"center"} color="white">Edit</Th>
         <Th textAlign={"center"}color="white">Image</Th>
         <Th textAlign={"left"}color="white">Category</Th>
@@ -68,12 +82,12 @@ setProd({...prod,[e.target.name]:e.target.value})
     <Tbody>
      {
       products?.map((el,i)=><Tr key={el._id}>
-        <Td textAlign={"center"}>{i+1}</Td>
+        <Td textAlign={"center"}>{el._id}</Td>
         <Td textAlign={"center"} cursor="pointer"><Center onClick={()=>{
           setProd(el);
           onOpen()
         }}><BiPencil  /></Center></Td>
-        <Td textAlign={"center"} w="10%"><Image w="100%" src={el.image}/></Td>
+        <Td textAlign={"center"} w="8%"><Image w="100%" src={el.image}/></Td>
         <Td>{el.category}</Td>
         <Td textAlign={"center"}>₹{el.price}</Td>
         <Td textAlign={"center"} cursor="pointer"><Center><AiFillDelete onClick={()=>{

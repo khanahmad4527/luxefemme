@@ -6,7 +6,7 @@ const superadminVerify = require("../middlewares/superadmin.action.middleware.js
 //get request user
 adminUserRoutes.get("/users", auth, async (req, res) => {
   let page = req.query.page;
-  let limit = 5;
+  let limit = page==0?0:5;
   let skip = (page - 1) * limit;
   try {
     let user = await UserModel.find({ role: "user" })
@@ -21,7 +21,7 @@ adminUserRoutes.get("/users", auth, async (req, res) => {
 //get request admin
 adminUserRoutes.get("/admin", auth, async (req, res) => {
   let page = req.query.page ;
-  let limit = 5;
+  let limit =page==0?0: 5;
   let skip = (page - 1) * limit;
   try {
     let user = await UserModel.find({

@@ -39,5 +39,5 @@ export const DELETE_ADMIN_LOADING="delete/admin/loading";
 export const DELETE_ADMIN_ERROR="delete/admin/error";
 export const DELETE_ADMIN_SUCCESS="delete/admin/success";
 
-
+export const CHANGE_PAGE="change/page";
 

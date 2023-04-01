@@ -89,9 +89,9 @@ export const getProductError = () => ({
     type: GET_PRODUCTS_ERROR
 })
 
-export const getProductSuccess = () => (dispatch) => {
+export const getProductSuccess = (page) => (dispatch) => {
     dispatch(getProductLoading())
-    getProduct().then((res) => {
+    getProduct(page).then((res) => {
         
         dispatch({ type: GET_PRODUCTS_SUCCESS, payload: res })
     }).catch((er) => {
@@ -133,9 +133,9 @@ export const getUsersError = () => ({
     type: GET_USERS_ERROR
 })
 
-export const getUserSuccess = () => (dispatch) => {
+export const getUserSuccess = (page) => (dispatch) => {
     dispatch(getUserLoading());
-    getUsers().then((res) => {
+    getUsers(page).then((res) => {
         dispatch({ type: GET_USERS_SUCCESS, payload: res })
     }).catch((er) => {
         dispatch({ type: GET_USERS_ERROR })
@@ -160,14 +160,14 @@ export const delUserSuccess = (id) => (dispatch) => {
 export const getAdminLoading = () => ({ type: GET_ADMIN_LOADING })
 export const getAdminError = () => ({ type: GET_ADMIN_ERROR })
 
-export const getAdminSuccess = () => async(dispatch) => {
+export const getAdminSuccess = (page) => async(dispatch) => {
     dispatch(getAdminLoading());
     // getAdmin().then((res) => {
     //     console.log(res)
     //     dispatch({ type: GET_ADMIN_SUCCESS, payload: res })
     // }).catch((er) => { dispatch(getAdminError()) })
     try{
-        let x= await getAdmin();
+        let x= await getAdmin(page);
         console.log(x);
         dispatch({ type: GET_ADMIN_SUCCESS, payload: x })
     }

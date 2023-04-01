@@ -28,10 +28,12 @@ import {
   GET_ADMIN_SUCCESS,
   PATCH_ADMIN_LOADING,
   PATCH_ADMIN_ERROR,
-  PATCH_ADMIN_SUCCESS
+  PATCH_ADMIN_SUCCESS,
+  CHANGE_PAGE
 } from "./admin.types";
 
 const initialState = {
+  page:1,
   loading: true,
   error: false,
   products: [],
@@ -61,7 +63,12 @@ export const adminReducer = (state = initialState, { type, payload }) => {
         loading: false,
       };
     }
-
+    case CHANGE_PAGE:{
+      return{
+        ...state,
+        page:payload
+      }
+    }
     case PATCH_PRODUCT_LOADING:{
       return{
         ...state,

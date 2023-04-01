@@ -9,11 +9,11 @@ const auth=require("../middlewares/auth.middleware.js");
 adminProductRouter.get("/products",auth, async (req, res) => {
   
   let page = req.query.page;
-  let limit=!page?0:10;
+  let limit=page==0?0:10;
   let skip = (page - 1) * limit;
   
   try {
-    let product = await ProductModel.find(req.query).skip(skip).limit(limit);
+    let product = await ProductModel.find().skip(skip).limit(limit);
     res.status(200).send(product);
   } catch (er) {
     res.status(400).send({ error: er.message });

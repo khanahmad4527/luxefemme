@@ -20,16 +20,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 import { delUserSuccess, getUserSuccess } from '../../redux/admin/admin.action';
 import Loading from '../../utils/Loading';
+import { CHANGE_PAGE } from '../../redux/admin/admin.types';
 import { AiFillDelete } from "react-icons/ai";
 const Users = () => {
    const [user,setUser]=useState(0);
    const dispatch=useDispatch();
-   const {users,loading}=useSelector(store=>store.admin);
+   const {users,loading,page}=useSelector(store=>store.admin);
    console.log(users,"dd")
    useEffect(()=>{
-dispatch(getUserSuccess())
+dispatch(getUserSuccess(page))
    },[dispatch])
   //  console.log(store)
+  const handlePayload=(payload)=>{
+    let newPage=page+payload;
+    dispatch({type:CHANGE_PAGE,payload:newPage})
+    dispatch(getUserSuccess(page))
+  }
   return (
     <Box w={{ base: 'full', md: "70%",lg:"80%" }} m="auto"  mr="0rem">
       <Text textAlign={"left"} fontSize="25px" fontWeight={"bold"}>Users List</Text>
@@ -37,7 +43,7 @@ dispatch(getUserSuccess())
     loading?<Loading/>:        <TableContainer top="0px">
     <Table variant='striped' colorScheme='teal'>
       <TableCaption>Total User : {user}</TableCaption>
-      <TableCaption><Button size="sm">Prev</Button><Button size="sm">1</Button><Button size="sm">Next</Button></TableCaption>
+      <TableCaption><Button size="sm" colorScheme={"blue"} mr="2px" onClick={()=>{handlePayload(-1)}} isDisabled={page==1}>Prev</Button><Button size="sm" >{page}</Button><Button size="sm" colorScheme={"blue"} onClick={()=>{handlePayload(+1)}} ml="2px">Next</Button></TableCaption>
       <Thead bg="blue">
         <Tr>
           <Th textAlign={"center"}color="white">Sr. No.</Th>

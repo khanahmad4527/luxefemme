@@ -4,8 +4,8 @@ import axios from "axios";
 
 //products apis========================================
 
-export const getProduct = async(getProductsParam="") => {
-   let data=await axios.get("http://localhost:8080/adminproduct/products",getProductsParam, { headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") } })
+export const getProduct = async(page=0) => {
+   let data=await axios.get(`http://localhost:8080/adminproduct/products?page=${page}`, { headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") } })
  return data?.data;
 }
 
@@ -40,8 +40,8 @@ export const updateProduct = async(id, payload) => {
 
 //users apis========================================
 
-export const getUsers = async() => {
-   let data= await axios.get("http://localhost:8080/adminuser/users", {
+export const getUsers = async(page=0) => {
+   let data= await axios.get(`http://localhost:8080/adminuser/users?page=${page}`, {
         headers: {
             "Content-Type": "application/json",
             "token": localStorage.getItem("token")
@@ -64,8 +64,8 @@ export const delUser = async(id) => {
 
 
 
-export const getAdmin = async() => {
-   let data= await axios.get("http://localhost:8080/adminuser/admin", {
+export const getAdmin = async(page=0) => {
+   let data= await axios.get(`http://localhost:8080/adminuser/admin?page=${page}`, {
         headers: {
             "Content-Type": "application/json",
             "token": localStorage.getItem("token")
