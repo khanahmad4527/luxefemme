@@ -1,4 +1,4 @@
-const { AddressModel } = require("../models/cart.model");
+const { AddressModel } = require("../models/address.model");
 
 const getAddress = async (req, res) => {
   const { userId } = req.body;

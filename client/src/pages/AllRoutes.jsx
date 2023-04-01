@@ -7,6 +7,7 @@ import HomePage from "./HomePage";
 import PageNotFound from "./PageNotFound";
 import ProductDetailPage from "./ProductDetailPage";
 import ProductsPage from "./ProductsPage";
+import CheckoutPage from "./CheckoutPage";
 import AuthProtectedRoutes from "../hoc/AuthProtectedRoutes";
 import OrdersPage from "./OrdersPage";
 import Home from "./AdminPages/Home";
@@ -19,27 +20,21 @@ const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route
-        path="/products"
-        element={
-          <AuthProtectedRoutes>
-            <ProductsPage />
-          </AuthProtectedRoutes>
-        }
-      />
-      <Route
-        path="/product/:id"
-        element={
-          <AuthProtectedRoutes>
-            <ProductDetailPage />
-          </AuthProtectedRoutes>
-        }
-      />
+      <Route path="/products" element={<ProductsPage />} />
+      <Route path="/product/:id" element={<ProductDetailPage />} />
       <Route
         path="/cart"
         element={
           <AuthProtectedRoutes>
             <CartPage />
+          </AuthProtectedRoutes>
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+          <AuthProtectedRoutes>
+            <CheckoutPage />
           </AuthProtectedRoutes>
         }
       />
@@ -54,10 +49,42 @@ const AllRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="*" element={<PageNotFound />} />
-      <Route path="/admin/" element={<> <SimpleSidebar/> <Home/></>}/>
-      <Route path="/admin/users" element={<> <SimpleSidebar/> <Users/></>}/>
-      <Route path="/admin/admins" element={<> <SimpleSidebar/> <Admins/></>}/>
-      <Route path="/admin/products" element={<> <SimpleSidebar/> <Products/></>}/>
+      <Route
+        path="/admin/"
+        element={
+          <>
+            {" "}
+            <SimpleSidebar /> <Home />
+          </>
+        }
+      />
+      <Route
+        path="/admin/users"
+        element={
+          <>
+            {" "}
+            <SimpleSidebar /> <Users />
+          </>
+        }
+      />
+      <Route
+        path="/admin/admins"
+        element={
+          <>
+            {" "}
+            <SimpleSidebar /> <Admins />
+          </>
+        }
+      />
+      <Route
+        path="/admin/products"
+        element={
+          <>
+            {" "}
+            <SimpleSidebar /> <Products />
+          </>
+        }
+      />
     </Routes>
   );
 };

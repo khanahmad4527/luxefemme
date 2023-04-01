@@ -8,10 +8,92 @@ import {
   RESET_AUTH,
 } from "./auth.types";
 
-const initialState = {};
+const token = localStorage.getItem("token");
+
+const { firstname, lastname, email, id } =
+  JSON.parse(localStorage.getItem("lfUserData")) || {};
+
+const initialState = {
+  id: id,
+  userDetails: {
+    firstname,
+    lastname,
+    email,
+  },
+  isLoading: false,
+  isError: false,
+  isAuth: token ? true : false,
+};
 
 export const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_AUTH_LOADING: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+
+    case GET_AUTH_SUCCESS: {
+      if (payload.userData) {
+        localStorage.setItem("token", payload.token);
+        localStorage.setItem("lfUserData", JSON.stringify(payload.userData));
+      }
+
+      return {
+        ...state,
+        id: payload.userData.id,
+        userDetails: {
+          firstname: payload.userData.firstname,
+          lastname: payload.userData.lastname,
+          email: payload.userData.email,
+        },
+        isLoading: false,
+        isError: false,
+        isAuth: true,
+      };
+    }
+
+    case GET_AUTH_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
+
+    case ADD_AUTH_LOADING: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+
+    case ADD_AUTH_SUCCESS: {
+      return {
+        ...state,
+      };
+    }
+
+    case ADD_AUTH_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
+
+    case RESET_AUTH: {
+      localStorage.removeItem("token");
+      localStorage.removeItem("lfUserData");
+      return {
+        ...initialState,
+        isAuth: false,
+      };
+    }
+
     default: {
       return state;
     }

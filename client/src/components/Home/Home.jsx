@@ -43,13 +43,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Flex
-      flexDirection="column"
-      w="92%"
-      gap="30px"
-      margin={"40px auto"}
-      border="1px solid red"
-    >
+    <Flex flexDirection="column" w="92%" gap="30px" margin={"40px auto"}>
       <Flex
         justifyContent={"space-between"}
         gap="20px"
@@ -64,7 +58,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -100,7 +94,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -123,7 +117,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -146,7 +140,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -169,7 +163,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -200,7 +194,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -222,7 +216,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -253,7 +247,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -275,7 +269,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -300,7 +294,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}

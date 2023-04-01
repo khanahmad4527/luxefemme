@@ -17,9 +17,9 @@ const userAddressSchema = mongoose.Schema(
     country: { type: String, required: true },
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
-    mobile: { type: String, required: true, unique: true },
+    mobile: { type: String, required: true },
     address: { type: addressSchema, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true },
   },
   {
     versionKey: false,
