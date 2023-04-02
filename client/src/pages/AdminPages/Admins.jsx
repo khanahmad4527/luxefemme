@@ -19,7 +19,8 @@ import {
     Flex,
     Avatar,
   } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState } from 'react';
+import { CHANGE_ADMIN_PAGE } from '../../redux/admin/admin.types';
 import {
   Modal,
   ModalOverlay,
@@ -42,14 +43,20 @@ const Admins = () => {
    const [admin,setAdmin]=useState(0);
    const { isOpen, onOpen, onClose } = useDisclosure()
    const dispatch=useDispatch();
-   const {admins,loading}=useSelector(store=>store.admin);
-   console.log(admins,"hh")
+   const {admins,loading,adminPage,totalAdmin}=useSelector(store=>store.admin);
+    console.log(totalAdmin,admins,"tt")
    useEffect(()=>{
-dispatch(getAdminSuccess())
+dispatch(getAdminSuccess(adminPage))
    },[])
+   const handlePayload=(payload)=>{
+    let newPage=adminPage+payload;
+    dispatch({type:CHANGE_ADMIN_PAGE,payload:newPage})
+    dispatch(getAdminSuccess(adminPage))
+  }
+// console.log(Math.ceil(totalAdmin/adminPage),"print")
   const handleChange=(e)=>{
     setAdmin({...admin,[e.target.name]:e.target.value})
-  }
+  }//
   return (
     <Box w={{ base: 'full', md: "70%",lg:"80%" }} m="auto"  mr="0rem">
       
@@ -59,14 +66,13 @@ dispatch(getAdminSuccess())
        { loading ?  <Loading/> :<TableContainer top="0px" w="100%">
   <Table variant='striped' colorScheme='teal'>
     {/* <TableCaption>Total User : {user}</TableCaption> */}
-    <TableCaption><Button size="sm">Prev</Button><Button size="sm">1</Button><Button size="sm">Next</Button></TableCaption>
+    <TableCaption><Button size="sm" colorScheme={"blue"} mr="2px"  onClick={()=>{handlePayload(-1)}} isDisabled={adminPage===1}>Prev</Button><Button size="sm" >{adminPage}</Button><Button size="sm" colorScheme={"blue"} isDisabled={adminPage===Math.ceil(totalAdmin/5)} onClick={()=>{handlePayload(+1)}} ml="2px">Next</Button></TableCaption>
     <Thead bg="blue" >
       <Tr >
         <Th textAlign={"center"} color="white">Sr. No.</Th>
         <Th textAlign={"center"} color="white">Avatar</Th>
         <Th textAlign={"center"} color="white">Edit</Th>
-        <Th textAlign={"center"}color="white">First Name</Th>
-        <Th textAlign={"center"}color="white">Last Name</Th>
+        <Th textAlign={"center"}color="white">Name</Th>
         <Th textAlign={"center"}color="white">Email</Th>
         <Th textAlign={"center"}color="white">Delete</Th>
       </Tr>
@@ -83,8 +89,7 @@ dispatch(getAdminSuccess())
           setAdmin(el);
           onOpen()
         }}><BiPencil  /></Center></Td>
-        <Td textAlign={"center"}>{el.firstname}</Td>
-        <Td textAlign={"center"}>{el.lastname}</Td>
+        <Td textAlign={"center"}>{el.firstname+" "+el.lastname}</Td>
         <Td textAlign={"center"}>{el.email}</Td>
         <Td textAlign={"center"} cursor="pointer"><Center><AiFillDelete onClick={()=>{
            dispatch(delAdminSuccess(el._id));
@@ -96,7 +101,6 @@ dispatch(getAdminSuccess())
     </Tbody>
     <Tfoot bg="blue">
       <Tr>
-      <Td textAlign={"center"}>{""}</Td>
       <Td textAlign={"center"}>{""}</Td>
       <Td textAlign={"center"}>{""}</Td>
       <Td textAlign={"center"}>{""}</Td>

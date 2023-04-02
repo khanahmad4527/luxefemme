@@ -13,6 +13,7 @@ import {
   useDisclosure,
   BoxProps,
   FlexProps,
+  Image,
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -25,12 +26,13 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { GrUserAdmin } from "react-icons/gr";
 import { RiProductHuntLine } from "react-icons/ri";
-import {AiOutlineUser} from "react-icons/ai";
+import {AiOutlineUser,AiOutlineLogout} from "react-icons/ai";
 const LinkItems = [
-  { name: 'Home', icon: FiHome,to:"/admin/" },
+  { name: 'Dashboard', icon: FiHome,to:"/admin/" },
   { name: 'Admins', icon: GrUserAdmin,to:"/admin/admins" },
   { name: 'Users', icon: AiOutlineUser,to:"/admin/users" },
-  { name: 'Products', icon: RiProductHuntLine ,to:"/admin/products"}
+  { name: 'Products', icon: RiProductHuntLine ,to:"/admin/products"},
+  {name: 'SignOut', icon: AiOutlineLogout}
   
 ];
 
@@ -79,12 +81,15 @@ const SidebarContent = ({ onClose, ...rest }) => {
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
+          <Image src="https://user-images.githubusercontent.com/112806398/229315341-53797706-d5c1-4968-8c95-bbe9db5d5ec5.png"/>
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} onClick={()=>{navigate(link.to)}}>
+        <NavItem key={link.name} icon={link.icon} onClick={()=>{if(link.to){navigate(link.to)}else{
+          localStorage.clear();
+          navigate("/")
+        }}}>
           {link.name}
         </NavItem>
       ))}
