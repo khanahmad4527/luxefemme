@@ -161,7 +161,9 @@ const Checkout = () => {
     }
   };
 
-  const orderConfirmed = () => {
+  const orderConfirmed =  () => {
+     dispatch(emptyCart());
+
     toast({
       title: "Payment successful!",
       description: "Thank you for your purchase.",
@@ -205,7 +207,6 @@ const Checkout = () => {
       }),
     };
     dispatch(addToOrder(newOrder));
-    dispatch(emptyCart());
     navigate("/");
   };
 

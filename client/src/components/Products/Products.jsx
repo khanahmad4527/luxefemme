@@ -16,12 +16,14 @@ import {
   UnorderedList,
   AccordionItem,
   AccordionPanel,
-  AccordionButton
+  AccordionButton,
+  Image
 } from '@chakra-ui/react';
 import './products.styles.css';
 import { MinusIcon, AddIcon } from '@chakra-ui/icons';
-import { getProducts } from '../../redux/products/products.action';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { getProducts } from '../../redux/products/products.action';
 
 const top_flex = [
   {
@@ -219,13 +221,16 @@ const filters = [
 
 const Products = () => {
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const [activePage, setActivePage] = React.useState(1);
   const { products } = useSelector((store) => store.products);
 
   React.useEffect(() => {
-    dispatch(getProducts());
+    if (!products.length) dispatch(getProducts());
   }, []);
 
-  console.log(products);
+  // console.log(products);
+  console.log(searchParams.getAll('category'));
 
   return (
     <Box w={{ base: '88%', lg: '88%', xl: '92%' }} m={'auto'}>
@@ -248,6 +253,7 @@ const Products = () => {
                 bgImage={banner.bg}
                 h={{ base: '80px', lg: '40px', xl: '60px' }}
                 key={i}
+                cursor={'pointer'}
               >
                 <Hide below={'lg'}>
                   <Hide below={'xl'}>
@@ -304,7 +310,7 @@ const Products = () => {
           <Box>
             <Slider infinite={false} slidesToShow={1} slidesToScroll={1}>
               {top_flex.map((banner, i) => (
-                <Box h={'25vw'} key={i} bgImage={banner.bg}>
+                <Box cursor={'pointer'} h={'25vw'} key={i} bgImage={banner.bg}>
                   <Heading
                     px={8}
                     py={6}
@@ -329,7 +335,7 @@ const Products = () => {
       </Box>
 
       <Flex justifyContent={'center'} alignItems={'flex-start'} gap={12}>
-        <Box w={'15%'} border={'2px solid blue'}>
+        <Box w={'15%'}>
           <Text
             pb={2}
             fontSize={'xs'}
@@ -533,7 +539,7 @@ const Products = () => {
           ))}
         </Box>
 
-        <Box w={'100%'} border={'2px solid red'}>
+        <Box w={'100%'}>
           <Flex justify={'space-between'} align={'center'}>
             <Heading
               py={1}
@@ -571,14 +577,41 @@ const Products = () => {
                 </Select>
               </Flex>
               {/* <Pagination /> */}
-              Pagination
+              {/* Pagination */}
             </Flex>
           </Flex>
 
-          <Grid>
-            <GridItem>
-              <Box>Products</Box>
-            </GridItem>
+          <Grid
+            templateColumns={'repeat(3, 1fr)'}
+            my={6}
+            rowGap={8}
+            columnGap={4}
+          >
+            {products.map((product) => (
+              <GridItem key={product._id}>
+                <Box>
+                  <Image
+                    objectFit={'contain'}
+                    boxSize={'400px'}
+                    src={product.image}
+                    alt={product.title}
+                  />
+                  <Box my={3} pr={12}>
+                    <Text fontSize={'xs'} noOfLines={1} className={'heading'}>
+                      {product.title}
+                    </Text>
+                    <Text fontSize={'xs'} className={'heading'}>
+                      ${product.discountPrice.toLocaleString('en-US')}
+                    </Text>
+                  </Box>
+                  <Flex justify={'left'} align={'center'} gap={2}>
+                    {products.colours?.map((color, i) => (
+                      <Circle size={3} bg={color[1]} />
+                    ))}
+                  </Flex>
+                </Box>
+              </GridItem>
+            ))}
           </Grid>
         </Box>
       </Flex>

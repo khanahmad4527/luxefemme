@@ -63,8 +63,8 @@ export const deleteCartData = (id) => async (dispatch) => {
 export const emptyCart = () => async (dispatch) => {
   dispatch({ type: EMPTY_CART_ITEMS_LOADING });
   try {
+    dispatch({ type: EMPTY_CART_ITEMS_SUCCESS });
     await instance.delete(`/cart/emptycart`);
-    dispatch({ type: EMPTY_CART_ITEMS_SUCCESS, payload: [] });
   } catch (err) {
     dispatch({ type: EMPTY_CART_ITEMS_ERROR });
   }
