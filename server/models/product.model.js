@@ -11,7 +11,7 @@ const productSchema = mongoose.Schema(
     reviews: { type: Number, required: true },
     image: { type: String, required: true },
     images: { type: [[String]], required: true },
-    colours: { type: [[String]], required: true },
+    colours: { type: [[String]]},
     sizes: { type: [String], required: true },
     quantity: { type: Number, required: true },
     description: { type: String, required: true },
