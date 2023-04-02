@@ -16,9 +16,9 @@ import {
   Text,
   Divider,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { existingUser, login } from "../../redux/auth/auth.action";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -32,6 +32,8 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { isAuth } = useSelector((store) => store.auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,8 +51,6 @@ export default function Login() {
       });
       if (role === "admin" || role === "superadmin") {
         navigate("/admin");
-      } else {
-        navigate(location.state?.data || "/", { replace: true });
       }
       setIsButton(false);
     } else if (status === 404) {
@@ -77,6 +77,12 @@ export default function Login() {
     setEmail("");
     setPassword("");
   };
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate(location.state?.from || "/", { replace: true });
+    }
+  }, [isAuth]);
 
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} color="sm.sparkle">
