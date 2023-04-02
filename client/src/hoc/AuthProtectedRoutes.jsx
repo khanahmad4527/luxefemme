@@ -1,9 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 const AuthProtectedRoutes = ({ children }) => {
-  return children;
+  const { isAuth } = useSelector((store) => store.auth);
+  const location = useLocation();
+
+  if (isAuth) {
+    return children;
+  } else {
+    return <Navigate to="/login" replce state={{ from: location }} />;
+  }
 };
 
 export default AuthProtectedRoutes;

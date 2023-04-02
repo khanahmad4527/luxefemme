@@ -6,6 +6,7 @@ const {
   addCart,
   updateCart,
   deleteCart,
+  emptyCart,
 } = require("../controllers/cart");
 const {
   getAddress,
@@ -14,6 +15,26 @@ const {
   deleteAddress,
 } = require("../controllers/address");
 const { getOrders, addOrder } = require("../controllers/orders");
+const { validator } = require("../middlewares/validator");
+
+const routesToValidate = [
+  "/cart",
+  "/cart/add",
+  "/cart/update/:cartId",
+  "/cart/delete/:cartId",
+  "/cart/emptycart",
+  "/address",
+  "/address/add",
+  "/address/update/:addressId",
+  "/address/delete/:addressId",
+  "/orders",
+  "/orders/add",
+];
+
+// Loop through the array of routes to validate and apply the middleware to each one
+routesToValidate.forEach((route) => {
+  userRoute.use(route, validator);
+});
 
 userRoute.get("/products", getProducts);
 
@@ -27,9 +48,11 @@ userRoute.patch("/cart/update/:cartId", updateCart);
 
 userRoute.delete("/cart/delete/:cartId", deleteCart);
 
+userRoute.delete("/cart/emptycart", emptyCart);
+
 userRoute.get("/address", getAddress);
 
-userRoute.get("/address/add", addAddress);
+userRoute.post("/address/add", addAddress);
 
 userRoute.patch("/address/update/:addressId", updateAddress);
 

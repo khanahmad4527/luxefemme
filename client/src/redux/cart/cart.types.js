@@ -13,3 +13,7 @@ export const UPDATE_CART_ITEMS_ERROR = "cart/items/update/error";
 export const REMOVE_CART_ITEMS_LOADING = "cart/items/remove/laoding";
 export const REMOVE_CART_ITEMS_SUCCESS = "cart/items/remove/success";
 export const REMOVE_CART_ITEMS_ERROR = "cart/items/remove/error";
+
+export const EMPTY_CART_ITEMS_LOADING = "empty/items/remove/laoding";
+export const EMPTY_CART_ITEMS_SUCCESS = "empty/items/remove/success";
+export const EMPTY_CART_ITEMS_ERROR = "empty/items/remove/error";
