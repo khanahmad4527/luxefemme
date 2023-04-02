@@ -35,19 +35,19 @@ import { AiFillDelete } from "react-icons/ai";
 import Loading from '../../utils/Loading';
 import { deleteProductSucess, getProductSuccess, updateProductSuccess } from '../../redux/admin/admin.action';
 import AddProduct from '../../components/Admin/AddProduct';
-import { CHANGE_PAGE } from '../../redux/admin/admin.types';
+import { CHANGE_PRODUCT_PAGE } from '../../redux/admin/admin.types';
 const Products = () => {
-  const {products,loading,page}=useSelector(store=>store.admin);
+  const {products,loading,productpage,totalPages}=useSelector(store=>store.admin);
   // const [searchParams, setSearchParams] = useSearchParams();
   // const initialPage = searchParams.get('page')
   //  const[page,setPage]=useState(initialPage||1);
-
+console.log(products)
   const { isOpen, onOpen, onClose } = useDisclosure()
  const dispatch=useDispatch();
  const [prod,setProd]=useState([]);
 const handlePayload=(payload)=>{
-  let newPage=page+payload;
-  dispatch({type:CHANGE_PAGE,payload:newPage})
+  let newPage=productpage+payload;
+  dispatch({type:CHANGE_PRODUCT_PAGE,payload:newPage})
   dispatch(getProductSuccess(newPage))
 }
 
@@ -56,7 +56,7 @@ const handlePayload=(payload)=>{
   //   page:page
   // }};
 //  setSearchParams(params.param)
-dispatch(getProductSuccess(page))
+dispatch(getProductSuccess(productpage))
  },[dispatch])
  const handleChange=(e)=>{
 setProd({...prod,[e.target.name]:e.target.value})
@@ -68,10 +68,10 @@ setProd({...prod,[e.target.name]:e.target.value})
         { loading ?  <Loading/> :<TableContainer top="0px" w="100%">
   <Table variant='striped' colorScheme='teal'>
     {/* <TableCaption>Total User : {user}</TableCaption> */}
-    <TableCaption><Button size="sm" colorScheme={"blue"} mr="2px" onClick={()=>{handlePayload(-1)}} isDisabled={page==1}>Prev</Button><Button size="sm" >{page}</Button><Button size="sm" colorScheme={"blue"} onClick={()=>{handlePayload(+1)}} ml="2px">Next</Button></TableCaption>
+    <TableCaption><Button size="sm" colorScheme={"blue"} mr="2px" onClick={()=>{handlePayload(-1)}} isDisabled={productpage==1}>Prev</Button><Button size="sm" >{productpage}</Button><Button size="sm" isDisabled={productpage===Math.ceil(totalPages/10)} colorScheme={"blue"} onClick={()=>{handlePayload(+1)}} ml="2px">Next</Button></TableCaption>
     <Thead bg="blue" >
       <Tr >
-        <Th textAlign={"center"} color="white">Product Id.</Th>
+        <Th textAlign={"left"} color="white">Product Id.</Th>
         <Th textAlign={"center"} color="white">Edit</Th>
         <Th textAlign={"center"}color="white">Image</Th>
         <Th textAlign={"left"}color="white">Category</Th>
@@ -82,7 +82,7 @@ setProd({...prod,[e.target.name]:e.target.value})
     <Tbody>
      {
       products?.map((el,i)=><Tr key={el._id}>
-        <Td textAlign={"center"}>{el._id}</Td>
+        <Td textAlign={"left"}>{el._id}</Td>
         <Td textAlign={"center"} cursor="pointer"><Center onClick={()=>{
           setProd(el);
           onOpen()

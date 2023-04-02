@@ -39,5 +39,7 @@ export const DELETE_ADMIN_LOADING="delete/admin/loading";
 export const DELETE_ADMIN_ERROR="delete/admin/error";
 export const DELETE_ADMIN_SUCCESS="delete/admin/success";
 
-export const CHANGE_PAGE="change/page";
+export const CHANGE_PRODUCT_PAGE="change/page";
+export const CHANGE_USER_PAGE="change/user/page";
+export const CHANGE_ADMIN_PAGE="change/admin/page";
 

@@ -14,7 +14,8 @@ adminProductRouter.get("/products",auth, async (req, res) => {
   
   try {
     let product = await ProductModel.find().skip(skip).limit(limit);
-    res.status(200).send(product);
+    let totalpages = await ProductModel.find()
+    res.status(200).send({product,totalpages:totalpages.length});
   } catch (er) {
     res.status(400).send({ error: er.message });
   }

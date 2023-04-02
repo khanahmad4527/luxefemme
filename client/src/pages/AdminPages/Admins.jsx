@@ -20,7 +20,7 @@ import {
     Avatar,
   } from '@chakra-ui/react'
 import { useState } from 'react';
-import { CHANGE_PAGE } from '../../redux/admin/admin.types';
+import { CHANGE_ADMIN_PAGE } from '../../redux/admin/admin.types';
 import {
   Modal,
   ModalOverlay,
@@ -43,17 +43,17 @@ const Admins = () => {
    const [admin,setAdmin]=useState(0);
    const { isOpen, onOpen, onClose } = useDisclosure()
    const dispatch=useDispatch();
-   const {admins,loading,page}=useSelector(store=>store.admin);
-   
+   const {admins,loading,adminPage,totalAdmin}=useSelector(store=>store.admin);
+    console.log(totalAdmin,admins,"tt")
    useEffect(()=>{
-dispatch(getAdminSuccess(page))
+dispatch(getAdminSuccess(adminPage))
    },[])
    const handlePayload=(payload)=>{
-    let newPage=page+payload;
-    dispatch({type:CHANGE_PAGE,payload:newPage})
-    dispatch(getAdminSuccess(page))
+    let newPage=adminPage+payload;
+    dispatch({type:CHANGE_ADMIN_PAGE,payload:newPage})
+    dispatch(getAdminSuccess(adminPage))
   }
-
+// console.log(Math.ceil(totalAdmin/adminPage),"print")
   const handleChange=(e)=>{
     setAdmin({...admin,[e.target.name]:e.target.value})
   }//
@@ -66,7 +66,7 @@ dispatch(getAdminSuccess(page))
        { loading ?  <Loading/> :<TableContainer top="0px" w="100%">
   <Table variant='striped' colorScheme='teal'>
     {/* <TableCaption>Total User : {user}</TableCaption> */}
-    <TableCaption><Button size="sm" colorScheme={"blue"} mr="2px" onClick={()=>{handlePayload(-1)}} isDisabled={page==1}>Prev</Button><Button size="sm" >{page}</Button><Button size="sm" colorScheme={"blue"} onClick={()=>{handlePayload(+1)}} ml="2px">Next</Button></TableCaption>
+    <TableCaption><Button size="sm" colorScheme={"blue"} mr="2px"  onClick={()=>{handlePayload(-1)}} isDisabled={adminPage===1}>Prev</Button><Button size="sm" >{adminPage}</Button><Button size="sm" colorScheme={"blue"} isDisabled={adminPage===Math.ceil(totalAdmin/5)} onClick={()=>{handlePayload(+1)}} ml="2px">Next</Button></TableCaption>
     <Thead bg="blue" >
       <Tr >
         <Th textAlign={"center"} color="white">Sr. No.</Th>

@@ -6,7 +6,8 @@ import axios from "axios";
 
 export const getProduct = async(page=0) => {
    let data=await axios.get(`http://localhost:8080/adminproduct/products?page=${page}`, { headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") } })
- return data?.data;
+   
+ return data;
 }
 
 export const postProduct = async(payload) => {
@@ -71,7 +72,7 @@ export const getAdmin = async(page=0) => {
             "token": localStorage.getItem("token")
         }
     })
-    // console.log(data)
+     
     return data?.data;
 }
 

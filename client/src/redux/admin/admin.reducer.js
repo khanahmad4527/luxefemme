@@ -29,11 +29,18 @@ import {
   PATCH_ADMIN_LOADING,
   PATCH_ADMIN_ERROR,
   PATCH_ADMIN_SUCCESS,
-  CHANGE_PAGE
+  CHANGE_PRODUCT_PAGE,
+   CHANGE_USER_PAGE,
+   CHANGE_ADMIN_PAGE
 } from "./admin.types";
 
 const initialState = {
-  page:1,
+  productpage:1,
+  userPage:1,
+  adminPage:1,
+  totalPages:0,
+  totalUser:0,
+  totalAdmin:0,
   loading: true,
   error: false,
   products: [],
@@ -63,10 +70,10 @@ export const adminReducer = (state = initialState, { type, payload }) => {
         loading: false,
       };
     }
-    case CHANGE_PAGE:{
+    case CHANGE_PRODUCT_PAGE:{
       return{
         ...state,
-        page:payload
+        productpage:payload
       }
     }
     case PATCH_PRODUCT_LOADING:{
@@ -110,7 +117,8 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        products: payload,
+        products: payload.data.product,
+        totalPages:payload.data.totalpages
       };
     }
    
@@ -133,7 +141,8 @@ export const adminReducer = (state = initialState, { type, payload }) => {
     return{
       ...state,
       loading:false,
-      users:payload
+      users:payload.user,
+      totalUser:payload.totalUser
     }
    }
 
@@ -224,7 +233,8 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       return{
         ...state,
         loading:false,
-        admins:payload
+        admins:payload.user,
+        totalAdmin:payload.TotalAdmin
       }
      }
 
@@ -270,6 +280,16 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       }
      }
 
+     case CHANGE_USER_PAGE:{
+      return{
+        ...state,userPage:payload
+      }
+     }     
+     case CHANGE_ADMIN_PAGE:{
+      return{
+        ...state,adminPage:payload
+      }
+     }  
     default: {
       return state;
     }

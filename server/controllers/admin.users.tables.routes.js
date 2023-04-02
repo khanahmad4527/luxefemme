@@ -12,7 +12,8 @@ adminUserRoutes.get("/users", auth, async (req, res) => {
     let user = await UserModel.find({ role: "user" })
       .skip(skip)
       .limit(limit);
-    res.status(200).send(user);
+      let totalUser= await UserModel.find({ role: "user" });
+    res.status(200).send({user,totalUser:totalUser.length});
   } catch (er) {
     res.status(400).send({ error: er.message });
   }
@@ -30,7 +31,11 @@ adminUserRoutes.get("/admin", auth, async (req, res) => {
 
       .skip(skip)
       .limit(limit);
-    res.status(200).send(user);
+      let TotalAdmin = await UserModel.find({
+        $or: [{ role: "admin" }, { role: "superadmin" }],
+      })
+
+    res.status(200).send({user,TotalAdmin:TotalAdmin.length});
   } catch (er) {
     res.status(400).send({ error: er.message });
   }
