@@ -9,9 +9,9 @@ import Error from "../../utils/Error";
 const ProductCarouel = ({ title, data, loading, error }) => {
   const settings = {
     infinite: true,
-    speed: 200,
+    speed: 700,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 4,
     nextArrow: <CustomNextArrow />,
     prevArrow: <CustomPrevArrow />,
     initialSlide: 0,
@@ -20,7 +20,7 @@ const ProductCarouel = ({ title, data, loading, error }) => {
         breakpoint: 1200,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
         },
       },
       {
@@ -42,14 +42,14 @@ const ProductCarouel = ({ title, data, loading, error }) => {
   return (
     <Box
       padding="20px"
-      bgColor="white"
+      bgColor={"#FDFDF9"}
       w={{ base: "95%", lg: "100%" }}
       margin="20px auto"
     >
-      <Text p="10px" fontSize="20px" fontWeight={500} color="lf.teal">
+      <Text fontSize="20px" fontWeight={500} color="lf.teal">
         {title}
       </Text>
-      <Box w="95%" margin="auto">
+      <Box w="95%" margin="auto" p="10px 0px">
         {loading ? <Loading /> : ""}
         {error ? <Error /> : ""}
         <Slider {...settings}>
@@ -81,6 +81,7 @@ const CustomPrevArrow = ({ onClick }) => (
     transform="translateY(-50%)"
     backgroundColor="white"
     size="35px"
+    bgColor={"#FDFDF9"}
     onClick={onClick}
   >
     <IoIosArrowBack size="20px" color="black" />
@@ -100,6 +101,7 @@ const CustomNextArrow = ({ onClick }) => (
     transform="translateY(-50%)"
     backgroundColor="white"
     size="35px"
+    bgColor={"#FDFDF9"}
     onClick={onClick}
   >
     <IoIosArrowForward size="20px" color="black" />

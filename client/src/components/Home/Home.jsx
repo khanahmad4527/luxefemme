@@ -1,7 +1,16 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Box, Button, Flex, Grid, Image, Link, Square } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Link,
+  Square,
+  Skeleton,
+  Image,
+} from "@chakra-ui/react";
 import i1 from "../../assets/1.jpg";
 import i2 from "../../assets/2.gif";
 import i3 from "../../assets/3.jpg";
@@ -43,13 +52,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Flex
-      flexDirection="column"
-      w="92%"
-      gap="30px"
-      margin={"40px auto"}
-      border="1px solid red"
-    >
+    <Flex flexDirection="column" w="92%" gap="30px" margin={"40px auto"}>
       <Flex
         justifyContent={"space-between"}
         gap="20px"
@@ -64,7 +67,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -100,7 +103,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -123,7 +126,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -146,7 +149,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -169,7 +172,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -200,7 +203,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -222,7 +225,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -253,7 +256,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -275,7 +278,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
@@ -300,7 +303,7 @@ const Home = () => {
             bottom={5}
             right={0}
             left={0}
-            bgColor="white"
+            bgColor={"#FDFDF9"}
             p="10px"
             w="max"
             margin={"auto"}
