@@ -22,7 +22,7 @@ import {
 import './products.styles.css';
 import { MinusIcon, AddIcon } from '@chakra-ui/icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { getProducts } from '../../redux/products/products.action';
 
 const top_flex = [
@@ -221,6 +221,7 @@ const filters = [
 
 const Products = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [activePage, setActivePage] = React.useState(1);
   const { products } = useSelector((store) => store.products);
@@ -588,7 +589,11 @@ const Products = () => {
             columnGap={4}
           >
             {products.map((product) => (
-              <GridItem key={product._id}>
+              <GridItem
+                key={product._id}
+                onClick={() => navigate(`/product/${product._id}`)}
+                cursor={'pointer'}
+              >
                 <Box>
                   <Image
                     objectFit={'contain'}

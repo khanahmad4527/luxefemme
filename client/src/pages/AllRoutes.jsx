@@ -7,6 +7,7 @@ import HomePage from "./HomePage";
 import PageNotFound from "./PageNotFound";
 import ProductDetailPage from "./ProductDetailPage";
 import ProductsPage from "./ProductsPage";
+import CheckoutPage from "./CheckoutPage";
 import AuthProtectedRoutes from "../hoc/AuthProtectedRoutes";
 import OrdersPage from "./OrdersPage";
 import Home from "./AdminPages/Home";
@@ -14,29 +15,13 @@ import Users from "./AdminPages/Users";
 import Admins from "./AdminPages/Admins";
 import Products from "./AdminPages/Products";
 import SimpleSidebar from "../components/Admin/AdminSidebar";
-import AdminPrivateRoute from "../hoc/AdminProtectedRoutes";
-import CheckoutPage from "./CheckoutPage";
 
 const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route
-        path="/products"
-        element={
-          <AuthProtectedRoutes>
-            <ProductsPage />
-          </AuthProtectedRoutes>
-        }
-      />
-      <Route
-        path="/product/:id"
-        element={
-          <AuthProtectedRoutes>
-            <ProductDetailPage />
-          </AuthProtectedRoutes>
-        }
-      />
+      <Route path="/products" element={<ProductsPage />} />
+      <Route path="/product/:id" element={<ProductDetailPage />} />
       <Route
         path="/cart"
         element={
@@ -65,39 +50,35 @@ const AllRoutes = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="*" element={<PageNotFound />} />
       <Route
-        path="/admin/"
+        path="/admin"
         element={
-          <AdminPrivateRoute>
-            {" "}
+          <>
             <SimpleSidebar /> <Home />
-          </AdminPrivateRoute>
+          </>
         }
       />
       <Route
         path="/admin/users"
         element={
-          <AdminPrivateRoute>
-            {" "}
+          <>
             <SimpleSidebar /> <Users />
-          </AdminPrivateRoute>
+          </>
         }
       />
       <Route
         path="/admin/admins"
         element={
-          <AdminPrivateRoute>
-            {" "}
+          <>
             <SimpleSidebar /> <Admins />
-          </AdminPrivateRoute>
+          </>
         }
       />
       <Route
         path="/admin/products"
         element={
-          <AdminPrivateRoute>
-            {" "}
+          <>
             <SimpleSidebar /> <Products />
-          </AdminPrivateRoute>
+          </>
         }
       />
     </Routes>

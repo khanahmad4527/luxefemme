@@ -31,7 +31,7 @@ import {
     PATCH_ADMIN_ERROR
 } from "./admin.types";
 
-import { getProduct, delProduct, updateAdmin, delAdmin, delUser, getAdmin, getUsers, addAdmin, updateProduct, postProduct } from "./admin.api"
+import { getProduct, delProduct,updateAdmin, delAdmin, delUser, getAdmin, getUsers, addAdmin, updateProduct, postProduct } from "./admin.api"
 
 
 //Products===============================================================================
@@ -49,7 +49,7 @@ export const addProductsError = () => ({
 
 export const addProductsSucess = (payload) => (dispatch) => {
     dispatch(addProductsLoading())
-    postProduct(payload).then((res) => { dispatch({ type: ADD_PRODUCT_SUCCESS }); dispatch(getProductSuccess()) }).catch((er) => {
+    postProduct(payload).then((res) => { dispatch({ type: ADD_PRODUCT_SUCCESS, payload: payload }) }).catch((er) => {
 
         dispatch(addProductsError())
 
@@ -72,9 +72,8 @@ export const deleteProductSucess = (id) => (dispatch) => {
     dispatch(deleteProductLoading());
     delProduct(id).then((res) => {
         dispatch({ type: DELETE_PRODUCT_SUCCESS })
-        dispatch(getProductSuccess())
     }).catch((er) => {
-        dispatch(deleteProductError())
+        dispatch({ type: DELETE_PRODUCT_ERROR })
     })
 }
 
@@ -89,10 +88,10 @@ export const getProductError = () => ({
     type: GET_PRODUCTS_ERROR
 })
 
-export const getProductSuccess = (page) => (dispatch) => {
+export const getProductSuccess = () => (dispatch) => {
     dispatch(getProductLoading())
-    getProduct(page).then((res) => {
-
+    getProduct().then((res) => {
+        
         dispatch({ type: GET_PRODUCTS_SUCCESS, payload: res })
     }).catch((er) => {
         dispatch(getProductError())
@@ -106,11 +105,10 @@ export const getProductSuccess = (page) => (dispatch) => {
 export const updateProductLoading = () => ({ type: PATCH_PRODUCT_LOADING });
 export const updateProductError = () => ({ tye: PATCH_PRODUCT_ERROR });
 
-export const updateProductSuccess = (id, payload) => (dispatch) => {
+export const updateProductSuccess = (payload) => (dispatch) => {
     dispatch(updateProductLoading())
-    updateProduct(id, payload).then((res) => {
+    updateProduct(payload.id, payload).then((res) => {
         dispatch({ type: PATCH_PRODUCT_SUCCESS });
-        dispatch(getProductSuccess())
     }).catch((er) => {
         dispatch(updateProductError())
     });
@@ -133,9 +131,9 @@ export const getUsersError = () => ({
     type: GET_USERS_ERROR
 })
 
-export const getUserSuccess = (page) => (dispatch) => {
+export const getUserSuccess = () => (dispatch) => {
     dispatch(getUserLoading());
-    getUsers(page).then((res) => {
+    getUsers().then((res) => {
         dispatch({ type: GET_USERS_SUCCESS, payload: res })
     }).catch((er) => {
         dispatch({ type: GET_USERS_ERROR })
@@ -160,22 +158,22 @@ export const delUserSuccess = (id) => (dispatch) => {
 export const getAdminLoading = () => ({ type: GET_ADMIN_LOADING })
 export const getAdminError = () => ({ type: GET_ADMIN_ERROR })
 
-export const getAdminSuccess = (page) => async (dispatch) => {
+export const getAdminSuccess = () => async(dispatch) => {
     dispatch(getAdminLoading());
     // getAdmin().then((res) => {
     //     console.log(res)
     //     dispatch({ type: GET_ADMIN_SUCCESS, payload: res })
     // }).catch((er) => { dispatch(getAdminError()) })
-    try {
-        let x = await getAdmin(page);
-        console.log(x, "xxxx");
+    try{
+        let x= await getAdmin();
+        console.log(x);
         dispatch({ type: GET_ADMIN_SUCCESS, payload: x })
     }
-    catch (er) {
+    catch(er){
         dispatch(getAdminError())
     }
-    let x = await getAdmin();
-    console.log(x, "hi")
+    let x= await getAdmin();
+    console.log(x,"hi")
     dispatch({ type: GET_ADMIN_SUCCESS, payload: x })
 }
 
@@ -204,9 +202,9 @@ export const delAdminSuccess = (id) => (dispatch) => {
 
 }
 
-export const updateAdminSuccess = (id, payload) => (dispatch) => {
-    dispatch({ type: PATCH_ADMIN_LOADING })
-    updateAdmin(id, payload).then((res) => {
-        dispatch({ type: PATCH_ADMIN_SUCCESS })
-    }).catch((er) => { dispatch({ type: PATCH_ADMIN_ERROR }) })
+export const updateAdminSuccess=(id,payload)=>(dispatch)=>{
+dispatch({type:PATCH_ADMIN_LOADING})
+updateAdmin(id,payload).then((res)=>{
+    dispatch({type:PATCH_ADMIN_SUCCESS})
+}).catch((er)=>{dispatch({type:PATCH_ADMIN_ERROR})})
 }

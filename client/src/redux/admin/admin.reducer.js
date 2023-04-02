@@ -28,19 +28,10 @@ import {
   GET_ADMIN_SUCCESS,
   PATCH_ADMIN_LOADING,
   PATCH_ADMIN_ERROR,
-  PATCH_ADMIN_SUCCESS,
-  CHANGE_PRODUCT_PAGE,
-   CHANGE_USER_PAGE,
-   CHANGE_ADMIN_PAGE
+  PATCH_ADMIN_SUCCESS
 } from "./admin.types";
 
 const initialState = {
-  productpage:1,
-  userPage:1,
-  adminPage:1,
-  totalPages:0,
-  totalUser:0,
-  totalAdmin:0,
   loading: true,
   error: false,
   products: [],
@@ -60,7 +51,7 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        error: true,
+        error: false,
       };
     }
 
@@ -68,14 +59,10 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
+        products: [...state.products, payload],
       };
     }
-    case CHANGE_PRODUCT_PAGE:{
-      return{
-        ...state,
-        productpage:payload
-      }
-    }
+
     case PATCH_PRODUCT_LOADING:{
       return{
         ...state,
@@ -117,11 +104,16 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        products: payload.data.product,
-        totalPages:payload.data.totalpages
+        products: payload,
       };
     }
-   
+    case DELETE_PRODUCT_LOADING: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    
     case GET_USERS_LOADING:{
       return{
         ...state,
@@ -141,19 +133,10 @@ export const adminReducer = (state = initialState, { type, payload }) => {
     return{
       ...state,
       loading:false,
-      users:payload.user,
-      totalUser:payload.totalUser
+      users:payload
     }
    }
 
-   case DELETE_PRODUCT_LOADING: {
-    return {
-      ...state,
-      loading: true,
-    };
-  }
-  
-  
     case DELETE_PRODUCT_ERROR: {
       return {
         ...state,
@@ -233,8 +216,7 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       return{
         ...state,
         loading:false,
-        admins:payload.user,
-        totalAdmin:payload.TotalAdmin
+        admins:payload
       }
      }
 
@@ -280,16 +262,6 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       }
      }
 
-     case CHANGE_USER_PAGE:{
-      return{
-        ...state,userPage:payload
-      }
-     }     
-     case CHANGE_ADMIN_PAGE:{
-      return{
-        ...state,adminPage:payload
-      }
-     }  
     default: {
       return state;
     }

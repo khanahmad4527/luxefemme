@@ -49,13 +49,3 @@ export const netBankingSchema = Yup.object().shape({
     .max(20, "Password must be at most 20 characters")
     .required("Password is required"),
 });
-
-export const upiSchema = Yup.object().shape({
-  upiId: Yup.string()
-    .matches(/^[a-zA-Z0-9]+@[a-zA-Z]+$/, "Invalid UPI ID format")
-    .required("UPI ID is required"),
-
-  remarks: Yup.string()
-    .max(100, "Remarks must be at most 100 characters")
-    .required("Remarks is required"),
-});
