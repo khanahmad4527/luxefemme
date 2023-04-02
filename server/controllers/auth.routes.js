@@ -21,7 +21,7 @@ let user=new UserModel({firstname,lastname,email,hashedPassword,role})
         res.status(200).send({ message: "registartion completed" });
       });
     }
-    ////
+    /////
    catch (er) {
     res.status(400).send({ error: er.message });
   }
