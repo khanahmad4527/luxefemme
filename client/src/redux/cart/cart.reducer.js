@@ -147,7 +147,7 @@ export const cartReducer = (state = initState, { type, payload }) => {
         ...state,
         cartEmptyIsLoading: false,
         cartEmptyIsError: false,
-        cartData: payload,
+        cartData: [],
       };
     }
 
