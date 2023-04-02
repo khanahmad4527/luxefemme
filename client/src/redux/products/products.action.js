@@ -8,8 +8,8 @@ import instance from '../../utils/axiosInstance';
 const getProducts = () => async (dispatch) => {
   dispatch({ type: GET_PRODUCTS_LOADING });
   try {
-    let payload = await instance.get('/products/');
-    dispatch({ type: GET_PRODUCTS_SUCCESS, payload });
+    let res = await instance.get('/products');
+    dispatch({ type: GET_PRODUCTS_SUCCESS, payload: res.data });
   } catch (err) {
     dispatch({ type: GET_PRODUCTS_ERROR });
   }
