@@ -25,7 +25,7 @@ app.use("/user/auth", userAuthRoute);
 app.use("/", userRoute);
 
 const PORT = process.env.port || 8080;
-app.listen(PORT, "192.168.31.98", async () => {
+app.listen(PORT, async () => {
   try {
     await connection;
     console.log("Connected to MongoDB");
