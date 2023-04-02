@@ -73,7 +73,7 @@ dispatch(getAdminSuccess())
     </Thead>
     <Tbody>
      {
-      admins?.map((el,i)=><Tr key={el._id}>
+      admins && admins?.map((el,i)=><Tr key={el._id}>
         <Td textAlign={"center"}>{i+1}</Td>
         <Td textAlign={"center"}> <Avatar
       size='md'

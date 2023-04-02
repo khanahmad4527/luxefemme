@@ -4,9 +4,10 @@ import axios from "axios";
 
 //products apis========================================
 
-export const getProduct = async() => {
-   let data=await axios.get("http://localhost:8080/adminproduct/products", { headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") } })
- return data?.data;
+export const getProduct = async(page=0) => {
+   let data=await axios.get(`http://localhost:8080/adminproduct/products?page=${page}`, { headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") } })
+   
+ return data;
 }
 
 export const postProduct = async(payload) => {
@@ -17,13 +18,13 @@ export const postProduct = async(payload) => {
 }
 
 export const delProduct = async(id) => {
-  let data= axios.delete(`http://localhost:8080/adminproduct/product/${id}`, {
+  let data=await axios.delete(`http://localhost:8080/adminproduct/product/${id}`, {
         headers: {
             "Content-Type": "application/json",
             "token": localStorage.getItem("token")
         }
     })
-    return data.data;
+    return data;
 }
 
 export const updateProduct = async(id, payload) => {
@@ -33,15 +34,15 @@ export const updateProduct = async(id, payload) => {
             "token": localStorage.getItem("token")
         }
     })
-    return data.data;
+    return data;
 }
 
 
 
 //users apis========================================
 
-export const getUsers = async() => {
-   let data= await axios.get("http://localhost:8080/adminuser/users", {
+export const getUsers = async(page=0) => {
+   let data= await axios.get(`http://localhost:8080/adminuser/users?page=${page}`, {
         headers: {
             "Content-Type": "application/json",
             "token": localStorage.getItem("token")
@@ -64,14 +65,14 @@ export const delUser = async(id) => {
 
 
 
-export const getAdmin = async() => {
-   let data= await axios.get("http://localhost:8080/adminuser/admin", {
+export const getAdmin = async(page=0) => {
+   let data= await axios.get(`http://localhost:8080/adminuser/admin?page=${page}`, {
         headers: {
             "Content-Type": "application/json",
             "token": localStorage.getItem("token")
         }
     })
-    // console.log(data)
+     
     return data?.data;
 }
 
