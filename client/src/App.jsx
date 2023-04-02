@@ -5,9 +5,8 @@ import Products from './components/Products/Products';
 
 const App = () => {
   return (
-    <Box>
-      {/* <AllRoutes /> */}
-      <Products />
+    <Box bgColor={"#FDFDF9"}>
+      <AllRoutes />
     </Box>
   );
 };

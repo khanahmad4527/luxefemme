@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const superadminVerify = (req, res, next) => {
   let token = req.headers.token;
   if (token) {
-    jwt.verify(token, process.env.privatekey, (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       // console.log(token,decoded.role)
       if (decoded.role == "superadmin") {
         next();

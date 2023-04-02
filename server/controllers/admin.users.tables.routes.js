@@ -1,7 +1,7 @@
 const express = require("express");
 const adminUserRoutes = express.Router();
 const auth = require("../middlewares/auth.middleware.js");
-const AdminUserModel = require("../models/user.model.js");
+const UserModel = require("../models/user.model.js");
 const superadminVerify = require("../middlewares/superadmin.action.middleware.js");
 //get request user
 adminUserRoutes.get("/users", auth, async (req, res) => {
@@ -9,7 +9,7 @@ adminUserRoutes.get("/users", auth, async (req, res) => {
   let limit = 5;
   let skip = (page - 1) * limit;
   try {
-    let user = await AdminUserModel.find({ role: "user" })
+    let user = await UserModel.find({ role: "user" })
       .skip(skip)
       .limit(limit);
     res.status(200).send(user);
@@ -20,11 +20,11 @@ adminUserRoutes.get("/users", auth, async (req, res) => {
 
 //get request admin
 adminUserRoutes.get("/admin", auth, async (req, res) => {
-  let page = req.query.page;
+  let page = req.query.page ;
   let limit = 5;
   let skip = (page - 1) * limit;
   try {
-    let user = await AdminUserModel.find({
+    let user = await UserModel.find({
       $or: [{ role: "admin" }, { role: "superadmin" }],
     })
 
@@ -40,7 +40,7 @@ adminUserRoutes.get("/admin", auth, async (req, res) => {
 adminUserRoutes.delete("/user/:id", auth, async (req, res) => {
   let id = req.params.id;
   try {
-    await AdminUserModel.findByIdAndDelete(id);
+    await UserModel.findByIdAndDelete(id);
     res.status(200).send("user deleted");
   } catch (er) {
     res.status(400).send({ error: er.message });
@@ -50,9 +50,9 @@ adminUserRoutes.delete("/user/:id", auth, async (req, res) => {
 //add admin by super admin
 adminUserRoutes.post("/add/admin", auth, superadminVerify, async (req, res) => {
   try {
-    // let admin = new AdminUserModel(req.body);
-    // await admin.save();
-    await AdminUserModel.insertMany()
+     let admin = new UserModel(req.body);
+     await admin.save();
+   
     res.status(200).send("admin added");
   } catch (er) {
     res.status(400).send({ error: er.message });
@@ -68,7 +68,7 @@ adminUserRoutes.delete(
   async (req, res) => {
     let id = req.params.id;
     try {
-      await AdminUserModel.findByIdAndDelete(id);
+      await UserModel.findByIdAndDelete(id);
 
       res.status(200).send("admin deleted");
     } catch (er) {
@@ -76,5 +76,30 @@ adminUserRoutes.delete(
     }
   }
 );
+
+
+
+adminUserRoutes.patch(
+  "/update/admin/:id",
+  auth,
+  superadminVerify,
+  async (req, res) => {
+    let id = req.params.id;
+    try {
+      await UserModel.findByIdAndUpdate(id,req.body);
+
+      res.status(200).send("admin updated");
+    } catch (er) {
+      res.status(400).send({ error: er.message });
+    }
+  }
+);
+
+
+
+
+
+
+
 
 module.exports = adminUserRoutes;
