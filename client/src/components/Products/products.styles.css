@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'Avenir Medium';
+  src: url('../../assets/Avenir Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Avenir Light';
+  src: url('../../assets/Avenir Light.ttf');
+}
+
+.slick-slide div {
+  width: 90%;
+  margin: auto;
+}
+
+.heading {
+  letter-spacing: 0.06rem;
+  font-family: 'Avenir Light', sans-serif;
+}

@@ -1,22 +1,21 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const adminUserSchema = mongoose.Schema(
   {
- 
-      firstname: { type: String, required: true },
-      lastname: { type: String, required: true },
-      email: { type: String, required: true },
-      password: { type: String, required: true },
-    
+    firstname: { type: String, required: true },
+    lastname: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+
     role: {
       type: String,
-      enum: ["admin", "user", "superadmin"],
+      enum: ['admin', 'user', 'superadmin']
     }
   },
   {
-    versionKey: false,
+    versionKey: false
   }
 );
 
-const AdminUserModel = mongoose.model("user", adminUserSchema);
+const AdminUserModel = mongoose.model('user', adminUserSchema);
 
 module.exports = AdminUserModel;
