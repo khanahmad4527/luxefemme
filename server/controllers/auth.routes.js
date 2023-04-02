@@ -1,30 +1,27 @@
 const express = require("express");
 const adminRouter = express.Router();
-const AdminUserModel = require("../models/user.model.js");
+const UserModel = require("../models/user.model.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 
 adminRouter.post("/registration", async (req, res) => {
-  const { firstname,lastname,email,hashedPassword,role } = req.body;
-  const valid = await AdminUserModel.findOne({ email });
+  const { firstname,lastname,email,password,role } = req.body;
+  const valid = await UserModel.findOne({ email });
   if (valid) {
     res
       .status(400)
       .send({ error: "user Already exists with this email id please" });
   }
   try {
-    bcrypt.hash(hashedPassword, 12, (err, hash) => {
-      const user = new AdminUserModel({
-        firstname,lastname,email,hashedPassword:hash,role
-      });
-
+    const hashedPassword=await bcrypt.hash(password,12)
+let user=new UserModel({firstname,lastname,email,hashedPassword,role})
       user.save().then((ress) => {
         res.status(200).send({ message: "registartion completed" });
       });
-    });
-  } catch (er) {
+    }
+   catch (er) {
     res.status(400).send({ error: er.message });
   }
 });
@@ -34,7 +31,7 @@ adminRouter.post("/registration", async (req, res) => {
 adminRouter.post("/login", async (req, res) => {
   let { email, password } = req.body;
 
-  const valid = await AdminUserModel.findOne({ email });
+  const valid = await UserModel.findOne({ email });
   if (!valid) {
     res.status(400).send({
       error: "user doesn't exist with this email id, please do registration",

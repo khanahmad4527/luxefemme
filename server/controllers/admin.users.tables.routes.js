@@ -4,6 +4,10 @@ const auth = require("../middlewares/auth.middleware.js");
 const UserModel = require("../models/user.model.js");
 const superadminVerify = require("../middlewares/superadmin.action.middleware.js");
 //get request user
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+
 adminUserRoutes.get("/users", auth, async (req, res) => {
   let page = req.query.page;
   let limit = page==0?0:5;
@@ -54,12 +58,24 @@ adminUserRoutes.delete("/user/:id", auth, async (req, res) => {
 
 //add admin by super admin
 adminUserRoutes.post("/add/admin", auth, superadminVerify, async (req, res) => {
+  let {firstname,lastname,email,hashedPassword,role}=req.body;
   try {
-     let admin = new UserModel(req.body);
-     await admin.save();
+ const hashedPass=await bcrypt.hash(hashedPassword,12)
+//     bcrypt.hash(hashedPassword, 12, (err, hash) => {
+       const user = new UserModel({
+         firstname,lastname,email,hashedPassword:hashedPass,role
+      });
+
+     user.save().then((ress) => {
+         res.status(200).send({ message: "registartion completed" });
+      });
+    }
+//console.log(hashedPass)
+    //  let admin = new UserModel(req.body);
+    //  await admin.save();
    
-    res.status(200).send("admin added");
-  } catch (er) {
+    //res.status(200).send("admin added");
+   catch (er) {
     res.status(400).send({ error: er.message });
   }
 });
