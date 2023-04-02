@@ -45,10 +45,10 @@ adminRouter.post("/login", async (req, res) => {
     bcrypt.compare(password, valid.hashedPassword, (err, decoded) => {
       if (decoded) {
         let token = jwt.sign(
-          { userId: valid._id, role: valid.role },
+          { userId: valid._id, role: valid.role},
           process.env.JWT_SECRET
         );
-        res.status(200).send({ message: "Logged In", token });
+        res.status(200).send({ message: "Logged In", token,name:valid.firstname+" "+valid.lastname,role:valid.role});
       } else {
         res.status(400).send({ message: "wrong credentials" });
       }

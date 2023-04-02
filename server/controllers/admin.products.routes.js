@@ -7,12 +7,15 @@ const auth=require("../middlewares/auth.middleware.js");
 
 //get request
 adminProductRouter.get("/products",auth, async (req, res) => {
-  let limit = 10;
+  
   let page = req.query.page;
+  let limit=page==0?0:10;
   let skip = (page - 1) * limit;
+  
   try {
     let product = await ProductModel.find().skip(skip).limit(limit);
-    res.status(200).send(product);
+    let totalpages = await ProductModel.find()
+    res.status(200).send({product,totalpages:totalpages.length});
   } catch (er) {
     res.status(400).send({ error: er.message });
   }
@@ -58,7 +61,7 @@ adminProductRouter.patch("/product/:id",auth, async (req, res) => {
 adminProductRouter.delete("/product/:id",auth, async (req, res) => {
   let id = req.params.id;
   try {
-    await ProductModel.findByIdAndDelete(id, payload);
+    await ProductModel.findByIdAndDelete(id);
     res.status(200).send({ message: "product deleted" });
   } catch (er) {
     res.status(400).send({ error: er.message });
