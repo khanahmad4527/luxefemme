@@ -6,6 +6,7 @@ const {
   addCart,
   updateCart,
   deleteCart,
+  emptyCart,
 } = require("../controllers/cart");
 const {
   getAddress,
@@ -21,6 +22,7 @@ const routesToValidate = [
   "/cart/add",
   "/cart/update/:cartId",
   "/cart/delete/:cartId",
+  "/cart/emptycart",
   "/address",
   "/address/add",
   "/address/update/:addressId",
@@ -45,6 +47,8 @@ userRoute.post("/cart/add", addCart);
 userRoute.patch("/cart/update/:cartId", updateCart);
 
 userRoute.delete("/cart/delete/:cartId", deleteCart);
+
+userRoute.delete("/cart/emptycart", emptyCart);
 
 userRoute.get("/address", getAddress);
 

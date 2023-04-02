@@ -13,13 +13,10 @@ import {
 export const login = (email, password) => async (dispatch) => {
   dispatch({ type: GET_AUTH_LOADING });
   try {
-    const responce = await instance.post(
-      `${process.env.REACT_APP_API_ENDPOINT}/user/auth/login`,
-      {
-        email,
-        password,
-      }
-    );
+    const responce = await instance.post(`/user/auth/login`, {
+      email,
+      password,
+    });
     dispatch({ type: GET_AUTH_SUCCESS, payload: responce.data });
   } catch (err) {
     dispatch({ type: GET_AUTH_ERROR });
@@ -28,26 +25,21 @@ export const login = (email, password) => async (dispatch) => {
 
 export const existingUser = async (email, password) => {
   try {
-    await instance.post(
-      `${process.env.REACT_APP_API_ENDPOINT}/user/auth/login`,
-      {
-        email,
-        password,
-      }
-    );
-
-    return 200;
+    const responce = await instance.post(`/user/auth/login`, {
+      email,
+      password,
+    });
+    const status = responce.status;
+    const role = responce.data.userData.role;
+    return { status, role };
   } catch (error) {
-    return error.response.status;
+    return { status: error.response.status };
   }
 };
 
 export const isEmailAvailable = async (newUser) => {
   try {
-    await instance.post(
-      `${process.env.REACT_APP_API_ENDPOINT}/user/auth/register`,
-      newUser
-    );
+    await instance.post(`/user/auth/register`, newUser);
 
     return 201;
   } catch (error) {

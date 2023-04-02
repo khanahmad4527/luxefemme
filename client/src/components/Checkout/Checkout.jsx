@@ -28,13 +28,13 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteCartData, getCartData } from "../../redux/cart/cart.actions";
+import { emptyCart, getCartData } from "../../redux/cart/cart.actions";
 import {
   getAddress,
   deleteAddress,
   getCoupons,
 } from "../../redux/checkout/checkout.actions";
-import { addToOrder, getOrderData } from "../../redux/order/order.actions";
+import { addToOrder } from "../../redux/order/order.actions";
 import Error from "../../utils/Error";
 import Loading from "../../utils/Loading";
 import AddressModal from "./AddressModal";
@@ -45,7 +45,8 @@ import UPIModal from "./UPIModal";
 
 const initialFormData = {
   country: "INDIA",
-  full_name: "",
+  firstname: "",
+  lastname: "",
   mobile: "",
   address: {
     street_address: "",
@@ -93,10 +94,6 @@ const Checkout = () => {
     couponsGetIsError,
     coupons,
   } = useSelector((store) => store.checkout);
-
-  // const { orderGetIsLoading, orderGetIsError, orderData } = useSelector(
-  //   (store) => store.order
-  // );
 
   const dispatch = useDispatch();
 
@@ -195,19 +192,20 @@ const Checkout = () => {
       months[currentDate.getMonth()]
     } ${currentDate.getDate()} ${currentDate.getFullYear()}`;
 
-    // const newOrder = [
-    //   {
-    //     orderID: Date.now(),
-    //     orderDate: formattedDate,
-    //     paid: finalAmount,
-    //     paymentMethod: paymentMethod,
-    //     items: cartData,
-    //   },
-    //   ...orderData,
-    // ];
-
-    //dispatch(addToOrder(newOrder));
-    //dispatch(deleteCartData([]));
+    const newOrder = {
+      orderDate: formattedDate,
+      paidAmount: finalAmount,
+      paymentMethod: paymentMethod,
+      items: cartData.map((item) => {
+        return {
+          quantity: item.quantity,
+          title: item.title,
+          itemPrice: item.itemPrice,
+        };
+      }),
+    };
+    dispatch(addToOrder(newOrder));
+    dispatch(emptyCart());
     navigate("/");
   };
 
@@ -273,7 +271,7 @@ const Checkout = () => {
                       as="span"
                       flex="1"
                       textAlign="left"
-                      color="sm.sparkle"
+                      color="lf.black"
                       fontSize="20px"
                       fontWeight={500}
                     >
@@ -309,7 +307,7 @@ const Checkout = () => {
                               >
                                 <Box>
                                   <span style={{ fontWeight: "bold" }}>
-                                    {item.full_name}
+                                    {item.firstname} {item.lastname}
                                   </span>{" "}
                                   {item.address.apartment},{" "}
                                   {item.address.street_address},{" "}
@@ -330,7 +328,9 @@ const Checkout = () => {
                                   <Box display={"inline"}>|</Box>{" "}
                                   <Link
                                     color="teal.500"
-                                    onClick={() => handleDeleteAddress(item.id)}
+                                    onClick={() =>
+                                      handleDeleteAddress(item._id)
+                                    }
                                   >
                                     Delete Address
                                   </Link>
@@ -343,7 +343,7 @@ const Checkout = () => {
 
                     <Link
                       isExternal
-                      color={"sm.sparkle"}
+                      color={"lf.black"}
                       onClick={() => {
                         setAddressTitle("Add a new address");
                         setAddressOperation("add");
@@ -363,7 +363,7 @@ const Checkout = () => {
                       as="span"
                       flex="1"
                       textAlign="left"
-                      color="sm.sparkle"
+                      color="lf.black"
                       fontSize="20px"
                       fontWeight={500}
                     >
@@ -479,7 +479,6 @@ const Checkout = () => {
             padding="10px"
             flexDirection="column"
             gap="10px"
-            bgColor="white"
             h="min-content"
           >
             <Input
@@ -547,7 +546,7 @@ const Checkout = () => {
 
             <Divider />
 
-            <Flex justifyContent="space-between" color="sm.sparkle">
+            <Flex justifyContent="space-between" color="lf.black">
               <Text fontSize="25px" fontWeight={500}>
                 Order Total:
               </Text>
@@ -592,6 +591,7 @@ const Checkout = () => {
                   onOpen1();
                 }
               }}
+              display={subtotal === 0 ? "none" : "block"}
             >
               Proceed To Pay
             </Button>

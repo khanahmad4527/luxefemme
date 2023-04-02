@@ -11,17 +11,22 @@ import {
   REMOVE_CART_ITEMS_LOADING,
   REMOVE_CART_ITEMS_SUCCESS,
   REMOVE_CART_ITEMS_ERROR,
+  EMPTY_CART_ITEMS_LOADING,
+  EMPTY_CART_ITEMS_SUCCESS,
+  EMPTY_CART_ITEMS_ERROR,
 } from "./cart.types";
 
 const initState = {
-  getIsLoading: false,
-  getIsError: false,
-  postIsLoading: false,
-  postIsError: false,
-  patchIsLoading: false,
-  patchIsError: false,
-  deleteIsLoading: false,
-  deleteIsError: false,
+  cartGetIsLoading: false,
+  cartGetIsError: false,
+  cartPostIsLoading: false,
+  cartPostIsError: false,
+  cartPatchIsLoading: false,
+  cartPatchIsError: false,
+  cartDeleteIsLoading: false,
+  cartDeleteIsError: false,
+  cartEmptyIsLoading: false,
+  cartEmptyIsError: false,
   cartData: [],
 };
 
@@ -30,16 +35,16 @@ export const cartReducer = (state = initState, { type, payload }) => {
     case GET_CART_ITEMS_LOADING: {
       return {
         ...state,
-        getIsLoading: true,
-        getIsError: false,
+        cartGetIsLoading: true,
+        cartGetIsError: false,
       };
     }
 
     case GET_CART_ITEMS_SUCCESS: {
       return {
         ...state,
-        getIsLoading: false,
-        getIsError: false,
+        cartGetIsLoading: false,
+        cartGetIsError: false,
         cartData: payload,
       };
     }
@@ -47,24 +52,24 @@ export const cartReducer = (state = initState, { type, payload }) => {
     case GET_CART_ITEMS_ERROR: {
       return {
         ...state,
-        getIsLoading: false,
-        getIsError: true,
+        cartGetIsLoading: false,
+        cartGetIsError: true,
       };
     }
 
     case ADD_ITEM_TO_CART_LOADING: {
       return {
         ...state,
-        postIsLoading: true,
-        postIsError: false,
+        cartPostIsLoading: true,
+        cartPostIsError: false,
       };
     }
 
     case ADD_ITEM_TO_CART_SUCCESS: {
       return {
         ...state,
-        postIsLoading: false,
-        postIsError: false,
+        cartPostIsLoading: false,
+        cartPostIsError: false,
         cartData: [payload, ...state.cartData],
       };
     }
@@ -72,24 +77,24 @@ export const cartReducer = (state = initState, { type, payload }) => {
     case ADD_ITEM_TO_CART_ERROR: {
       return {
         ...state,
-        postIsLoading: false,
-        postIsError: true,
+        cartPostIsLoading: false,
+        cartPostIsError: true,
       };
     }
 
     case UPDATE_CART_ITEMS_LOADING: {
       return {
         ...state,
-        patchIsLoading: true,
-        patchIsError: false,
+        cartPatchIsLoading: true,
+        cartPatchIsError: false,
       };
     }
 
     case UPDATE_CART_ITEMS_SUCCESS: {
       return {
         ...state,
-        patchIsLoading: false,
-        patchIsError: false,
+        cartPatchIsLoading: false,
+        cartPatchIsError: false,
         cartData: state.cartData.map((item) =>
           item._id === payload._id ? payload : item
         ),
@@ -99,24 +104,24 @@ export const cartReducer = (state = initState, { type, payload }) => {
     case UPDATE_CART_ITEMS_ERROR: {
       return {
         ...state,
-        patchIsLoading: false,
-        patchIsError: true,
+        cartPatchIsLoading: false,
+        cartPatchIsError: true,
       };
     }
 
     case REMOVE_CART_ITEMS_LOADING: {
       return {
         ...state,
-        deleteIsLoading: true,
-        deleteIsError: false,
+        cartDeleteIsLoading: true,
+        cartDeleteIsError: false,
       };
     }
 
     case REMOVE_CART_ITEMS_SUCCESS: {
       return {
         ...state,
-        deleteIsLoading: false,
-        deleteIsError: false,
+        cartDeleteIsLoading: false,
+        cartDeleteIsError: false,
         cartData: state.cartData.filter((item) => item._id !== payload._id),
       };
     }
@@ -124,8 +129,33 @@ export const cartReducer = (state = initState, { type, payload }) => {
     case REMOVE_CART_ITEMS_ERROR: {
       return {
         ...state,
-        deleteIsLoading: false,
-        deleteIsError: true,
+        cartDeleteIsLoading: false,
+        cartDeleteIsError: true,
+      };
+    }
+
+    case EMPTY_CART_ITEMS_LOADING: {
+      return {
+        ...state,
+        cartEmptyIsLoading: true,
+        cartEmptyIsError: false,
+      };
+    }
+
+    case EMPTY_CART_ITEMS_SUCCESS: {
+      return {
+        ...state,
+        cartEmptyIsLoading: false,
+        cartEmptyIsError: false,
+        cartData: payload,
+      };
+    }
+
+    case EMPTY_CART_ITEMS_ERROR: {
+      return {
+        ...state,
+        cartEmptyIsLoading: false,
+        cartEmptyIsError: true,
       };
     }
 

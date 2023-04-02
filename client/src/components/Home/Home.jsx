@@ -1,7 +1,16 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Box, Button, Flex, Grid, Image, Link, Square } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Link,
+  Square,
+  Skeleton,
+  Image,
+} from "@chakra-ui/react";
 import i1 from "../../assets/1.jpg";
 import i2 from "../../assets/2.gif";
 import i3 from "../../assets/3.jpg";
