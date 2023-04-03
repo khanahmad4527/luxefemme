@@ -5,6 +5,7 @@ Welcome to LuxeFemme, an e-commerce platform that allows you to easily browse an
 Our user-friendly interface makes it easy to browse and shop for products, and with our powerful search and filtering tools, you can quickly and easily find the perfect items to suit your style and budget. With LuxeFemme, you can turn your house into a home in no time.
 
 ## Table of Contents
+
 - [A Collaborative Project](#a-collaborative-project)
 - [Description](#description)
 - [Tech Stack](#tech-stack)
@@ -37,6 +38,7 @@ LuxeFemme is an online platform that allows users to browse and purchase home de
 - Mongoose
 
 ## Features
+
 - Browse and purchase home decor products with ease
 - Filter and search for products to find the perfect items
 - User-friendly interface
@@ -49,11 +51,13 @@ LuxeFemme is an online platform that allows users to browse and purchase home de
 ```bash
 git clone https://github.com/khanahmad4527/luxefemme.git
 ```
+
 2. Install dependencies
 
 ```bash
 npm install
 ```
+
 3. Start the project
 
 ```bash
@@ -71,6 +75,33 @@ npm start
 
 ## Screenshots
 
+<div align="center">
+  <h3>Home Page</h3>
+  <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(120).png?raw=true" width="800">
+    <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(121).png?raw=true" width="800">
+</div>
+
+<div align="center">
+  <h3>Product Details Page</h3>
+  <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(128).png?raw=true" width="800">
+</div>
+
+<div align="center">
+  <h3>Cart</h3>
+  <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(122).png?raw=true" width="800">
+</div>
+
+<div align="center">
+  <h3>Checkout</h3>
+  <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(123).png?raw=true" width="800">
+    <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(124).png?raw=true" width="800">
+      <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(125).png?raw=true" width="800">
+</div>
+
+<div align="center">
+  <h3>Orders</h3>
+    <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(126).png?raw=true" width="800">
+</div>
 
 ## Demo
 
