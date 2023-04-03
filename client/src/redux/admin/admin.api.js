@@ -32,7 +32,7 @@ export const getUsers = async (page = 0) => {
 
 export const delUser = async (id) => {
   let data = await instance.delete(`adminuser/user/${id}`);
-  return data.data;
+  return data?.data;
 };
 
 export const getAdmin = async (page = 0) => {
@@ -48,10 +48,10 @@ export const addAdmin = async (payload) => {
 
 export const delAdmin = async (id) => {
   let data = instance.delete(`adminuser/delete/admin/${id}`);
-  return data.data;
+  return data?.data;
 };
 
 export const updateAdmin = async (id, payload) => {
   let data = instance.patch(`adminuser/update/admin/${id}`, payload);
-  return data.data;
+  return data?.data;
 };
