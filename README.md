@@ -71,55 +71,17 @@ npm start
 
 ## Screenshots
 
-<div align="center">
-  <h3>Home Page</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213929836-17fec47c-a276-41e5-8012-1566c3c33a0d.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Login Page</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930076-c6c6084f-6226-4ebc-99b0-bd5300b557dc.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Products Page & Search Functionality</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930231-45487d5e-da29-41bf-a050-73b5a463ae0a.png" width="800">
-  <img src="https://user-images.githubusercontent.com/112630634/213930235-fd6971a6-6af9-4ac1-88a0-47f153541a45.png" width="800">
-  <img src="https://user-images.githubusercontent.com/112630634/213930245-4fa93cf1-4478-4f02-af1c-d0602278f399.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Product Details Page</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930364-eae3b152-f4b0-4e08-ba9c-34d3d5dd1e7d.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Cart</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930427-3bb0a223-e99e-4642-8d26-c4b2c0bffef5.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Checkout</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930501-ca3fec7a-9ad3-4267-872d-229503cbff13.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Orders</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930555-3137a837-3ae2-4238-b874-21d5a7e164da.png" width="800">
-</div>
 
 ## Demo
 
-Check out the demo <a href="https://homedecor-sand.vercel.app/" target="_blank">here</a>
+Check out the demo <a href="https://luxefemme.vercel.app" target="_blank">here</a>
 
 ## Team
 
 - [Ahmad Khan](https://github.com/khanahmad4527)
-- [Snehil Agrahari](https://github.com/snehilagrahari)
-- [Dhiraj Garad](https://github.com/dhiraj19999)
-- [Kamal Gupta](https://github.com/kamalgupta1410)
-- [Akash Singh](https://github.com/singh2198)
+- [Akash Singha](https://github.com/akash-singha-3558)
+- [Sanket Potdar](https://github.com/SanketPotdar121695)
 
 ## Disclaimer
 
-This project is a re-creation of the website "craftsvilla" for educational purposes only and is not affiliated with or endorsed by the original website or its owners. The project was created solely for the purpose of learning and practicing web development skills and should not be used for any commercial or unauthorized purposes. All rights to the original website, including its
+This project is a re-creation of the website "https://www.anthropologie.com" for educational purposes only and is not affiliated with or endorsed by the original website or its owners. The project was created solely for the purpose of learning and practicing web development skills and should not be used for any commercial or unauthorized purposes. All rights to the original website, including its
