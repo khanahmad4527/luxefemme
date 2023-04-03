@@ -71,42 +71,6 @@ npm start
 
 ## Screenshots
 
-<div align="center">
-  <h3>Home Page</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213929836-17fec47c-a276-41e5-8012-1566c3c33a0d.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Login Page</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930076-c6c6084f-6226-4ebc-99b0-bd5300b557dc.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Products Page & Search Functionality</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930231-45487d5e-da29-41bf-a050-73b5a463ae0a.png" width="800">
-  <img src="https://user-images.githubusercontent.com/112630634/213930235-fd6971a6-6af9-4ac1-88a0-47f153541a45.png" width="800">
-  <img src="https://user-images.githubusercontent.com/112630634/213930245-4fa93cf1-4478-4f02-af1c-d0602278f399.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Product Details Page</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930364-eae3b152-f4b0-4e08-ba9c-34d3d5dd1e7d.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Cart</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930427-3bb0a223-e99e-4642-8d26-c4b2c0bffef5.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Checkout</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930501-ca3fec7a-9ad3-4267-872d-229503cbff13.png" width="800">
-</div>
-
-<div align="center">
-  <h3>Orders</h3>
-  <img src="https://user-images.githubusercontent.com/112630634/213930555-3137a837-3ae2-4238-b874-21d5a7e164da.png" width="800">
-</div>
 
 ## Demo
 
