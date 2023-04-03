@@ -1,10 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
-  let token = req.headers.token;
+  const token = req.headers.authorization.split(" ")[1];
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        
       if (decoded.role == "admin" || decoded.role == "superadmin") {
         next();
       } else {

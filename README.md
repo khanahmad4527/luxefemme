@@ -1,8 +1,8 @@
-# Homedecor
+# LuxeFemme
 
-Welcome to Homedecor, an e-commerce platform that allows you to easily browse and purchase a wide range of home decor products. Whether you're looking to redecorate your living room, spruce up your bedroom, or add a personal touch to your home office, Homedecor has everything you need to make your space feel like your own.
+Welcome to LuxeFemme, an e-commerce platform that allows you to easily browse and purchase a wide range of home decor products. Whether you're looking to redecorate your living room, spruce up your bedroom, or add a personal touch to your home office, LuxeFemme has everything you need to make your space feel like your own.
 
-Our user-friendly interface makes it easy to browse and shop for products, and with our powerful search and filtering tools, you can quickly and easily find the perfect items to suit your style and budget. With Homedecor, you can turn your house into a home in no time.
+Our user-friendly interface makes it easy to browse and shop for products, and with our powerful search and filtering tools, you can quickly and easily find the perfect items to suit your style and budget. With LuxeFemme, you can turn your house into a home in no time.
 
 ## Table of Contents
 - [A Collaborative Project](#a-collaborative-project)
@@ -18,11 +18,11 @@ Our user-friendly interface makes it easy to browse and shop for products, and w
 
 ## A Collaborative Project
 
-This project is a re-creation of the website "craftsvilla" for educational purposes only. It is a collaborative effort developed by a team of individuals who aim to learn and practice web development skills. We developed this project to enhance our knowledge in building a complete e-commerce web application as a team, where we learn about the best practices for working in a collaborative environment, project management, and problem-solving.
+This project is a re-creation of the website "https://www.anthropologie.com/" for educational purposes only. It is a collaborative effort developed by a team of individuals who aim to learn and practice web development skills. We developed this project to enhance our knowledge in building a complete e-commerce web application as a team, where we learn about the best practices for working in a collaborative environment, project management, and problem-solving.
 
 ## Description
 
-Homedecor is an online platform that allows users to browse and purchase home decor products. It has a wide range of products available in various categories such as Handicrafts, ethnic wear, and home decor. The platform has a user-friendly interface and provides a variety of customization options for products.
+LuxeFemme is an online platform that allows users to browse and purchase home decor products. It has a wide range of products available in various categories such as Handicrafts, ethnic wear, and home decor. The platform has a user-friendly interface and provides a variety of customization options for products.
 
 ## Tech Stack
 
@@ -32,6 +32,9 @@ Homedecor is an online platform that allows users to browse and purchase home de
 - CSS
 - Redux
 - Axios
+- Node.js
+- MongoDB
+- Mongoose
 
 ## Features
 - Browse and purchase home decor products with ease
@@ -44,7 +47,7 @@ Homedecor is an online platform that allows users to browse and purchase home de
 1. Clone the repository
 
 ```bash
-git clone https://github.com/khanahmad4527/HomeDecor.git
+git clone https://github.com/khanahmad4527/luxefemme.git
 ```
 2. Install dependencies
 

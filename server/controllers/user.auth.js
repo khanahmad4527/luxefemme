@@ -48,7 +48,7 @@ const login = async (req, res) => {
         return res.status(401).json({ message: "Incorrect Password" });
       } else {
         jwt.sign(
-          { id, firstname, lastname, email },
+          { id, firstname, lastname, email, role },
           process.env.JWT_SECRET,
           {
             expiresIn: "3d",

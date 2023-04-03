@@ -1,111 +1,57 @@
-import axios from "axios";
-
-
+import instance from "../../utils/axiosInstance";
 
 //products apis========================================
 
-export const getProduct = async(page=0) => {
-   let data=await axios.get(`http://localhost:8080/adminproduct/products?page=${page}`, { headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") } })
-   
- return data;
-}
+export const getProduct = async (page = 0) => {
+  let data = await instance.get(`adminproduct/products?page=${page}`);
 
-export const postProduct = async(payload) => {
-  let data= await axios.post("http://localhost:8080/adminproduct/add", payload,
-        { headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") } }
-    )
-    return data?.data;
-}
+  return data;
+};
 
-export const delProduct = async(id) => {
-  let data=await axios.delete(`http://localhost:8080/adminproduct/product/${id}`, {
-        headers: {
-            "Content-Type": "application/json",
-            "token": localStorage.getItem("token")
-        }
-    })
-    return data;
-}
+export const postProduct = async (payload) => {
+  let data = await instance.post("adminproduct/add", payload);
+  return data?.data;
+};
 
-export const updateProduct = async(id, payload) => {
-   let data= await axios.patch(`http://localhost:8080/adminproduct/product/${id}`, payload, {
-        headers: {
-            "Content-Type": "application/json",
-            "token": localStorage.getItem("token")
-        }
-    })
-    return data;
-}
+export const delProduct = async (id) => {
+  let data = await instance.delete(`adminproduct/product/${id}`);
+  return data;
+};
 
-
+export const updateProduct = async (id, payload) => {
+  let data = await instance.patch(`adminproduct/product/${id}`, payload);
+  return data;
+};
 
 //users apis========================================
 
-export const getUsers = async(page=0) => {
-   let data= await axios.get(`http://localhost:8080/adminuser/users?page=${page}`, {
-        headers: {
-            "Content-Type": "application/json",
-            "token": localStorage.getItem("token")
-        }
-    })
-    return data?.data;
-}
+export const getUsers = async (page = 0) => {
+  let data = await instance.get(`adminuser/users?page=${page}`);
+  return data?.data;
+};
 
+export const delUser = async (id) => {
+  let data = await instance.delete(`adminuser/user/${id}`);
+  return data.data;
+};
 
-export const delUser = async(id) => {
-   let data= await axios.delete(`http://localhost:8080/adminuser/user/${id}`, {
-        headers: {
-            "Content-Type": "application/json",
-            "token": localStorage.getItem("token")
-        }
-    })
-    return data.data;
-}
+export const getAdmin = async (page = 0) => {
+  let data = await instance.get(`adminuser/admin?page=${page}`);
 
+  return data?.data;
+};
 
+export const addAdmin = async (payload) => {
+  let data = await instance.post("adminuser/add/admin", payload);
+  return data;
+};
 
+export const delAdmin = async (id) => {
+  let data = instance.delete(`adminuser/delete/admin/${id}`);
+  return data.data;
+};
 
-export const getAdmin = async(page=0) => {
-   let data= await axios.get(`http://localhost:8080/adminuser/admin?page=${page}`, {
-        headers: {
-            "Content-Type": "application/json",
-            "token": localStorage.getItem("token")
-        }
-    })
-     
-    return data?.data;
-}
-
-
-export const addAdmin = async(payload) => {
- let data= await axios.post("http://localhost:8080/adminuser/add/admin", payload, {
-        headers: {
-            "Content-Type": "application/json",
-            "token": localStorage.getItem("token")
-        }
-    })
-    return data
-}
-
-export const delAdmin = async(id) => {
-  let data= axios.delete(`http://localhost:8080/adminuser/delete/admin/${id}`, {
-        headers: {
-            "Content-Type": "application/json",
-            "token": localStorage.getItem("token")
-        }
-    })
-    return data.data;
-}
-
-
-export const updateAdmin=async(id,payload)=>{
-    let data= axios.patch(`http://localhost:8080/adminuser/update/admin/${id}`,payload,{
-        headers: {
-            "Content-Type": "application/json",
-            "token": localStorage.getItem("token")
-        }
-    })
-    return data.data;
-
-
-}
+export const updateAdmin = async (id, payload) => {
+  let data = instance.patch(`adminuser/update/admin/${id}`, payload);
+  return data.data;
+};
