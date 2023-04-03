@@ -110,7 +110,7 @@ npm start
 
 ## Demo
 
-Check out the demo <a href="https://homedecor-sand.vercel.app/" target="_blank">here</a>
+Check out the demo <a href="https://luxefemme.vercel.app" target="_blank">here</a>
 
 ## Team
 
