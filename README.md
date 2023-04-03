@@ -115,11 +115,9 @@ Check out the demo <a href="https://homedecor-sand.vercel.app/" target="_blank">
 ## Team
 
 - [Ahmad Khan](https://github.com/khanahmad4527)
-- [Snehil Agrahari](https://github.com/snehilagrahari)
-- [Dhiraj Garad](https://github.com/dhiraj19999)
-- [Kamal Gupta](https://github.com/kamalgupta1410)
-- [Akash Singh](https://github.com/singh2198)
+- [Akash Singha](https://github.com/akash-singha-3558)
+- [Sanket Potdar](https://github.com/SanketPotdar121695)
 
 ## Disclaimer
 
-This project is a re-creation of the website "craftsvilla" for educational purposes only and is not affiliated with or endorsed by the original website or its owners. The project was created solely for the purpose of learning and practicing web development skills and should not be used for any commercial or unauthorized purposes. All rights to the original website, including its
+This project is a re-creation of the website "https://www.anthropologie.com" for educational purposes only and is not affiliated with or endorsed by the original website or its owners. The project was created solely for the purpose of learning and practicing web development skills and should not be used for any commercial or unauthorized purposes. All rights to the original website, including its
