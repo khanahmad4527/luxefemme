@@ -30,22 +30,22 @@ import {
   PATCH_ADMIN_ERROR,
   PATCH_ADMIN_SUCCESS,
   CHANGE_PRODUCT_PAGE,
-   CHANGE_USER_PAGE,
-   CHANGE_ADMIN_PAGE
+  CHANGE_USER_PAGE,
+  CHANGE_ADMIN_PAGE,
 } from "./admin.types";
 
 const initialState = {
-  productpage:1,
-  userPage:1,
-  adminPage:1,
-  totalPages:0,
-  totalUser:0,
-  totalAdmin:0,
+  productpage: 1,
+  userPage: 1,
+  adminPage: 1,
+  totalPages: 0,
+  totalUser: 0,
+  totalAdmin: 0,
   loading: true,
   error: false,
   products: [],
   users: [],
-  admins:[],
+  admins: [],
 };
 
 export const adminReducer = (state = initialState, { type, payload }) => {
@@ -70,32 +70,32 @@ export const adminReducer = (state = initialState, { type, payload }) => {
         loading: false,
       };
     }
-    case CHANGE_PRODUCT_PAGE:{
-      return{
+    case CHANGE_PRODUCT_PAGE: {
+      return {
         ...state,
-        productpage:payload
-      }
+        productpage: payload,
+      };
     }
-    case PATCH_PRODUCT_LOADING:{
-      return{
+    case PATCH_PRODUCT_LOADING: {
+      return {
         ...state,
-        loading:true
-      }
-    }
-    
-    case PATCH_PRODUCT_ERROR:{
-      return{
-        ...state,
-        loading:false,
-        error:true
-      }
+        loading: true,
+      };
     }
 
-    case PATCH_PRODUCT_SUCCESS:{
-      return{
+    case PATCH_PRODUCT_ERROR: {
+      return {
         ...state,
-        loading:false
-      }
+        loading: false,
+        error: true,
+      };
+    }
+
+    case PATCH_PRODUCT_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+      };
     }
 
     case GET_PRODUCTS_LOADING: {
@@ -117,43 +117,42 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        products: payload.data.product,
-        totalPages:payload.data.totalpages
+        products: payload?.data?.product,
+        totalPages: payload?.data?.totalpages,
       };
     }
-   
-    case GET_USERS_LOADING:{
-      return{
+
+    case GET_USERS_LOADING: {
+      return {
         ...state,
-        loading:true
-      }
+        loading: true,
+      };
     }
 
-    case  GET_USERS_ERROR:{
-      return{
+    case GET_USERS_ERROR: {
+      return {
         ...state,
-        loading:false,
-        error:true
-      }
+        loading: false,
+        error: true,
+      };
     }
 
-   case GET_USERS_SUCCESS:{
-    return{
-      ...state,
-      loading:false,
-      users:payload.user,
-      totalUser:payload.totalUser
+    case GET_USERS_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        users: payload.user,
+        totalUser: payload?.totalUser,
+      };
     }
-   }
 
-   case DELETE_PRODUCT_LOADING: {
-    return {
-      ...state,
-      loading: true,
-    };
-  }
-  
-  
+    case DELETE_PRODUCT_LOADING: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+
     case DELETE_PRODUCT_ERROR: {
       return {
         ...state,
@@ -169,127 +168,128 @@ export const adminReducer = (state = initialState, { type, payload }) => {
       };
     }
 
+    case DELETE_USERS_LOADING: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
 
-    case DELETE_USERS_LOADING:{
-      return{
+    case DELETE_USERS_ERROR: {
+      return {
         ...state,
-        loading:true
-      }
-     }
-    
-     case DELETE_USERS_ERROR:{
-      return{
-        ...state,
-        loading:false,
-        error:true
-      }
-     }
-     
-     case DELETE_USERS_SUCCESS:{
-      return{
-        ...state,
-        loading:false
-      }
-     }
-    
-     case ADD_ADMIN_LOADING:{
-      return{
-        ...state,
-        loading:true
-      }
-     }
+        loading: false,
+        error: true,
+      };
+    }
 
-     case ADD_ADMIN_ERROR:{
-      return{
+    case DELETE_USERS_SUCCESS: {
+      return {
         ...state,
-        loading:false,
-        error:true
-      }
-     }
+        loading: false,
+      };
+    }
 
-     case ADD_ADMIN_SUCCESS:{
-      return{
+    case ADD_ADMIN_LOADING: {
+      return {
         ...state,
-        loading:false
-      }
-     }
- 
-     case GET_ADMIN_LOADING:{
-      return{
-        ...state,
-        loading:true
-      }
-     }
+        loading: true,
+      };
+    }
 
-     case GET_ADMIN_ERROR:{
-      return{
+    case ADD_ADMIN_ERROR: {
+      return {
         ...state,
-        loading:false,
-        error:true
-      }
-     }
-     
-     case GET_ADMIN_SUCCESS:{
-      return{
-        ...state,
-        loading:false,
-        admins:payload.user,
-        totalAdmin:payload.TotalAdmin
-      }
-     }
+        loading: false,
+        error: true,
+      };
+    }
 
-     case DELETE_ADMIN_LOADING:{
-      return{
+    case ADD_ADMIN_SUCCESS: {
+      return {
         ...state,
-        loading:true,
-      }
-     }
-     
-     case DELETE_ADMIN_ERROR:{
-      return{
-        ...state,
-        loading:false,
-        error:true
-      }
-     }
+        loading: false,
+      };
+    }
 
-     case DELETE_ADMIN_SUCCESS:{
-      return{
+    case GET_ADMIN_LOADING: {
+      return {
         ...state,
-        loading:false,
-      }
-     }
-       
-     case PATCH_ADMIN_LOADING:{
-      return{
-        ...state,
-        loading:true
-      }
-     }
-     case PATCH_ADMIN_ERROR:{
-      return{
-        ...state,
-        loading:false,
-        error:true
-      }
-     }
-     case PATCH_ADMIN_SUCCESS:{
-      return{
-        ...state,
-        loading:false
-      }
-     }
+        loading: true,
+      };
+    }
 
-     case CHANGE_USER_PAGE:{
-      return{
-        ...state,userPage:payload
-      }
-     }     
-     case CHANGE_ADMIN_PAGE:{
-      return{
-        ...state,adminPage:payload
-      }
-     }  
+    case GET_ADMIN_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    }
+
+    case GET_ADMIN_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        admins: payload?.user,
+        totalAdmin: payload?.TotalAdmin,
+      };
+    }
+
+    case DELETE_ADMIN_LOADING: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+
+    case DELETE_ADMIN_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    }
+
+    case DELETE_ADMIN_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+      };
+    }
+
+    case PATCH_ADMIN_LOADING: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case PATCH_ADMIN_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    }
+    case PATCH_ADMIN_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+      };
+    }
+
+    case CHANGE_USER_PAGE: {
+      return {
+        ...state,
+        userPage: payload,
+      };
+    }
+    case CHANGE_ADMIN_PAGE: {
+      return {
+        ...state,
+        adminPage: payload,
+      };
+    }
     default: {
       return state;
     }
