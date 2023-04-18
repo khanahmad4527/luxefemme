@@ -9,7 +9,7 @@ export const getProductDetail = (id) => async (dispatch) => {
   dispatch({ type: GET_PRODUCTDETAIL_LOADING });
   try {
     const responce = await axios.get(
-      `${process.env.REACT_APP_API_ENDPOINT}/products/${id}`
+      `${process.env.REACT_APP_API_ENDPOINT}/product/${id}`
     );
     dispatch({ type: GET_PRODUCTDETAIL_SUCCESS, payload: responce.data });
   } catch (err) {

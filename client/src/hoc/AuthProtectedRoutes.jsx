@@ -9,7 +9,7 @@ const AuthProtectedRoutes = ({ children }) => {
   if (isAuth) {
     return children;
   } else {
-    return <Navigate to="/login" replce state={{ from: location }} />;
+    return <Navigate to="/login" replace state={{ from: location }} />;
   }
 };
 
