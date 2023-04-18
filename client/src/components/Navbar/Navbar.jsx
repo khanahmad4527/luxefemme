@@ -44,7 +44,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../redux/cart/cart.actions";
 import { logout } from "../../redux/auth/auth.action";
 import { BsBag } from "react-icons/bs";
-import { throttle } from "lodash";
 
 const Navbar = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -101,7 +100,7 @@ const Navbar = () => {
     if (isAuth && cartData.length === 0) {
       dispatch(getCartData());
     }
-  }, [isAuth]);
+  }, [cartData.length, dispatch, isAuth]);
 
   return (
     <>
@@ -340,37 +339,38 @@ const Navbar = () => {
 
             {/*** 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 Search Bar 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 ***/}
 
-            <Square
-              onClick={() => navigate("/cart")}
-              cursor="pointer"
-              position="relative"
-            >
-              <Icon boxSize={8} as={BsBag} color="lf.teal" />
-              {isAuth && cartGetIsLoading && (
-                <Spinner
-                  position="absolute"
-                  top={-2}
-                  right={-2}
-                  thickness="2px"
-                  speed="0.65s"
-                  color="teal.500"
-                  boxSize="25px"
-                />
-              )}
-              {isAuth && !cartGetIsLoading && (
-                <Circle
-                  borderRadius="50%"
-                  size="25px"
-                  bg="lf.teal"
-                  color="white"
-                  position="absolute"
-                  top={-2}
-                  right={-2}
-                >
-                  {cartData && cartData.length}
-                </Circle>
-              )}
-            </Square>
+            {isAuth && (
+              <Square
+                onClick={() => navigate("/cart")}
+                cursor="pointer"
+                position="relative"
+              >
+                <Icon boxSize={8} as={BsBag} color="lf.teal" />
+                {cartGetIsLoading ? (
+                  <Spinner
+                    position="absolute"
+                    top={-2}
+                    right={-2}
+                    thickness="2px"
+                    speed="0.65s"
+                    color="teal.500"
+                    boxSize="25px"
+                  />
+                ) : (
+                  <Circle
+                    borderRadius="50%"
+                    size="25px"
+                    bg="lf.teal"
+                    color="white"
+                    position="absolute"
+                    top={-2}
+                    right={-2}
+                  >
+                    {cartData && cartData.length}
+                  </Circle>
+                )}
+              </Square>
+            )}
           </Flex>
 
           {/*** 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 Laptop Logout Login My Account 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 ***/}
