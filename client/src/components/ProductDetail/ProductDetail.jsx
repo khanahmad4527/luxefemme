@@ -223,7 +223,11 @@ export default function ProductDetail() {
                         colours.map((item, i) => {
                           return (
                             <Square
-                              border={colorSet === i ? "1px solid teal" : ""}
+                              border={
+                                colorSet === i
+                                  ? "1px solid teal"
+                                  : "1px solid transparent"
+                              }
                               p="2px"
                               borderRadius={"50%"}
                             >
