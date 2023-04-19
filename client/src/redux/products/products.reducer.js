@@ -5,8 +5,9 @@ import {
 } from "./products.types";
 
 const initialState = {
-  productsIsLoading: false,
-  productsIsError: false,
+  isLoading: false,
+  isError: false,
+  totalProductCount: 0,
   productsData: [],
 };
 
@@ -15,25 +16,26 @@ export const productsReducer = (state = initialState, { type, payload }) => {
     case GET_PRODUCTS_LOADING: {
       return {
         ...state,
-        productsIsLoading: true,
-        productsIsError: false,
+        isLoading: true,
+        isError: false,
       };
     }
 
     case GET_PRODUCTS_SUCCESS: {
       return {
         ...state,
-        productsIsLoading: false,
-        productsIsError: false,
-        productsData: payload,
+        isLoading: false,
+        isError: false,
+        totalProductCount: payload.totalProductCount,
+        productsData: payload.data,
       };
     }
 
     case GET_PRODUCTS_ERROR: {
       return {
         ...state,
-        productsIsLoading: false,
-        productsIsError: true,
+        isLoading: false,
+        isError: true,
       };
     }
 
