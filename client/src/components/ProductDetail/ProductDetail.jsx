@@ -15,6 +15,7 @@ import {
   GridItem,
   useToast,
   Circle,
+  Select,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
@@ -30,6 +31,8 @@ export default function ProductDetail() {
   const [imageIndex, setImageIndex] = useState(0);
   const [imageSet, setImageSet] = useState(0);
   const [colorSet, setColorSet] = useState(0);
+  const [sizeSet, setSizeSet] = useState(0);
+  const [qtyValue, setQtyValue] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
   const toast = useToast();
 
@@ -56,10 +59,7 @@ export default function ProductDetail() {
     brand,
   } = productDetailData;
 
-  colours &&
-    colours.map((item) => {
-      console.log(item[1]);
-    });
+  console.log(sizes);
 
   const { cartData } = useSelector((store) => store.cart);
 
@@ -215,32 +215,94 @@ export default function ProductDetail() {
                   Product Details
                 </Text>
 
-                <Box>
-                  <Text>Color: {colours && colours[colorSet][0]}</Text>
-                  <Flex gap={"10px"}>
-                    {colours &&
-                      colours.map((item, i) => {
-                        return (
-                          <Square
-                            border={colorSet === i ? "1px solid blue" : ""}
-                            p="2px"
-                            borderRadius={"50%"}
-                          >
-                            <Box
-                              bg={item[1]}
-                              w="20px"
-                              h="20px"
+                {colours && (
+                  <Stack spacing={2} mb={2}>
+                    <Text>Color: {colours && colours[colorSet][0]}</Text>
+                    <Flex gap={"10px"}>
+                      {colours &&
+                        colours.map((item, i) => {
+                          return (
+                            <Square
+                              border={colorSet === i ? "1px solid teal" : ""}
+                              p="2px"
                               borderRadius={"50%"}
-                              onClick={() =>{
-                                setColorSet(i);
-                                setImageSet(i);
+                            >
+                              <Box
+                                bg={item[1]}
+                                w="20px"
+                                h="20px"
+                                borderRadius={"50%"}
+                                onClick={() => {
+                                  setColorSet(i);
+                                  setImageSet(i);
+                                  setImageIndex(0);
+                                }}
+                              ></Box>
+                            </Square>
+                          );
+                        })}
+                    </Flex>
+                  </Stack>
+                )}
+
+                {sizes && (
+                  <Stack spacing={2} mb={2}>
+                    <Text>Size: {sizes && sizes[sizeSet]}</Text>
+                    <Flex gap={"10px"}>
+                      {sizes &&
+                        sizes.map((item, i) => {
+                          return (
+                            <Square
+                              border={
+                                sizeSet === i
+                                  ? "2px solid teal"
+                                  : "2px solid transparent"
+                              }
+                              padding={"10px"}
+                              bgColor={"lightgray"}
+                              minW={"35px"}
+                              minH={"35px"}
+                              onClick={() => {
+                                setSizeSet(i);
                               }}
-                            ></Box>
-                          </Square>
-                        );
-                      })}
-                  </Flex>
-                </Box>
+                            >
+                              {item}
+                            </Square>
+                          );
+                        })}
+                    </Flex>
+                  </Stack>
+                )}
+
+                <Select
+                  w="max"
+                  margin="2px 0px"
+                  border="2px solid"
+                  borderColor="teal.500"
+                  _hover={{
+                    border: "2px solid",
+                    borderColor: "teal.500",
+                  }}
+                  outline="none"
+                  _focus={{
+                    boxShadow: "none",
+                    border: "2px solid",
+                    borderColor: "teal.500",
+                  }}
+                  value={qtyValue}
+                  onChange={(e) => {
+                    setQtyValue(+e.target.value);
+                  }}
+                >
+                  {new Array(10).fill(1).map((_, index) => {
+                    return (
+                      <option
+                        key={Date() + Math.random()}
+                        value={`${index + 1}`}
+                      >{`Qty ${index + 1}`}</option>
+                    );
+                  })}
+                </Select>
 
                 <List spacing={2}>
                   <ListItem>
@@ -320,11 +382,11 @@ export default function ProductDetail() {
                       title,
                       category,
                       itemPrice: discountPrice,
-                      quantity: 1,
-                      totalPrice: discountPrice * 1,
+                      quantity: qtyValue,
+                      totalPrice: discountPrice * qtyValue,
                       image,
-                      colour: colours[0][0],
-                      size: sizes[0],
+                      colour: colours[colorSet][0],
+                      size: sizes[sizeSet],
                       description,
                     });
                   }
