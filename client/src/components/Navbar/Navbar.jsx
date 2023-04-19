@@ -395,7 +395,7 @@ const Navbar = () => {
                   borderBottomColor: "lf.teal",
                   cursor: "pointer",
                 }}
-                onClick={() => navigate(`/products?category=${category.name}`)}
+                onClick={() => navigate(`/products?category=${category.name}&_page=1`)}
               >
                 <Text fontSize={"13px"} fontWeight={400}>
                   {category.displayName}
