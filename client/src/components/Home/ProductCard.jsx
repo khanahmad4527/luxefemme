@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Card, CardBody, Image, Stack, Text } from "@chakra-ui/react";
+import { Card, CardBody, Image, Stack, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ _id, title, images, price }) => {
@@ -27,7 +27,7 @@ const ProductCard = ({ _id, title, images, price }) => {
       <CardBody>
         <Image
           src={images && images[0][imageIndex]}
-          alt="Image belongs to Amazon. Used for educatinal purposes and showcasing web development skills only."
+          alt="Image belongs to Amazon. Used for educational purposes and showcasing web development skills only."
           display="block"
           margin="auto"
           h={{ base: "150px", sm: "200px", lg: "300px" }}

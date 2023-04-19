@@ -1,16 +1,6 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  Link,
-  Square,
-  Skeleton,
-  Image,
-} from "@chakra-ui/react";
+import { Box, Flex, Grid, Link, Square, Image } from "@chakra-ui/react";
 import i1 from "../../assets/1.jpg";
 import i2 from "../../assets/2.gif";
 import i3 from "../../assets/3.jpg";
@@ -23,7 +13,7 @@ import i9 from "../../assets/9.jpg";
 import i10 from "../../assets/10.jpg";
 import i11 from "../../assets/11.jpg";
 import { getDresses, getShoes } from "../../redux/home/home.action";
-import ProductCarouel from "./ProductCarouel";
+import ProductCarousel from "./ProductCarousel";
 
 const Home = () => {
   const {
@@ -49,7 +39,7 @@ const Home = () => {
     if (!shoesData.length) {
       dispatch(getShoes());
     }
-  }, []);
+  }, [dispatch, dressData.length, shoesData.length]);
 
   return (
     <Flex flexDirection="column" w="92%" gap="30px" margin={"40px auto"}>
@@ -320,14 +310,14 @@ const Home = () => {
         </Box>
       </Flex>
 
-      <ProductCarouel
+      <ProductCarousel
         title="Dresses"
         data={dressData}
         loading={isLoadingDress}
         error={isErrorDress}
       />
 
-      <ProductCarouel
+      <ProductCarousel
         title="Shoes"
         data={shoesData}
         loading={isLoadingShoes}

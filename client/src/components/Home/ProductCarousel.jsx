@@ -1,12 +1,12 @@
 import React from "react";
-import { Box, Circle, Square, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Slider from "react-slick";
 import ProductCard from "./ProductCard";
 import Loading from "../../utils/Loading";
 import Error from "../../utils/Error";
 
-const ProductCarouel = ({ title, data, loading, error }) => {
+const ProductCarousel = ({ title, data, loading, error }) => {
   const settings = {
     infinite: true,
     speed: 700,
@@ -66,7 +66,7 @@ const ProductCarouel = ({ title, data, loading, error }) => {
   );
 };
 
-export default ProductCarouel;
+export default ProductCarousel;
 
 const CustomPrevArrow = ({ onClick }) => (
   <Box
