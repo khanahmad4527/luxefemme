@@ -38,6 +38,7 @@ LuxeFemme is an online platform that provides a seamless shopping experience for
 - Change user information, including name, shipping address, and payment options
 - User reviews and ratings to help you make informed purchasing decisions
 - Comprehensive product details, including images, descriptions, and specifications
+- Admin page to add, delete, edit an existing product details, see user details, add a new admin by superadmin.
 
 ## Installation
 
