@@ -27,15 +27,28 @@ LuxeFemme is an online platform that allows users to browse and purchase home de
 
 ## Tech Stack
 
-- React
-- JavaScript
-- HTML
-- CSS
-- Redux
-- Axios
-- Node.js
-- MongoDB
-- Mongoose
+<h4 align="center">Frontend:</h4>
+<p align="center">
+  <img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" alt="nextjs" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="javascript" />
+  <img src="https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white" alt="chakraui" />
+  <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="react" />
+  <img src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white" alt="redux"/> 
+</p>
+
+<h4 align="center">Backend:</h4>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="nodejs" />
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="expressjs" />
+  <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" alt="mongodb" />
+</p>
+
+<h4 align="center">Deployed On:</h4>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="vercerl">
+</p>
 
 ## Features
 
@@ -118,7 +131,6 @@ Check out the demo <a href="https://luxefemme.vercel.app" target="_blank">here</
 
 - [Ahmad Khan](https://github.com/khanahmad4527)
 - [Akash Singha](https://github.com/akash-singha-3558)
-- [Sanket Potdar](https://github.com/SanketPotdar121695)
 
 ## Disclaimer
 
