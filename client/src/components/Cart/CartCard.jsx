@@ -55,7 +55,7 @@ const CartCard = ({ item }) => {
             w="100%"
             h="200px"
             objectFit="contain"
-            onClick={() => navigate(`/product/${item._id}`)}
+            onClick={() => navigate(`/product/${item.productId}`)}
           />
         </GridItem>
 

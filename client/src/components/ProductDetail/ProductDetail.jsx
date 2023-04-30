@@ -33,7 +33,6 @@ export default function ProductDetail() {
   const [colorSet, setColorSet] = useState(0);
   const [sizeSet, setSizeSet] = useState(0);
   const [qtyValue, setQtyValue] = useState(1);
-  const [isAdded, setIsAdded] = useState(false);
   const toast = useToast();
 
   const { id } = useParams();
@@ -59,16 +58,11 @@ export default function ProductDetail() {
     brand,
   } = productDetailData;
 
-  console.log(sizes);
-
-  const { cartData } = useSelector((store) => store.cart);
-
   const { isAuth } = useSelector((store) => store.auth);
 
   const dispatch = useDispatch();
 
   const handleAddToCart = (item) => {
-    setIsAdded(true);
     dispatch(addToCart(item));
     toast({
       title: "Added to cart",
@@ -85,16 +79,6 @@ export default function ProductDetail() {
     window.scrollTo(0, 0);
     dispatch(getProductDetail(id && id));
   }, [dispatch, id]);
-
-  useEffect(() => {
-    if (isAuth) {
-      for (let i = 0; i < cartData.length; i++) {
-        if (cartData[i].productId === id) {
-          setIsAdded(true);
-        }
-      }
-    }
-  }, [cartData, cartData.length, dispatch, id, isAuth]);
 
   if (isLoading) {
     return (
@@ -218,31 +202,37 @@ export default function ProductDetail() {
                 {colours && (
                   <Stack spacing={2} mb={2}>
                     <Text>Color: {colours && colours[colorSet][0]}</Text>
-                    <Flex gap={"10px"}>
+                    <Flex gap={"10px"} flexWrap={"wrap"}>
                       {colours &&
                         colours.map((item, i) => {
                           return (
-                            <Square
+                            <Box
+                              key={Math.random() + Date.now() + i}
                               border={
                                 colorSet === i
                                   ? "1px solid teal"
                                   : "1px solid transparent"
                               }
                               p="2px"
-                              borderRadius={"50%"}
+                              display={"flex"}
+                              justifyContent={"center"}
+                              alignItems={"center"}
+                              w="28px"
+                              h="28px"
+                              borderRadius={"100px"}
                             >
                               <Box
                                 bg={item[1]}
                                 w="20px"
                                 h="20px"
-                                borderRadius={"50%"}
+                                borderRadius={"100px"}
                                 onClick={() => {
                                   setColorSet(i);
                                   setImageSet(i);
                                   setImageIndex(0);
                                 }}
                               ></Box>
-                            </Square>
+                            </Box>
                           );
                         })}
                     </Flex>
@@ -257,6 +247,7 @@ export default function ProductDetail() {
                         sizes.map((item, i) => {
                           return (
                             <Square
+                              key={Math.random() + Date.now() + i}
                               border={
                                 sizeSet === i
                                   ? "2px solid teal"
@@ -325,80 +316,49 @@ export default function ProductDetail() {
               </Box>
             </Stack>
 
-            {isAdded ? (
-              <Button
-                rounded={"none"}
-                w={"full"}
-                mt={8}
-                size={"lg"}
-                py={"7"}
-                textTransform={"uppercase"}
-                bg="lf.button"
-                color="white"
-                _hover={{
-                  transform: "translateY(2px)",
-                  boxShadow: "lg",
-                  color: "lf.black",
-                  bg: "teal.500",
-                }}
-                onClick={() =>
+            <Button
+              rounded={"none"}
+              w={"full"}
+              mt={8}
+              size={"lg"}
+              py={"7"}
+              textTransform={"uppercase"}
+              bg="lf.button"
+              color="white"
+              _hover={{
+                transform: "translateY(2px)",
+                boxShadow: "lg",
+                color: "lf.black",
+                bg: "teal.500",
+              }}
+              onClick={() => {
+                if (!isAuth) {
                   toast({
-                    title: "Product in cart",
-                    description: "Product is already in the cart",
+                    title: "Kindly login",
+                    description: "Please login first to add products",
                     status: "warning",
                     duration: 2000,
                     isClosable: true,
                     position: "top",
-                  })
+                  });
+                } else {
+                  handleAddToCart({
+                    productId: id,
+                    title,
+                    category,
+                    itemPrice: discountPrice,
+                    quantity: qtyValue,
+                    totalPrice: discountPrice * qtyValue,
+                    image: images[colorSet][0],
+                    colour: colours[colorSet][0],
+                    size: sizes[sizeSet],
+                    description,
+                  });
                 }
-              >
-                In Cart
-              </Button>
-            ) : (
-              <Button
-                rounded={"none"}
-                w={"full"}
-                mt={8}
-                size={"lg"}
-                py={"7"}
-                textTransform={"uppercase"}
-                bg="lf.button"
-                color="white"
-                _hover={{
-                  transform: "translateY(2px)",
-                  boxShadow: "lg",
-                  color: "lf.black",
-                  bg: "teal.500",
-                }}
-                onClick={() => {
-                  if (!isAuth) {
-                    toast({
-                      title: "Kindly login",
-                      description: "Please login first to add products",
-                      status: "warning",
-                      duration: 2000,
-                      isClosable: true,
-                      position: "top",
-                    });
-                  } else {
-                    handleAddToCart({
-                      productId: id,
-                      title,
-                      category,
-                      itemPrice: discountPrice,
-                      quantity: qtyValue,
-                      totalPrice: discountPrice * qtyValue,
-                      image,
-                      colour: colours[colorSet][0],
-                      size: sizes[sizeSet],
-                      description,
-                    });
-                  }
-                }}
-              >
-                Add to cart
-              </Button>
-            )}
+              }}
+            >
+              Add to cart
+            </Button>
 
             <Stack
               direction="row"

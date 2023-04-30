@@ -39,7 +39,7 @@ const Cart = () => {
     if (cartData.length === 0) {
       dispatch(getCartData());
     }
-  }, []);
+  }, [cartData.length, dispatch]);
 
   useEffect(() => {
     let subtotal = 0;
@@ -66,7 +66,7 @@ const Cart = () => {
     return (
       <Container maxW={"8xl"} m="40px auto">
         <Flex
-          color={"sm.sparkle"}
+          color={"lf.black"}
           justifyContent={"space-between"}
           gap="15px"
           flexDirection={{ base: "column", lg: "row" }}
@@ -78,7 +78,7 @@ const Cart = () => {
             padding="20px"
           >
             <Text fontSize={30} fontWeight={500}>
-              My Cart
+              Basket
             </Text>
             {cartData && cartData.length === 0 ? (
               <EmptyCart />

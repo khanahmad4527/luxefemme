@@ -173,8 +173,6 @@ const Products = () => {
       ...(rating_lte !== undefined && { rating_lte }),
     };
 
-    console.log(params);
-
     dispatch(getProducts(params));
 
     setSearchParams(params);
@@ -310,7 +308,11 @@ const Products = () => {
             </Box>
           ) : (
             <Grid
-              templateColumns={{ base: "100%", lg: "repeat(3, 1fr)" }}
+              templateColumns={{
+                base: "100%",
+                md: "repeat(3, 1fr)",
+                lg: "repeat(3, 1fr)",
+              }}
               gap={"10px"}
             >
               {productsData &&
@@ -379,6 +381,7 @@ const Products = () => {
               discount={`${discount_gte},${discount_lte}`}
               productRatingOnchange={productRatingOnchange}
               rating={`${rating_gte},${rating_lte}`}
+              resetFilter={resetFilter}
             />
 
             <Sort

@@ -82,9 +82,9 @@ const AddressModal = ({
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader color={"sm.sparkle"}>{title}</ModalHeader>
+        <ModalHeader color={"lf.black"}>{title}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody color={"sm.sparkle"}>
+        <ModalBody color={"lf.black"}>
           <form onSubmit={handleSubmit}>
             <VStack spacing="20px">
               <HStack spacing="20px">
