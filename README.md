@@ -82,8 +82,15 @@ npm start
 </div>
 
 <div align="center">
+  <h3>Products Page</h3>
+  <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(424).png?raw=true" width="800">
+    <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(425).png?raw=true" width="800">
+</div>
+
+<div align="center">
   <h3>Product Details Page</h3>
   <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(128).png?raw=true" width="800">
+  <img src="https://github.com/khanahmad4527/luxefemme/blob/master/client/src/assets/Screenshot%20(427).png?raw=true" width="800">
 </div>
 
 <div align="center">
