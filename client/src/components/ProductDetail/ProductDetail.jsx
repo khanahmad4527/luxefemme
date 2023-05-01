@@ -199,7 +199,7 @@ export default function ProductDetail() {
                   Product Details
                 </Text>
 
-                {colours && (
+                {colours && colours[colorSet][0] && (
                   <Stack spacing={2} mb={2}>
                     <Text>Color: {colours && colours[colorSet][0]}</Text>
                     <Flex gap={"10px"} flexWrap={"wrap"}>
@@ -350,8 +350,8 @@ export default function ProductDetail() {
                     quantity: qtyValue,
                     totalPrice: discountPrice * qtyValue,
                     image: images[colorSet][0],
-                    colour: colours[colorSet][0],
-                    size: sizes[sizeSet],
+                    colour: colours[colorSet][0] ? colours[colorSet][0] : "NA",
+                    size: sizes[sizeSet] ? sizes[sizeSet] : "One Size",
                     description,
                   });
                 }

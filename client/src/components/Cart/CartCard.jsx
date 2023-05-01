@@ -75,9 +75,20 @@ const CartCard = ({ item }) => {
             >
               {item.title}
             </Text>
+
             <Text fontSize={18} fontWeight={500}>
               Price: <span>&#8377;</span>{" "}
               {item.itemPrice && formatMoney(item.itemPrice)}
+            </Text>
+
+            <Text fontSize={18}>
+              <span>Color: </span>
+              {item.colour}
+            </Text>
+
+            <Text fontSize={18}>
+              <span>Size: </span>
+              {item.size}
             </Text>
 
             <Flex alignItems={"center"} gap="10px">
