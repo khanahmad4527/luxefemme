@@ -77,6 +77,9 @@ export default function ProductDetail() {
   useEffect(() => {
     /**********    page will always loads at top position   ******************/
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     dispatch(getProductDetail(id && id));
   }, [dispatch, id]);
 

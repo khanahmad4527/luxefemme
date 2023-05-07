@@ -11,13 +11,20 @@ const Orders = () => {
     (store) => store.order
   );
 
+  const { isAuth } = useSelector((store) => store.auth);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (orderData.length === 0) {
+    /**********    page will always loads at top position   ******************/
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (isAuth) {
       dispatch(getOrderData());
     }
-  }, [orderData.length]);
+  }, [dispatch, isAuth]);
 
   if (orderGetIsLoading) {
     return (

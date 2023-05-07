@@ -47,6 +47,7 @@ import { BsBag } from "react-icons/bs";
 
 const Navbar = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [query, setQuery] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const toast = useToast();
@@ -96,8 +97,10 @@ const Navbar = () => {
   useEffect(() => {
     /**********    page will always loads at top position   ******************/
     window.scrollTo(0, 0);
+  }, []);
 
-    if (isAuth && cartData.length === 0) {
+  useEffect(() => {
+    if (isAuth && !cartData.length) {
       dispatch(getCartData());
     }
   }, [cartData.length, dispatch, isAuth]);
@@ -395,7 +398,9 @@ const Navbar = () => {
                   borderBottomColor: "lf.teal",
                   cursor: "pointer",
                 }}
-                onClick={() => navigate(`/products?category=${category.name}&_page=1`)}
+                onClick={() =>
+                  navigate(`/products?category=${category.name}&_page=1`)
+                }
               >
                 <Text fontSize={"13px"} fontWeight={400}>
                   {category.displayName}

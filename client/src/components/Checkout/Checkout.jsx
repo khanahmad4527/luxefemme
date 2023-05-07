@@ -161,8 +161,8 @@ const Checkout = () => {
     }
   };
 
-  const orderConfirmed =  () => {
-     dispatch(emptyCart());
+  const orderConfirmed = () => {
+    dispatch(emptyCart());
 
     toast({
       title: "Payment successful!",
@@ -213,7 +213,9 @@ const Checkout = () => {
   useEffect(() => {
     /**********    page will always loads at top position   ******************/
     window.scrollTo(0, 0);
+  }, []);
 
+  useEffect(() => {
     if (cartData.length === 0) {
       dispatch(getCartData());
     }
@@ -304,7 +306,7 @@ const Checkout = () => {
                             return (
                               <Radio
                                 key={Date() + Math.random()}
-                                value={`${item.id}`}
+                                value={`${item._id}`}
                               >
                                 <Box>
                                   <span style={{ fontWeight: "bold" }}>
@@ -626,15 +628,12 @@ const Checkout = () => {
 
         <AddressModal
           title={addressTitle}
-          userAddress={userAddress}
           isOpen2={isOpen2}
-          onOpen2={onOpen2}
           onClose2={onClose2}
           formData={formData}
           setFormData={setFormData}
           initialFormData={initialFormData}
           addressOperation={addressOperation}
-          setAddressOperation={setAddressOperation}
         />
       </Container>
     );

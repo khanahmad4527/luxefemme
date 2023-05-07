@@ -35,7 +35,9 @@ const Cart = () => {
   useEffect(() => {
     /**********    page will always loads at top position   ******************/
     window.scrollTo(0, 0);
+  }, []);
 
+  useEffect(() => {
     if (cartData.length === 0) {
       dispatch(getCartData());
     }
