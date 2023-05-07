@@ -39,7 +39,7 @@ import React, { useEffect, useState } from "react";
 import alphaLogo from "../../assets/LuxeFemme-alpha.png";
 import { SearchIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { BiUserCircle } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../redux/cart/cart.actions";
 import { logout } from "../../redux/auth/auth.action";
@@ -47,7 +47,8 @@ import { BsBag } from "react-icons/bs";
 
 const Navbar = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get("q") || "");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const toast = useToast();
@@ -67,12 +68,30 @@ const Navbar = () => {
     { name: "dress", displayName: "Sale" },
   ];
 
+  //to remove the flickering effect use setTimeout
   const handleInputFocus = () => {
     setIsInputFocused(true);
   };
 
   const handleInputBlur = () => {
-    setIsInputFocused(false);
+    setTimeout(() => {
+      setIsInputFocused(false);
+    }, 100);
+  };
+
+  /********** handle query search on different pages ******************/
+
+  const handleSearch = () => {
+    if (searchParams.has("q")) {
+      setSearchParams((prevSearchParams) => {
+        const newSearchParams = new URLSearchParams(prevSearchParams);
+        newSearchParams.set("q", query);
+        newSearchParams.set("_page", 1);
+        return newSearchParams;
+      });
+    } else {
+      navigate(`/products?q=${query}`);
+    }
   };
 
   const { isAuth } = useSelector((store) => store.auth);
@@ -317,6 +336,8 @@ const Navbar = () => {
                 outlineColor={"lf.teal"}
               >
                 <Input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search luxefemme"
                   _focus={{ boxShadow: "none" }}
                   _placeholder={{ color: "lf.teal" }}
@@ -334,6 +355,7 @@ const Navbar = () => {
                   cursor="pointer"
                   color={isInputFocused ? "white" : "lf.teal"}
                   bgColor={isInputFocused ? "lf.teal" : "transparent"}
+                  onClick={handleSearch}
                 >
                   <Icon boxSize="5" as={SearchIcon} />
                 </InputRightAddon>
