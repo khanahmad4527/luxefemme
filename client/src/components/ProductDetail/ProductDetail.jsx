@@ -354,7 +354,7 @@ export default function ProductDetail() {
                     totalPrice: discountPrice * qtyValue,
                     image: images[colorSet][0],
                     colour: colours[colorSet][0] ? colours[colorSet][0] : "NA",
-                    size: sizes[sizeSet] ? sizes[sizeSet] : "One Size",
+                    size: sizes ? sizes[sizeSet] : "One Size",
                     description,
                   });
                 }

@@ -26,13 +26,13 @@ const rootReducer = combineReducers({
 });
 
 /*****************       In Production    ***************************/
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const store = legacy_createStore(
-  rootReducer,
-  composeEnhancer(applyMiddleware(thunk))
-);
+// export const store = legacy_createStore(
+//   rootReducer,
+//   composeEnhancer(applyMiddleware(thunk))
+// );
 
 /*****************       For Users    ***************************/
 
-// export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
