@@ -180,32 +180,34 @@ const Navbar = () => {
         </Flex>
       )}
 
+      {/*** 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 Mobile logo 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 ***/}
+
+      <Box display={{ base: "block", lg: "none" }} m="auto">
+        <Image
+          src={alphaLogo}
+          h="100px"
+          alt="luxeFemme"
+          cursor="pointer"
+          onClick={() => navigate("/")}
+        />
+      </Box>
+
+      {/*** 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 Mobile logo 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 ***/}
+
       <Grid
         bgColor={"#FDFDF9"}
         justifyContent={"space-between"}
         alignItems="center"
         gap="10px"
+        paddingTop={{ base: "20px", lg: "0" }}
         templateColumns="repeat(1,1fr)"
         alignSelf={"center"}
         position="sticky"
         top="0"
+        left="0"
         width="100%"
         zIndex={100}
       >
-        {/*** 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 Mobile logo 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 ***/}
-
-        <Box display={{ base: "block", lg: "none" }} m="auto">
-          <Image
-            src={alphaLogo}
-            h="100px"
-            alt="luxeFemme"
-            cursor="pointer"
-            onClick={() => navigate("/")}
-          />
-        </Box>
-
-        {/*** 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 Mobile logo 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 ***/}
-
         <Flex
           justifyContent={"space-between"}
           alignItems="center"
