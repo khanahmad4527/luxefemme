@@ -236,22 +236,27 @@ const Filter = ({
                     onChange={productBrandOnchange}
                   >
                     <Stack spacing={1} direction={"column"}>
-                      <Checkbox value="Voltas">Voltas</Checkbox>
-                      <Checkbox value="Panasonic">Panasonic</Checkbox>
-                      <Checkbox value="Godrej">Godrej</Checkbox>
-                      <Checkbox value="LG">LG</Checkbox>
+                      <Checkbox value="Vaararo">Vaararo</Checkbox>
+                      <Checkbox value="AASK">AASK</Checkbox>
+                      <Checkbox value="BATA">BATA</Checkbox>
+                      <Checkbox value="Peora">Peora</Checkbox>
+                      <Checkbox value="ZENEME">ZENEME</Checkbox>
+                      <Checkbox value="MyGlamm">MyGlamm</Checkbox>
                       <Checkbox value="Ikea">Ikea</Checkbox>
-                      <Checkbox value="OnePlus">OnePlus</Checkbox>
-                      <Checkbox value="BoAt">BoAt</Checkbox>
-                      <Checkbox value="Lenovo">Lenovo</Checkbox>
-                      <Checkbox value="Acer">Acer</Checkbox>
-                      <Checkbox value="HP">HP</Checkbox>
-                      <Checkbox value="Redmi">Redmi</Checkbox>
-                      <Checkbox value="Oppo">Oppo</Checkbox>
-                      <Checkbox value="Samsung">Samsung</Checkbox>
-                      <Checkbox value="Xiaomi">Xiaomi</Checkbox>
-                      <Checkbox value="Whirlpool">Whirlpool</Checkbox>
-                      <Checkbox value="Generic">Generic</Checkbox>
+                      <Checkbox value="Lymio">Lymio</Checkbox>
+                      <Checkbox value="BIBA">BIBA</Checkbox>
+                      <Checkbox value="Homesake">Homesake</Checkbox>
+                      <Checkbox value="Em5">Em5</Checkbox>
+                      <Checkbox value="IRIS">IRIS</Checkbox>
+                      <Checkbox value="Sparx">Sparx</Checkbox>
+                      <Checkbox value="Campus">Campus</Checkbox>
+                      <Checkbox value="Corocraft">Corocraft</Checkbox>
+                      <Checkbox value="Clara">Clara</Checkbox>
+                      <Checkbox value="HUDA">HUDA</Checkbox>
+                      <Checkbox value="ThinkArtDecor">ThinkArtDecor</Checkbox>
+                      <Checkbox value="Amayra">Amayra</Checkbox>
+                      <Checkbox value="Ayat">Ayat</Checkbox>
+                      <Checkbox value="MARS">MARS</Checkbox>
                     </Stack>
                   </CheckboxGroup>
                 </AccordionPanel>
