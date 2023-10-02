@@ -14,7 +14,7 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import {
   addAddress,
   updateAddress,
@@ -577,4 +577,4 @@ const AddressModal = ({
   );
 };
 
-export default AddressModal;
+export default memo(AddressModal);

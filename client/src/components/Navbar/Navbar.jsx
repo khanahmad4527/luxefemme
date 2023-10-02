@@ -3,16 +3,9 @@ import {
   Button,
   Divider,
   Flex,
-  FormControl,
-  FormLabel,
-  Image,
   Input,
   InputGroup,
-  InputLeftAddon,
-  InputLeftElement,
   InputRightAddon,
-  InputRightElement,
-  Select,
   Icon,
   Grid,
   Circle,
@@ -35,8 +28,7 @@ import {
   Square,
   Spinner,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import alphaLogo from "../../assets/LuxeFemme-alpha.png";
+import React, { useEffect, useState, memo } from "react";
 import { SearchIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { BiUserCircle } from "react-icons/bi";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -44,6 +36,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../redux/cart/cart.actions";
 import { logout } from "../../redux/auth/auth.action";
 import { BsBag } from "react-icons/bs";
+import Logo from "../../utils/Logo";
 
 const Navbar = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -119,7 +112,8 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (isAuth && !cartData.length) {
+    const pathname = window.location.pathname;
+    if (isAuth && !cartData.length && pathname !== "/cart") {
       dispatch(getCartData());
     }
   }, [cartData.length, dispatch, isAuth]);
@@ -183,13 +177,7 @@ const Navbar = () => {
       {/*** 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 Mobile logo 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 ***/}
 
       <Box display={{ base: "block", lg: "none" }} m="auto">
-        <Image
-          src={alphaLogo}
-          h="100px"
-          alt="luxeFemme"
-          cursor="pointer"
-          onClick={() => navigate("/")}
-        />
+        <Logo />
       </Box>
 
       {/*** 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 Mobile logo 🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁🢁 ***/}
@@ -199,7 +187,6 @@ const Navbar = () => {
         justifyContent={"space-between"}
         alignItems="center"
         gap="10px"
-        paddingTop={{ base: "20px", lg: "0" }}
         templateColumns="repeat(1,1fr)"
         alignSelf={"center"}
         position="sticky"
@@ -207,12 +194,13 @@ const Navbar = () => {
         left="0"
         width="100%"
         zIndex={100}
+        mt="-1px"
       >
         <Flex
           justifyContent={"space-between"}
           alignItems="center"
           gap="10px"
-          p={{ base: "0px 10px 20px 10px", lg: "0px 50px 0px 10px" }}
+          p={{ base: "20px 10px", lg: "0px 50px" }}
         >
           {/*** 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 Mobile Logout Login My Account 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 ***/}
 
@@ -319,13 +307,7 @@ const Navbar = () => {
           {/*** 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 Laptop Logout Login My Account 🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃🢃 ***/}
 
           <Box display={{ base: "none", lg: "block" }}>
-            <Image
-              src={alphaLogo}
-              h="80px"
-              alt="luxeFemme"
-              cursor="pointer"
-              onClick={() => navigate("/")}
-            />
+            <Logo />
           </Box>
 
           <Flex justifyContent={"space-between"} alignItems="center" gap="20px">
@@ -408,12 +390,12 @@ const Navbar = () => {
         <Flex
           alignItems={"center"}
           display={{ base: "none", lg: "flex" }}
-          p={"0px 0px 0px 20px"}
+          pl="20px"
         >
-          {categories.map((category) => {
+          {categories.map((category, index) => {
             return (
               <Square
-                key={Date() + Math.random()}
+                key={"navbar_category" + index}
                 p={"15px 10px"}
                 border="1px solid transparent"
                 _hover={{
@@ -440,4 +422,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

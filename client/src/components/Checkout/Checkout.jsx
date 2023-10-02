@@ -25,7 +25,7 @@ import {
   ModalCloseButton,
   useToast,
 } from "@chakra-ui/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { emptyCart, getCartData } from "../../redux/cart/cart.actions";
@@ -99,13 +99,16 @@ const Checkout = () => {
 
   const navigate = useNavigate();
 
-  const handleDeleteAddress = (id) => {
-    dispatch(deleteAddress(id));
-  };
+  const handleDeleteAddress = useCallback(
+    (id) => {
+      dispatch(deleteAddress(id));
+    },
+    [dispatch]
+  );
 
-  const handleEditAddress = (item) => {
+  const handleEditAddress = useCallback((item) => {
     setFormData(item);
-  };
+  }, []);
 
   const calculateFinalAmount = (discount) => {
     const final = subtotal - subtotal * (discount / 100);
@@ -161,7 +164,7 @@ const Checkout = () => {
     }
   };
 
-  const orderConfirmed = () => {
+  const orderConfirmed = useCallback(() => {
     dispatch(emptyCart());
 
     toast({
@@ -208,7 +211,15 @@ const Checkout = () => {
     };
     dispatch(addToOrder(newOrder));
     navigate("/");
-  };
+  }, [
+    cartData,
+    dispatch,
+    finalAmount,
+    navigate,
+    onClose1,
+    paymentMethod,
+    toast,
+  ]);
 
   useEffect(() => {
     /**********    page will always loads at top position   ******************/
@@ -220,18 +231,14 @@ const Checkout = () => {
       dispatch(getCartData());
     }
 
-    if (userAddress.length === 0) {
-      dispatch(getAddress());
-    }
-
     if (coupons.length === 0) {
       dispatch(getCoupons());
     }
 
-    // if (orderData.length === 0) {
-    //   dispatch(getOrderData());
-    // }
-  }, []);
+    if (userAddress.length === 0) {
+      dispatch(getAddress());
+    }
+  }, [cartData.length, coupons.length, dispatch, userAddress.length]);
 
   useEffect(() => {
     let subtotal = 0;
@@ -301,11 +308,11 @@ const Checkout = () => {
                       onChange={setDeliveryAddress}
                     >
                       <Stack spacing="15px">
-                        {userAddress &&
-                          userAddress.map((item) => {
+                        {userAddress.length &&
+                          userAddress.map((item, index) => {
                             return (
                               <Radio
-                                key={Date() + Math.random()}
+                                key={"checkout_user_address" + index}
                                 value={`${item._id}`}
                               >
                                 <Box>

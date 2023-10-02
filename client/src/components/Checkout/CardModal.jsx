@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { cardSchema } from "../../schemas/payment";
-import { useState } from "react";
+import { useState, memo } from "react";
 
 const initialValues = {
   cardNumber: "",
@@ -238,4 +238,4 @@ const CardModal = ({ orderConfirmed }) => {
   );
 };
 
-export default CardModal;
+export default memo(CardModal);

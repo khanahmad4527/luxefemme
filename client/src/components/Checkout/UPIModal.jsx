@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { FormControl, FormLabel, Input, Stack, Button } from "@chakra-ui/react";
 
 const UPIModal = ({ orderConfirmed }) => {
@@ -63,4 +63,4 @@ const UPIModal = ({ orderConfirmed }) => {
   );
 };
 
-export default UPIModal;
+export default memo(UPIModal);

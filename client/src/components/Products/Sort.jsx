@@ -1,5 +1,5 @@
+import React, { memo } from "react";
 import { Flex, Select, Text } from "@chakra-ui/react";
-import React from "react";
 
 const Sort = ({
   productPerPageOnChange,
@@ -9,7 +9,7 @@ const Sort = ({
 }) => {
   return (
     <Flex
-      w={{ md: "100%", lg: "50%" }}
+      w={{ md: "100%", lg: "80%", xl: "50%" }}
       gap="10px"
       flexDirection={{ base: "column", md: "row", lg: "row" }}
       marginLeft="auto"
@@ -55,4 +55,4 @@ const Sort = ({
   );
 };
 
-export default Sort;
+export default memo(Sort);

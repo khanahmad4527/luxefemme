@@ -1,6 +1,5 @@
-import React from "react";
-import { Box } from "@chakra-ui/react";
 import AllRoutes from "./pages/AllRoutes";
+import { Box } from "@chakra-ui/react";
 
 const App = () => {
   return (

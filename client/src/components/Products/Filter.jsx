@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import {
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  AccordionIcon,
   Box,
   Text,
   Stack,
@@ -77,7 +76,11 @@ const Filter = ({
 
   return (
     <Stack bgColor="white" padding="10px" spacing="10px" color="lf.black">
-      <Flex alignItems="center" justifyContent="space-between">
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        flexWrap={"wrap"}
+      >
         <Text fontSize={18} fontWeight={400} textAlign={"left"}>
           Filter By
         </Text>
@@ -119,11 +122,11 @@ const Filter = ({
                     onChange={productCategoryOnchange}
                   >
                     <Stack spacing={1} direction={"column"}>
-                      {categories.map((category) => {
+                      {categories.map((category, index) => {
                         return (
                           <Checkbox
                             value={category.name}
-                            key={Date() + Math.random() + category.name}
+                            key={"filter_category_checkbox" + index}
                           >
                             {category.displayName}
                           </Checkbox>
@@ -292,7 +295,7 @@ const Filter = ({
                         return (
                           <Radio
                             value={`${index},${index + 1}`}
-                            key={Date() + Math.random() + Date.now()}
+                            key={"filter_radio" + index}
                           >
                             <Flex
                               color="teal.500"
@@ -308,12 +311,7 @@ const Filter = ({
                                     if (roundedRating - i >= 1) {
                                       return (
                                         <BsStarFill
-                                          key={
-                                            Date() +
-                                            Math.random() +
-                                            i +
-                                            Date.now()
-                                          }
+                                          key={"filter_rating_BsStarFill" + i}
                                           style={{ marginLeft: "1" }}
                                         />
                                       );
@@ -321,14 +319,14 @@ const Filter = ({
                                     if (roundedRating - i === 0.5) {
                                       return (
                                         <BsStarHalf
-                                          key={Date() + Math.random() + i + "B"}
+                                          key={"filter_rating_BsStarHalf" + i}
                                           style={{ marginLeft: "1" }}
                                         />
                                       );
                                     }
                                     return (
                                       <BsStar
-                                        key={Date() + Math.random() + i + "A"}
+                                        key={"filter_rating_BsStar" + i}
                                         style={{ marginLeft: "1" }}
                                       />
                                     );
@@ -352,4 +350,4 @@ const Filter = ({
   );
 };
 
-export default Filter;
+export default memo(Filter);

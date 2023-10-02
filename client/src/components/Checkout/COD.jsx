@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/react";
-import React from "react";
+import React, { memo } from "react";
 
 const COD = ({ orderConfirmed }) => {
   const handlePayment = (e) => {
@@ -8,13 +8,13 @@ const COD = ({ orderConfirmed }) => {
   };
   return (
     <Button
-    textTransform={"uppercase"}
-    bg="lf.button"
-    color="white"
-    _hover={{
-      color: "lf.black",
-      bg: "teal.500",
-    }}
+      textTransform={"uppercase"}
+      bg="lf.button"
+      color="white"
+      _hover={{
+        color: "lf.black",
+        bg: "teal.500",
+      }}
       onClick={handlePayment}
     >
       Confirm Order
@@ -22,4 +22,4 @@ const COD = ({ orderConfirmed }) => {
   );
 };
 
-export default COD;
+export default memo(COD);

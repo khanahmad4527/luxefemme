@@ -8,10 +8,10 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { memo } from "react";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteCartData, updateCartData } from "../../redux/cart/cart.actions";
 
@@ -31,7 +31,7 @@ const CartCard = ({ item }) => {
   };
 
   return (
-    <Stack key={Date() + Math.random()} gap="10px">
+    <Stack gap="10px">
       <Divider borderColor="teal.500" borderWidth="1px" />
 
       <Grid
@@ -108,13 +108,14 @@ const CartCard = ({ item }) => {
                 }}
                 value={qtyValue}
                 onChange={(e) => {
+                  setQtyValue(+e.target.value);
                   handleCount(+e.target.value);
                 }}
               >
                 {new Array(10).fill(1).map((_, index) => {
                   return (
                     <option
-                      key={Date() + Math.random()}
+                      key={"cart_card_qty" + index}
                       value={`${index + 1}`}
                     >{`Qty ${index + 1}`}</option>
                   );
@@ -146,7 +147,7 @@ const CartCard = ({ item }) => {
   );
 };
 
-export default CartCard;
+export default memo(CartCard);
 
 const formatMoney = (amount) => {
   if (amount) {

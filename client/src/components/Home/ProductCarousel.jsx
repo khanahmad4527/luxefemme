@@ -54,9 +54,9 @@ const ProductCarousel = ({ title, data, loading, error }) => {
         {error ? <Error /> : ""}
         <Slider {...settings}>
           {data &&
-            data.map((item) => (
+            data.map((item, index) => (
               <ProductCard
-                key={Date() + data.title + data.discount}
+                key={"ProductCarousel_ProductCard" + index}
                 {...item}
               />
             ))}

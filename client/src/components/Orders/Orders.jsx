@@ -71,10 +71,10 @@ const Orders = () => {
                 <Td textTransform={"uppercase"}>{order.paymentMethod}</Td>
                 <Td w="30%">
                   <ul>
-                    {order.items.map((item) => {
+                    {order.items.map((item, index) => {
                       return (
                         <li
-                          key={Date.now() + Math.random()}
+                          key={"order_list" + index}
                           style={{
                             marginBottom: "10px",
                           }}

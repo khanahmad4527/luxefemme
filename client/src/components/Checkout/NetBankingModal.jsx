@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   FormControl,
   FormLabel,
@@ -251,4 +251,4 @@ const NetBankingModal = ({ orderConfirmed }) => {
   );
 };
 
-export default NetBankingModal;
+export default memo(NetBankingModal);

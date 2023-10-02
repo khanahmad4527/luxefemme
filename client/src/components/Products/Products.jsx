@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo, memo } from "react";
 import {
   Box,
   Button,
@@ -70,24 +70,24 @@ const Products = () => {
 
   const dispatch = useDispatch();
 
-  const paginate = (value) => {
+  const paginate = useCallback((value) => {
     setCurrentPage(Number(value));
     //searchParams.set("_page", value);
-  };
+  }, []);
 
-  const productPerPageOnChange = (value) => {
+  const productPerPageOnChange = useCallback((value) => {
     setProductPerPage(Number(value));
     setCurrentPage(1);
-  };
+  }, []);
 
-  const productSortOnChange = (value) => {
+  const productSortOnChange = useCallback((value) => {
     const splitedValue = value.split(",");
     setSort(splitedValue[0]);
     setOrder(splitedValue[1]);
     setCurrentPage(1);
-  };
+  }, []);
 
-  const productCategoryOnchange = (value) => {
+  const productCategoryOnchange = useCallback((value) => {
     if (value === "*") {
       setCategory([]);
       setCurrentPage(1);
@@ -95,9 +95,9 @@ const Products = () => {
       setCategory(value);
       setCurrentPage(1);
     }
-  };
+  }, []);
 
-  const productBrandOnchange = (value) => {
+  const productBrandOnchange = useCallback((value) => {
     if (value === "*") {
       setBrand([]);
       setCurrentPage(1);
@@ -105,9 +105,9 @@ const Products = () => {
       setBrand(value);
       setCurrentPage(1);
     }
-  };
+  }, []);
 
-  const productPriceOnchange = (value) => {
+  const productPriceOnchange = useCallback((value) => {
     if (value === "*") {
       setPrice_gte(undefined);
       setPrice_lte(undefined);
@@ -118,9 +118,9 @@ const Products = () => {
       setPrice_lte(splitedValue[1]);
       setCurrentPage(1);
     }
-  };
+  }, []);
 
-  const productDiscountOnchange = (value) => {
+  const productDiscountOnchange = useCallback((value) => {
     if (value === "*") {
       setDiscount_gte(undefined);
       setDiscount_lte(undefined);
@@ -131,9 +131,9 @@ const Products = () => {
       setDiscount_lte(splitedValue[1]);
       setCurrentPage(1);
     }
-  };
+  }, []);
 
-  const productRatingOnchange = (value) => {
+  const productRatingOnchange = useCallback((value) => {
     if (value === "*") {
       setRating_gte(undefined);
       setRating_lte(undefined);
@@ -144,14 +144,14 @@ const Products = () => {
       setRating_lte(splitedValue[1]);
       setCurrentPage(1);
     }
-  };
+  }, []);
 
-  const resetFilter = () => {
+  const resetFilter = useCallback(() => {
     if (searchParams.has("q")) {
       searchParams.set("q", "");
     }
     setQ("");
-  };
+  }, []);
 
   useEffect(() => {
     /**********    page will always loads at top position   ******************/
@@ -312,14 +312,14 @@ const Products = () => {
             <Grid
               templateColumns={{
                 base: "100%",
-                md: "repeat(3, 1fr)",
-                lg: "repeat(3, 1fr)",
+                md: "repeat(2, 1fr)",
+                xl: "repeat(3, 1fr)",
               }}
               gap={"10px"}
             >
               {productsData &&
                 productsData.map((elm) => {
-                  return <ProductsCard key={Date() + Math.random()} {...elm} />;
+                  return <ProductsCard key={elm._id} {...elm} />;
                 })}
             </Grid>
           )}
@@ -410,4 +410,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default memo(Products);

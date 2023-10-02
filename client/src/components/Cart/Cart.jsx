@@ -85,9 +85,9 @@ const Cart = () => {
             {cartData && cartData.length === 0 ? (
               <EmptyCart />
             ) : (
-              cartData &&
+              cartData.length &&
               cartData.map((item) => {
-                return <CartCard key={Date() + Math.random()} item={item} />;
+                return <CartCard key={item._id} item={item} />;
               })
             )}
           </Flex>

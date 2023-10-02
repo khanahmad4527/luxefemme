@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { usePagination, DOTS } from "./usePagination";
 import { Button, Flex, Square } from "@chakra-ui/react";
 
@@ -45,18 +45,14 @@ const Pagination = ({
       >
         Previous
       </Button>
-      {paginationRange.map((pageNumber) => {
+      {paginationRange.map((pageNumber, index) => {
         if (pageNumber === DOTS) {
-          return (
-            <Square key={`${pageNumber}${Math.random()}${Date.now()}`}>
-              &#8230;
-            </Square>
-          );
+          return <Square key={"pagination_DOTS" + index}>&#8230;</Square>;
         }
 
         return (
           <Square
-            key={`${pageNumber}${Math.random()}${Date.now()}`}
+            key={"pagination_Square" + index}
             padding="5px 15px"
             cursor="pointer"
             bgColor={currentPage === pageNumber ? "teal.500" : "white"}
@@ -79,4 +75,4 @@ const Pagination = ({
   );
 };
 
-export default Pagination;
+export default memo(Pagination);

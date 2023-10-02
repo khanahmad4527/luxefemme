@@ -6,7 +6,6 @@ import {
   Flex,
   Heading,
   StackDivider,
-  useColorModeValue,
   List,
   ListItem,
   Grid,
@@ -14,18 +13,18 @@ import {
   Button,
   GridItem,
   useToast,
-  Circle,
   Select,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
-import { MdLocalShipping, MdPadding } from "react-icons/md";
+import { MdLocalShipping } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addToCart, getCartData } from "../../redux/cart/cart.actions";
+import { addToCart } from "../../redux/cart/cart.actions";
 import { getProductDetail } from "../../redux/product-detail/productDetail.actions";
 import Error from "../../utils/Error";
 import Loading from "../../utils/Loading";
+import ImagesContainer from "./ImagesContainer";
 
 export default function ProductDetail() {
   const [imageIndex, setImageIndex] = useState(0);
@@ -41,7 +40,7 @@ export default function ProductDetail() {
     (store) => store.productDetail
   );
 
-  const {
+  let {
     title,
     category,
     price,
@@ -105,44 +104,12 @@ export default function ProductDetail() {
         gap={10}
       >
         <GridItem>
-          <Flex
-            justifyContent="center"
-            flexDirection={{ base: "row", lg: "column" }}
-            gap="10px"
-            flexWrap="wrap"
-          >
-            {images &&
-              images[imageSet].map((image, index) => {
-                return (
-                  <Square
-                    key={Date() + Math.random()}
-                    w="50px"
-                    h="60px"
-                    border="1px solid"
-                    borderColor="teal.500"
-                    {...(imageIndex === index
-                      ? {
-                          border: "1px solid",
-                          borderColor: "teal.500",
-                          boxShadow: "0px 0px 5px 2px rgba(0, 128, 128, 1)",
-                        }
-                      : {})}
-                    tabIndex={0}
-                    onFocus={() => setImageIndex(index)}
-                    onMouseOver={() => setImageIndex(index)}
-                  >
-                    <Image
-                      p={1}
-                      src={image}
-                      w="100%"
-                      h="100%"
-                      objectFit="contain"
-                      bgColor="white"
-                    />
-                  </Square>
-                );
-              })}
-          </Flex>
+          <ImagesContainer
+            images={images}
+            imageSet={imageSet}
+            imageIndex={imageIndex}
+            setImageIndex={setImageIndex}
+          />
         </GridItem>
 
         <GridItem>
@@ -175,7 +142,7 @@ export default function ProductDetail() {
 
             <Box as={"header"}>
               <Box color="teal.500" fontWeight={300} fontSize={"2xl"}>
-                <Rating rating={4} />
+                <Rating rating={rating && rating} />
               </Box>
             </Box>
 
@@ -210,7 +177,7 @@ export default function ProductDetail() {
                         colours.map((item, i) => {
                           return (
                             <Box
-                              key={Math.random() + Date.now() + i}
+                              key={"productdetails_color" + i}
                               border={
                                 colorSet === i
                                   ? "1px solid teal"
@@ -245,12 +212,12 @@ export default function ProductDetail() {
                 {sizes && (
                   <Stack spacing={2} mb={2}>
                     <Text>Size: {sizes && sizes[sizeSet]}</Text>
-                    <Flex gap={"10px"}>
+                    <Flex gap={"10px"} flexWrap={"wrap"}>
                       {sizes &&
                         sizes.map((item, i) => {
                           return (
                             <Square
-                              key={Math.random() + Date.now() + i}
+                              key={"productdetails_size" + i}
                               border={
                                 sizeSet === i
                                   ? "2px solid teal"
@@ -295,7 +262,7 @@ export default function ProductDetail() {
                   {new Array(10).fill(1).map((_, index) => {
                     return (
                       <option
-                        key={Date() + Math.random()}
+                        key={"productdetails_qty" + index}
                         value={`${index + 1}`}
                       >{`Qty ${index + 1}`}</option>
                     );
@@ -387,7 +354,7 @@ function Rating({ rating }) {
           if (roundedRating - i >= 1) {
             return (
               <BsStarFill
-                key={i + Date() + Math.random()}
+                key={"rating_BsStarFill" + i}
                 style={{ marginLeft: "1" }}
               />
             );
@@ -395,16 +362,13 @@ function Rating({ rating }) {
           if (roundedRating - i === 0.5) {
             return (
               <BsStarHalf
-                key={i + Date() + Math.random()}
+                key={"rating_BsStarHalf" + i}
                 style={{ marginLeft: "1" }}
               />
             );
           }
           return (
-            <BsStar
-              key={i + Date() + Math.random()}
-              style={{ marginLeft: "1" }}
-            />
+            <BsStar key={"rating_BsStar" + i} style={{ marginLeft: "1" }} />
           );
         })}
     </Flex>
