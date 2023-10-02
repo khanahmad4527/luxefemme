@@ -65,6 +65,7 @@ function ProductsCard({
       <Image
         src={images && images[imageSet][imageIndex]}
         alt="Image belongs to Amazon. Used for educational purposes and showcasing web development skills only."
+        w="100%" // width avoid flickering effect during hover
         h={{
           base: "200px",
           sm: "250px",
