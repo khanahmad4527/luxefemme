@@ -1,14 +1,15 @@
-import { Box, Spinner } from "@chakra-ui/react";
-import React from "react";
+import { Flex, Heading, Spinner } from "@chakra-ui/react";
 
 const Error = () => {
   return (
-    <Box
+    <Flex
       width="100%"
-      display="flex"
       alignItems="center"
       justifyContent="center"
       margin="auto"
+      flexDir={"column"}
+      gap={"10px"}
+      textAlign={"center"}
     >
       <Spinner
         thickness="5px"
@@ -18,7 +19,8 @@ const Error = () => {
         size="xl"
         boxSize="200px"
       />
-    </Box>
+      <Heading>FREE PLAN can't handle much load, Please refresh the page Sorry!</Heading>
+    </Flex>
   );
 };
 
