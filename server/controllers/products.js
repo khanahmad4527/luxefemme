@@ -1,7 +1,7 @@
 const ProductModel = require("../models/product.model");
 
 const getProducts = async (req, res) => {
-  const { q, _page, _limit, _sort, _order, category } = req.query;
+  const { q, _page, _limit, _sort, _order, category, brand } = req.query;
 
   const filters = {};
 
@@ -14,6 +14,10 @@ const getProducts = async (req, res) => {
 
   if (category) {
     filters.category = { $in: category };
+  }
+
+  if (brand) {
+    filters.brand = { $in: brand };
   }
 
   Object.keys(req.query).forEach((key) => {
@@ -47,23 +51,40 @@ const getProducts = async (req, res) => {
 
   try {
     if (_page && _sort) {
-      const products = await ProductModel.find(filters)
-        .sort(sort)
-        .skip(skip)
-        .limit(limit);
+      const [products, totalCount] = await Promise.all([
+        ProductModel.find(filters).sort(sort).skip(skip).limit(limit).lean(),
+        ProductModel.countDocuments(filters),
+      ]);
+      res.header("Access-Control-Expose-Headers", "x-total-count");
+      res.header("x-total-count", totalCount);
       return res.status(200).json(products);
     } else if (_page) {
-      const products = await ProductModel.find(filters).skip(skip).limit(limit);
+      const [products, totalCount] = await Promise.all([
+        ProductModel.find(filters).skip(skip).limit(limit).lean(),
+        ProductModel.countDocuments(filters),
+      ]);
+      res.header("Access-Control-Expose-Headers", "x-total-count");
+      res.header("x-total-count", totalCount);
       return res.status(200).json(products);
     } else if (_sort) {
-      const products = await ProductModel.find(filters).sort(sort);
+      const [products, totalCount] = await Promise.all([
+        ProductModel.find(filters).sort(sort).lean(),
+        ProductModel.countDocuments(filters),
+      ]);
+      res.header("Access-Control-Expose-Headers", "x-total-count");
+      res.header("x-total-count", totalCount);
       return res.status(200).json(products);
     } else {
-      const products = await ProductModel.find(filters);
+      const [products, totalCount] = await Promise.all([
+        ProductModel.find(filters).lean(),
+        ProductModel.countDocuments(filters),
+      ]);
+      res.header("Access-Control-Expose-Headers", "x-total-count");
+      res.header("x-total-count", totalCount);
       return res.status(200).json(products);
     }
-  } catch (err) {
-    return res.status(400).json({ message: err.message });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
   }
 };
 

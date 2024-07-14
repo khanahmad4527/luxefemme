@@ -4,8 +4,8 @@ const { connection } = require('./config/database.js');
 const adminRouter = require('./controllers/auth.routes.js');
 const adminUserRoutes = require('./controllers/admin.users.tables.routes.js');
 const adminProductRouter = require('./controllers/admin.products.routes.js');
-const { userRoute } = require('./routes/user.route');
-const { userAuthRoute } = require('./routes/user.auth.route');
+const { userRoute } = require('./routes/user.route.js');
+const { userAuthRoute } = require('./routes/user.auth.route.js');
 require('dotenv').config();
 
 const app = express();
